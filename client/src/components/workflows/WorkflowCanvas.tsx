@@ -174,31 +174,31 @@ export const WorkflowCanvas: React.FC<WorkflowCanvasProps> = ({
   return (
     <div className="space-y-6">
       {/* Workflow Selection & Trigger Bar */}
-      <div className="glass-panel p-6 rounded-2xl relative">
+      <div className="glass-panel p-6 rounded-3xl relative border border-cyan-500/20 shadow-2xl">
         <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
           <div>
-            <h2 className="text-lg font-bold text-white flex items-center gap-2">
+            <h2 className="text-lg font-black text-white flex items-center gap-2">
               <Cpu className="w-5 h-5 text-cyan-400" />
-              Agentic Automation Engine
+              Smart Document Reviewer & Auditor
             </h2>
-            <p className="text-xs text-slate-400">
-              Configure and dispatch deterministic Gemini 2.5 Flash agents with strict OpenAPI schema validation.
+            <p className="text-xs text-slate-300">
+              Pick a workflow to automatically scan contracts or financial records for legal risks and compliance.
             </p>
           </div>
 
           <button
             onClick={() => setShowCreateModal(true)}
-            className="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-200 border border-white/10 text-xs font-semibold flex items-center gap-1.5 transition-all"
+            className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-slate-200 border border-white/10 text-xs font-bold flex items-center gap-1.5 transition-all"
           >
-            <Plus className="w-4 h-4 text-indigo-400" />
-            New Workflow Template
+            <Plus className="w-4 h-4 text-cyan-400" />
+            + Create Custom Review
           </button>
         </div>
 
         {/* Workflow Template Selector Pills */}
         <div className="mb-6">
-          <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-2">
-            Select Active AI Workflow Agent
+          <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-300 mb-2">
+            1. Select Review Type:
           </label>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
             {workflows.map((wf) => {
@@ -208,14 +208,14 @@ export const WorkflowCanvas: React.FC<WorkflowCanvasProps> = ({
                   key={wf.id}
                   type="button"
                   onClick={() => setSelectedWorkflowId(wf.id)}
-                  className={`p-3 rounded-xl text-left transition-all border ${
+                  className={`p-3.5 rounded-2xl text-left transition-all border ${
                     isSelected
-                      ? "bg-indigo-600/20 border-indigo-500/50 text-white shadow-glow"
+                      ? "bg-gradient-to-br from-indigo-600/30 to-cyan-600/30 border-cyan-400/60 text-white shadow-cyanGlow"
                       : "bg-white/[0.02] border-white/5 text-slate-400 hover:bg-white/[0.05] hover:text-slate-200"
                   }`}
                 >
                   <p className="text-xs font-bold truncate mb-1">{wf.name}</p>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/5 border border-white/5 text-slate-400">
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-slate-300">
                     {wf.target_department || "General"}
                   </span>
                 </button>
@@ -225,30 +225,30 @@ export const WorkflowCanvas: React.FC<WorkflowCanvasProps> = ({
         </div>
 
         {/* Workflow Parameters & Input Payload Selector */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-4 border-t border-white/5">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 pt-4 border-t border-white/5">
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
-                Input Payload Source
+              <label className="text-[11px] font-semibold uppercase tracking-wider text-slate-300">
+                2. Choose Document to Analyze:
               </label>
-              <div className="flex items-center rounded-lg bg-white/5 p-0.5 border border-white/5">
+              <div className="flex items-center rounded-xl bg-nexus-950 p-0.5 border border-white/5">
                 <button
                   type="button"
                   onClick={() => setInputSource("asset")}
-                  className={`px-2.5 py-1 rounded-md text-[10px] font-semibold transition-all ${
-                    inputSource === "asset" ? "bg-indigo-600 text-white" : "text-slate-400 hover:text-white"
+                  className={`px-3 py-1 rounded-lg text-[10px] font-bold transition-all ${
+                    inputSource === "asset" ? "bg-indigo-600 text-white shadow-sm" : "text-slate-400 hover:text-white"
                   }`}
                 >
-                  Knowledge Hub Asset
+                  From Library
                 </button>
                 <button
                   type="button"
                   onClick={() => setInputSource("custom")}
-                  className={`px-2.5 py-1 rounded-md text-[10px] font-semibold transition-all ${
-                    inputSource === "custom" ? "bg-indigo-600 text-white" : "text-slate-400 hover:text-white"
+                  className={`px-3 py-1 rounded-lg text-[10px] font-bold transition-all ${
+                    inputSource === "custom" ? "bg-indigo-600 text-white shadow-sm" : "text-slate-400 hover:text-white"
                   }`}
                 >
-                  Custom Payload Text
+                  Paste Custom Text
                 </button>
               </div>
             </div>
@@ -302,17 +302,17 @@ export const WorkflowCanvas: React.FC<WorkflowCanvasProps> = ({
               <button
                 onClick={handleExecute}
                 disabled={isExecuting}
-                className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-bold text-xs shadow-cyanGlow transition-all disabled:opacity-50 flex items-center gap-2"
+                className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-black text-xs shadow-cyanGlow transition-all disabled:opacity-50 flex items-center gap-2"
               >
                 {isExecuting ? (
                   <>
                     <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    Synthesizing with Gemini...
+                    Scanning with Gemini 2.5 Flash...
                   </>
                 ) : (
                   <>
                     <Play className="w-4 h-4 fill-white" />
-                    Execute AI Workflow
+                    ⚡ Run AI Review
                   </>
                 )}
               </button>
@@ -323,47 +323,48 @@ export const WorkflowCanvas: React.FC<WorkflowCanvasProps> = ({
 
       {/* Generated Report Display */}
       {executionResult && (
-        <div className="glass-panel rounded-2xl overflow-hidden border border-indigo-500/30 shadow-glow animate-in fade-in">
+        <div className="glass-panel rounded-3xl overflow-hidden border border-indigo-500/30 shadow-2xl animate-in fade-in">
           {/* Header */}
-          <div className="p-5 border-b border-white/5 bg-nexus-900/60 flex flex-wrap items-center justify-between gap-4">
-            <div className="flex items-center space-x-3">
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center border font-mono font-extrabold text-lg ${getScoreColor(executionResult.report.overallRiskScore)}`}>
-                {executionResult.report.overallRiskScore}/10
+          <div className="p-5 border-b border-white/5 bg-nexus-900/80 flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center space-x-3.5">
+              <div className={`w-14 h-14 rounded-2xl flex flex-col items-center justify-center border font-mono font-black ${getScoreColor(executionResult.report.overallRiskScore)}`}>
+                <span className="text-lg leading-none">{executionResult.report.overallRiskScore}</span>
+                <span className="text-[9px] uppercase font-sans font-bold text-slate-400">out of 10</span>
               </div>
               <div>
-                <h3 className="text-base font-bold text-white flex items-center gap-2">
-                  Enterprise Audit & Synthesis Deliverable
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 uppercase">
+                <h3 className="text-base font-black text-white flex items-center gap-2">
+                  Document Review & Risk Summary
+                  <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 uppercase">
                     COMPLETED
                   </span>
                 </h3>
-                <p className="text-xs text-slate-400 flex items-center gap-2 mt-0.5">
-                  <Clock className="w-3.5 h-3.5 text-indigo-400" />
-                  Execution latency: <span className="font-mono text-slate-300 font-semibold">{executionResult.durationMs}ms</span>
+                <p className="text-xs text-slate-300 flex items-center gap-2 mt-0.5">
+                  <Clock className="w-3.5 h-3.5 text-cyan-400" />
+                  Reviewed in <strong className="text-white">{executionResult.durationMs}ms</strong>
                   <span>•</span>
-                  <span>Execution ID: <span className="font-mono text-slate-400">{executionResult.executionId.substring(0, 8)}...</span></span>
+                  <span>Review ID: <code className="text-slate-400">{executionResult.executionId.substring(0, 8)}</code></span>
                 </p>
               </div>
             </div>
 
             <div className="flex items-center space-x-2">
-              <div className="flex items-center rounded-lg bg-white/5 p-0.5 border border-white/5">
+              <div className="flex items-center rounded-xl bg-nexus-950 p-0.5 border border-white/5">
                 <button
                   onClick={() => setReportTab("visual")}
-                  className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all ${
-                    reportTab === "visual" ? "bg-indigo-600 text-white" : "text-slate-400 hover:text-white"
+                  className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                    reportTab === "visual" ? "bg-indigo-600 text-white shadow-sm" : "text-slate-400 hover:text-white"
                   }`}
                 >
-                  Executive Report
+                  Visual Report
                 </button>
                 <button
                   onClick={() => setReportTab("json")}
-                  className={`px-3 py-1.5 rounded-md text-xs font-semibold flex items-center gap-1 transition-all ${
-                    reportTab === "json" ? "bg-indigo-600 text-white" : "text-slate-400 hover:text-white"
+                  className={`px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1 transition-all ${
+                    reportTab === "json" ? "bg-indigo-600 text-white shadow-sm" : "text-slate-400 hover:text-white"
                   }`}
                 >
                   <FileCode2 className="w-3.5 h-3.5" />
-                  JSON Spec
+                  Raw JSON
                 </button>
               </div>
 

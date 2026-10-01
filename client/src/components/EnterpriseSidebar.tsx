@@ -19,49 +19,54 @@ interface EnterpriseSidebarProps {
   currentPath: string;
   onNavigate: (path: string) => void;
   onOpenApiKeyModal: () => void;
+  onOpenShareModal: () => void;
+  onOpenSupabaseModal: () => void;
 }
 
 export const EnterpriseSidebar: React.FC<EnterpriseSidebarProps> = ({
   currentPath,
   onNavigate,
   onOpenApiKeyModal,
+  onOpenShareModal,
+  onOpenSupabaseModal,
 }) => {
   const { user, organization, logout, customApiKey } = useAuth();
 
   const navItems = [
     {
-      name: "Executive Overview",
+      name: "Overview Dashboard",
       path: "/dashboard",
       icon: LayoutDashboard,
-      badge: "Live",
-      badgeColor: "text-emerald-400 bg-emerald-950/60 border-emerald-800/60",
+      badge: "Stats",
+      badgeColor: "text-emerald-300 bg-emerald-500/20 border-emerald-500/40",
     },
     {
-      name: "Enterprise Copilot",
+      name: "Company AI Copilot",
       path: "/copilot",
       icon: Sparkles,
-      badge: "RAG",
-      badgeColor: "text-indigo-400 bg-indigo-950/60 border-indigo-800/60",
+      badge: "Chat",
+      badgeColor: "text-violet-300 bg-violet-500/20 border-violet-500/40",
     },
     {
-      name: "Document Hub",
+      name: "Document Library",
       path: "/knowledge-base",
       icon: Database,
-      badge: null,
+      badge: "Docs",
+      badgeColor: "text-indigo-300 bg-indigo-500/20 border-indigo-500/40",
     },
     {
-      name: "Automation Engine",
+      name: "Smart Workflows",
       path: "/workflows",
       icon: Cpu,
-      badge: "Gemini",
-      badgeColor: "text-cyan-400 bg-cyan-950/60 border-cyan-800/60",
+      badge: "Audits",
+      badgeColor: "text-cyan-300 bg-cyan-500/20 border-cyan-500/40",
     },
     {
-      name: "Tenant Administration",
+      name: "Company Settings & Team",
       path: "/settings/org",
       icon: ShieldCheck,
       badge: "Admin",
-      badgeColor: "text-purple-400 bg-purple-950/60 border-purple-800/60",
+      badgeColor: "text-purple-300 bg-purple-500/20 border-purple-500/40",
     },
   ];
 
@@ -149,24 +154,57 @@ export const EnterpriseSidebar: React.FC<EnterpriseSidebarProps> = ({
           );
         })}
 
-        {/* Gemini Engine Banner Button */}
-        <div className="pt-6 px-1">
+        {/* Quick Tools & Public Share */}
+        <div className="pt-4 px-1 space-y-2">
+          {/* Share App Button */}
+          <button
+            onClick={onOpenShareModal}
+            className="w-full p-2.5 rounded-xl bg-gradient-to-r from-cyan-950/60 to-indigo-950/60 hover:from-cyan-900/60 hover:to-indigo-900/60 border border-cyan-500/30 text-left transition-all group flex items-center justify-between"
+          >
+            <div className="flex items-center space-x-2.5">
+              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+              <div>
+                <p className="text-xs font-bold text-white group-hover:text-cyan-300">Share Public Link</p>
+                <p className="text-[10px] text-slate-400">Public HTTPS & Wi-Fi URL</p>
+              </div>
+            </div>
+            <ExternalLink className="w-3.5 h-3.5 text-cyan-400 group-hover:translate-x-0.5 transition-transform" />
+          </button>
+
+          {/* Supabase Integration Button */}
+          <button
+            onClick={onOpenSupabaseModal}
+            className="w-full p-2.5 rounded-xl bg-emerald-950/30 hover:bg-emerald-950/50 border border-emerald-500/20 text-left transition-all group flex items-center justify-between"
+          >
+            <div className="flex items-center space-x-2.5">
+              <Database className="w-3.5 h-3.5 text-emerald-400" />
+              <div>
+                <p className="text-xs font-bold text-white group-hover:text-emerald-300">Supabase Database</p>
+                <p className="text-[10px] text-slate-400">Cloud PostgreSQL</p>
+              </div>
+            </div>
+            <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-semibold">
+              CONNECTED
+            </span>
+          </button>
+
+          {/* Gemini Engine Banner */}
           <div className="p-3 rounded-xl bg-gradient-to-br from-indigo-950/40 via-purple-950/20 to-slate-900 border border-indigo-500/20">
-            <div className="flex items-center justify-between mb-1.5">
-              <span className="text-[11px] font-semibold text-indigo-300 flex items-center gap-1.5">
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-[11px] font-bold text-indigo-300 flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                 Gemini 2.5 Flash
               </span>
               <button
                 onClick={onOpenApiKeyModal}
-                className="text-[10px] text-indigo-400 hover:text-indigo-200 underline flex items-center gap-0.5"
+                className="text-[10px] text-indigo-400 hover:text-indigo-200 underline flex items-center gap-0.5 font-medium"
               >
                 <KeyRound className="w-3 h-3" />
-                {customApiKey ? "Configured" : "Set API Key"}
+                {customApiKey ? "Key Set" : "API Key"}
               </button>
             </div>
             <p className="text-[10px] text-slate-400 leading-relaxed">
-              Grounding via RAG pipeline with OpenAPI structured schema output.
+              Fast, intelligent document analysis and RAG answers.
             </p>
           </div>
         </div>

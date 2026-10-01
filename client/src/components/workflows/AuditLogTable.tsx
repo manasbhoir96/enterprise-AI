@@ -18,32 +18,32 @@ export const AuditLogTable: React.FC<AuditLogTableProps> = ({ executions }) => {
   };
 
   return (
-    <div className="glass-panel rounded-2xl overflow-hidden">
-      <div className="p-4 border-b border-white/5 flex items-center justify-between">
+    <div className="glass-panel rounded-3xl overflow-hidden border border-white/10 shadow-xl">
+      <div className="p-4 border-b border-white/5 bg-nexus-900/60 flex items-center justify-between">
         <div>
-          <h3 className="text-sm font-bold text-white flex items-center gap-2">
+          <h3 className="text-sm font-extrabold text-white flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-emerald-400" />
-            Immutable Compliance & Audit Trail
+            Review History & Activity Trail
           </h3>
-          <p className="text-[11px] text-slate-400">
-            Real-time telemetry and cryptographic execution tracking across enterprise AI agents.
+          <p className="text-[11px] text-slate-300">
+            Complete record of every contract review and automated AI audit.
           </p>
         </div>
-        <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 border border-white/5 text-slate-400">
-          {executions.length} Logged Executions
+        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-300">
+          {executions.length} Completed Reviews
         </span>
       </div>
 
       <div className="overflow-x-auto">
         <table className="w-full text-left text-xs">
-          <thead className="bg-nexus-900/60 text-slate-400 uppercase tracking-wider text-[10px] font-bold border-b border-white/5">
+          <thead className="bg-nexus-900/80 text-slate-400 uppercase tracking-wider text-[10px] font-bold border-b border-white/5">
             <tr>
-              <th className="py-3 px-4">Timestamp</th>
-              <th className="py-3 px-4">Workflow</th>
-              <th className="py-3 px-4">Executed By</th>
+              <th className="py-3 px-4">Date & Time</th>
+              <th className="py-3 px-4">Review Type</th>
+              <th className="py-3 px-4">Run By</th>
               <th className="py-3 px-4">Status</th>
-              <th className="py-3 px-4">Latency</th>
-              <th className="py-3 px-4 text-right">Audit Detail</th>
+              <th className="py-3 px-4">Speed</th>
+              <th className="py-3 px-4 text-right">View Report</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-white/5">

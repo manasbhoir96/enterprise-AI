@@ -101,62 +101,70 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
             <div>
               <span className="text-2xl font-black tracking-tight text-white flex items-center gap-2">
                 Nexus<span className="text-indigo-400">AI</span>
-                <span className="text-xs uppercase font-extrabold tracking-widest px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                  ENTERPRISE
+                <span className="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded-full bg-gradient-to-r from-indigo-500/20 to-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                  SMART WORKSPACE
                 </span>
               </span>
-              <p className="text-xs text-slate-400">The Multi-Tenant Enterprise Knowledge & Workflow Platform</p>
+              <p className="text-xs text-slate-300">Your Company's AI Knowledge & Workflow Assistant</p>
             </div>
           </div>
 
           <div className="space-y-3">
-            <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
-              Unify organizational knowledge into an <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">agentic AI brain.</span>
+            <h1 className="text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">
+              One smart brain for your entire company's <span className="bg-gradient-to-r from-violet-400 via-indigo-400 to-cyan-400 bg-clip-text text-transparent">policies, contracts & docs.</span>
             </h1>
-            <p className="text-sm text-slate-400 leading-relaxed">
-              Ground your enterprise copilot in verified internal documents with strict Row Level Security (RLS) data isolation and automated compliance workflows powered by Gemini 2.5 Flash.
+            <p className="text-sm text-slate-300 leading-relaxed">
+              Ask questions about company travel rules, review vendor contracts for risks in seconds, and keep all your company data strictly private.
             </p>
           </div>
 
           {/* Value Highlights */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-            <div className="glass-panel p-3.5 rounded-xl border border-white/5 space-y-1">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
+            <div className="glass-panel p-3 rounded-2xl border border-indigo-500/20 space-y-1">
               <div className="flex items-center gap-1.5 text-xs font-bold text-indigo-300">
                 <ShieldCheck className="w-4 h-4 text-indigo-400" />
-                Multi-Tenant Hardened
+                100% Private
               </div>
-              <p className="text-[11px] text-slate-400">Strict organizational boundaries ensuring zero cross-tenant leakage.</p>
+              <p className="text-[10px] text-slate-400">Strictly isolated so only your team accesses your data.</p>
             </div>
 
-            <div className="glass-panel p-3.5 rounded-xl border border-white/5 space-y-1">
+            <div className="glass-panel p-3 rounded-2xl border border-cyan-500/20 space-y-1">
               <div className="flex items-center gap-1.5 text-xs font-bold text-cyan-300">
                 <Sparkles className="w-4 h-4 text-cyan-400" />
-                Gemini 2.5 Flash RAG
+                Gemini 2.5 AI
               </div>
-              <p className="text-[11px] text-slate-400">Sub-second synthesis with deterministic OpenAPI JSON schemas.</p>
+              <p className="text-[10px] text-slate-400">Answers backed by direct citations from your files.</p>
+            </div>
+
+            <div className="glass-panel p-3 rounded-2xl border border-emerald-500/20 space-y-1">
+              <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-300">
+                <Building2 className="w-4 h-4 text-emerald-400" />
+                Supabase Ready
+              </div>
+              <p className="text-[10px] text-slate-400">Production PostgreSQL cloud storage with SSL.</p>
             </div>
           </div>
 
           {/* Quick Demo Access Bar */}
-          <div className="p-4 rounded-2xl bg-indigo-950/40 border border-indigo-500/20 space-y-2.5">
+          <div className="p-4 rounded-3xl bg-gradient-to-r from-indigo-950/60 via-purple-950/40 to-slate-900 border border-indigo-500/30 space-y-2.5 shadow-xl">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-wider text-indigo-300 flex items-center gap-1.5">
-                <Zap className="w-3.5 h-3.5 text-amber-400" />
-                Instant Evaluator 1-Click Demo Logins
+              <span className="text-xs font-extrabold uppercase tracking-wider text-amber-300 flex items-center gap-1.5">
+                <Zap className="w-4 h-4 text-amber-400 fill-amber-400" />
+                1-Click Instant Demo Logins (No Signup Needed)
               </span>
-              <span className="text-[10px] font-mono text-slate-400">Acme Corporation</span>
+              <span className="text-[10px] font-bold text-slate-400">Acme Corp</span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               <button
                 type="button"
                 onClick={() => handleQuickLogin("admin@acme.com")}
                 disabled={isLoading}
-                className="p-2.5 rounded-xl bg-white/5 hover:bg-indigo-600/30 text-left border border-white/10 hover:border-indigo-500/40 transition-all group"
+                className="p-2.5 rounded-2xl bg-white/5 hover:bg-indigo-600/30 text-left border border-white/10 hover:border-indigo-500/50 transition-all group"
               >
                 <div className="text-xs font-bold text-white group-hover:text-indigo-200">Elena Vance</div>
                 <div className="text-[10px] text-indigo-400 flex items-center justify-between mt-0.5">
-                  <span>Tenant Owner / Executive</span>
+                  <span>Executive Owner</span>
                   <span>→</span>
                 </div>
               </button>
@@ -165,11 +173,24 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
                 type="button"
                 onClick={() => handleQuickLogin("marcus.reed@acme.com")}
                 disabled={isLoading}
-                className="p-2.5 rounded-xl bg-white/5 hover:bg-cyan-600/30 text-left border border-white/10 hover:border-cyan-500/40 transition-all group"
+                className="p-2.5 rounded-2xl bg-white/5 hover:bg-cyan-600/30 text-left border border-white/10 hover:border-cyan-500/50 transition-all group"
               >
                 <div className="text-xs font-bold text-white group-hover:text-cyan-200">Marcus Reed</div>
                 <div className="text-[10px] text-cyan-400 flex items-center justify-between mt-0.5">
-                  <span>Admin / Legal & Compliance</span>
+                  <span>Legal & Compliance</span>
+                  <span>→</span>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleQuickLogin("sarah.chen@acme.com")}
+                disabled={isLoading}
+                className="p-2.5 rounded-2xl bg-white/5 hover:bg-purple-600/30 text-left border border-white/10 hover:border-purple-500/50 transition-all group"
+              >
+                <div className="text-xs font-bold text-white group-hover:text-purple-200">Sarah Chen</div>
+                <div className="text-[10px] text-purple-400 flex items-center justify-between mt-0.5">
+                  <span>Human Resources</span>
                   <span>→</span>
                 </div>
               </button>

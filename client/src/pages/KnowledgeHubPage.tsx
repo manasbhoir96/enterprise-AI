@@ -87,23 +87,23 @@ export const KnowledgeHubPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Header */}
-      <div className="glass-panel p-6 rounded-2xl flex flex-wrap items-center justify-between gap-4">
+      <div className="glass-panel p-6 rounded-3xl flex flex-wrap items-center justify-between gap-4 border border-indigo-500/20 shadow-glow">
         <div>
-          <h2 className="text-lg font-bold text-white flex items-center gap-2">
+          <h2 className="text-lg font-black text-white flex items-center gap-2">
             <Database className="w-5 h-5 text-indigo-400" />
-            Enterprise Document Hub & Knowledge Repository
+            Company Document Library
           </h2>
-          <p className="text-xs text-slate-400">
-            Ingest, classify, and index proprietary organizational documents into the secure RAG vector pipeline.
+          <p className="text-xs text-slate-300">
+            Store and organize handbooks, agreements, and policies so your AI copilot can reference them anytime.
           </p>
         </div>
 
         <button
           onClick={() => setShowUploader(!showUploader)}
-          className="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs shadow-glow transition-all flex items-center gap-1.5"
+          className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-bold text-xs shadow-glow transition-all flex items-center gap-1.5"
         >
           <Plus className="w-4 h-4" />
-          {showUploader ? "Hide Ingestion Panel" : "Ingest New Document"}
+          {showUploader ? "Close Upload Box" : "+ Upload New Document"}
         </button>
       </div>
 

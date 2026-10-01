@@ -9,6 +9,11 @@
   
   body {
     background-color: #06080F;
+    background-image: 
+      radial-gradient(at 15% 15%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
+      radial-gradient(at 85% 20%, rgba(14, 165, 233, 0.12) 0px, transparent 50%),
+      radial-gradient(at 50% 85%, rgba(168, 85, 247, 0.08) 0px, transparent 60%);
+    background-attachment: fixed;
     color: #F1F5F9;
     overflow-x: hidden;
   }
@@ -32,59 +37,79 @@
 
 /* Glassmorphic card styling */
 .glass-panel {
-  background: rgba(16, 22, 38, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-panel-hover {
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .glass-panel-hover:hover {
-  border-color: rgba(99, 102, 241, 0.35);
-  box-shadow: 0 10px 35px -10px rgba(99, 102, 241, 0.15);
-  transform: translateY(-1px);
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 12px 40px -8px rgba(99, 102, 241, 0.25);
+  transform: translateY(-2px);
 }
 
 .glass-input {
-  background: rgba(11, 15, 25, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(11, 15, 25, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: #F8FAFC;
   transition: all 0.2s ease;
 }
 .glass-input:focus {
   outline: none;
   border-color: #6366F1;
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
 }
 
 /* Radiant glow backgrounds */
 .bg-radial-gradient {
-  background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.15) 0%, rgba(6, 8, 15, 0) 70%);
+  background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.2) 0%, rgba(6, 8, 15, 0) 70%);
 }
 
 .badge-risk-low {
-  background: rgba(16, 185, 129, 0.12);
+  background: rgba(16, 185, 129, 0.15);
   color: #34D399;
-  border: 1px solid rgba(16, 185, 129, 0.25);
+  border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
 .badge-risk-medium {
-  background: rgba(245, 158, 11, 0.12);
+  background: rgba(245, 158, 11, 0.15);
   color: #FBBF24;
-  border: 1px solid rgba(245, 158, 11, 0.25);
+  border: 1px solid rgba(245, 158, 11, 0.3);
 }
 
 .badge-risk-high {
-  background: rgba(244, 63, 94, 0.12);
+  background: rgba(244, 63, 94, 0.15);
   color: #FB7185;
-  border: 1px solid rgba(244, 63, 94, 0.25);
+  border: 1px solid rgba(244, 63, 94, 0.3);
 }
 
 .badge-risk-critical {
-  background: rgba(225, 29, 72, 0.2);
+  background: rgba(225, 29, 72, 0.25);
   color: #FDA4AF;
-  border: 1px solid rgba(225, 29, 72, 0.4);
+  border: 1px solid rgba(225, 29, 72, 0.45);
+}
+
+/* Fluid animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.03); }
+}
+
+.animate-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
 }

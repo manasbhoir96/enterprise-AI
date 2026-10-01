@@ -32,7 +32,7 @@ export const CopilotChatWindow: React.FC = () => {
     {
       id: "initial-welcome",
       sender: "copilot",
-      text: `Hello, I am **NexusAI**, your organization's enterprise AI copilot. I am strictly grounded in your company's uploaded policies, legal contracts, and departmental guidelines.\n\nHow may I assist your workflow today?`,
+      text: `👋 **Welcome! I'm your Company AI Copilot.**\n\nI answer questions strictly based on your company's uploaded documents (like employee handbooks, vendor contracts, and security policies).\n\n💡 **Try asking:**\n- *"What is our travel reimbursement policy for flights?"*\n- *"What are our liability limits in the Cloud MSA?"*\n- *"How many sick and PTO days do we get?"*`,
       timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
       modelUsed: "gemini-2.5-flash",
     },
@@ -167,37 +167,38 @@ export const CopilotChatWindow: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-5rem)] glass-panel rounded-2xl overflow-hidden relative border border-white/10">
+    <div className="flex flex-col h-[calc(100vh-6rem)] glass-panel rounded-3xl overflow-hidden relative border border-indigo-500/20 shadow-2xl">
       {/* Top Controls Bar */}
-      <div className="p-4 border-b border-white/5 bg-nexus-900/70 flex flex-wrap items-center justify-between gap-3 shrink-0">
+      <div className="p-4 border-b border-white/5 bg-nexus-900/80 flex flex-wrap items-center justify-between gap-3 shrink-0">
         <div className="flex items-center space-x-3">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center shadow-glow">
-            <Sparkles className="w-4 h-4 text-white" />
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-violet-600 via-indigo-600 to-cyan-400 flex items-center justify-center shadow-glow">
+            <Sparkles className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h3 className="text-sm font-bold text-white flex items-center gap-2">
-              Context-Aware Enterprise Copilot
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                Grounding Active
+            <h3 className="text-sm font-extrabold text-white flex items-center gap-2">
+              Company AI Copilot
+              <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
+                <Shield className="w-3 h-3 text-emerald-400" />
+                Grounded in Verified Docs
               </span>
             </h3>
-            <p className="text-[11px] text-slate-400">
-              Answers are strictly grounded in Acme Corporation's internal knowledge base.
+            <p className="text-[11px] text-slate-300">
+              Ask any question — answers are backed by direct quotes from your company documents.
             </p>
           </div>
         </div>
 
         {/* Filter and Clear Chat */}
-        <div className="flex items-center space-x-2">
-          <div className="flex items-center space-x-1.5 text-xs text-slate-400">
-            <Filter className="w-3.5 h-3.5" />
-            <span>Scope:</span>
+        <div className="flex items-center space-x-2.5">
+          <div className="flex items-center space-x-1.5 text-xs text-slate-300">
+            <Filter className="w-3.5 h-3.5 text-indigo-400" />
+            <span className="text-[11px] font-semibold">Filter by Dept:</span>
             <select
               value={departmentContext}
               onChange={(e) => setDepartmentContext(e.target.value)}
-              className="glass-input px-2.5 py-1 rounded-lg text-xs bg-nexus-900"
+              className="glass-input px-3 py-1.5 rounded-xl text-xs bg-nexus-900 font-medium"
             >
-              <option value="All Departments">All Departments</option>
+              <option value="All Departments">All Departments (Entire Company)</option>
               <option value="Legal & Compliance">Legal & Compliance</option>
               <option value="Human Resources">Human Resources</option>
               <option value="Finance & Accounting">Finance & Accounting</option>

@@ -158,3 +158,92 @@ export async function updateOrgSettings(req: Request, res: Response): Promise<vo
     res.status(500).json({ error: "Failed to update organization settings" });
   }
 }
+
+export async function getDatabaseStatusHandler(_req: Request, res: Response): Promise<void> {
+  try {
+    const { getDatabaseStatus } = await import("../lib/supabase.js");
+    const status = getDatabaseStatus();
+    res.json({ status });
+  } catch (err: any) {
+    res.status(500).json({ error: "Failed to fetch database status" });
+  }
+}
+
+export async function testDatabaseHandler(req: Request, res: Response): Promise<void> {
+  const { connectionString } = req.body;
+  if (!connectionString) {
+    res.status(400).json({ error: "Connection string is required" });
+    return;
+  }
+
+  try {
+    const { testConnection } = await import("../lib/supabase.js");
+    const result = await testConnection(connectionString);
+    res.json(result);
+  } catch (err: any) {
+    res.status(500).json({ success: false, message: err.message || "Failed to test connection" });
+  }
+}
+
+export async function migrateDatabaseHandler(req: Request, res: Response): Promise<void> {
+  const { connectionString } = req.body;
+  if (!connectionString) {
+    res.status(400).json({ error: "Connection string is required" });
+    return;
+  }
+
+  try {
+    const { migrateDatabase } = await import("../lib/supabase.js");
+    const result = await migrateDatabase(connectionString);
+    res.json(result);
+  } catch (err: any) {
+    res.status(500).json({ success: false, message: err.message || "Failed to migrate database" });
+  }
+}
+
+export async function getShareInfoHandler(_req: Request, res: Response): Promise<void> {
+  try {
+    const fs = await import("fs");
+    const path = await import("path");
+    const os = await import("os");
+
+    const possiblePaths = [
+      path.resolve(process.cwd(), "public-url.json"),
+      path.resolve(process.cwd(), "../public-url.json"),
+      path.resolve(process.cwd(), "server/public-url.json"),
+    ];
+
+    let info: any = null;
+    for (const p of possiblePaths) {
+      if (fs.existsSync(p)) {
+        try {
+          info = JSON.parse(fs.readFileSync(p, "utf-8"));
+          if (info?.publicUrl) break;
+        } catch (e) {}
+      }
+    }
+
+    let localIp = "localhost";
+    const interfaces = os.networkInterfaces();
+    for (const name of Object.keys(interfaces)) {
+      for (const iface of interfaces[name] || []) {
+        if (iface.family === "IPv4" && !iface.internal) {
+          localIp = iface.address;
+          break;
+        }
+      }
+    }
+
+    res.json({
+      localIp,
+      localPort: 5173,
+      localUrl: `http://${localIp}:5173`,
+      publicUrl: info?.publicUrl || null,
+      publicIp: info?.publicIp || "103.160.174.114",
+      tunnelPassword: info?.tunnelPassword || info?.publicIp || "103.160.174.114",
+      status: info?.status || "ready",
+    });
+  } catch (err: any) {
+    res.status(500).json({ error: "Failed to get share info" });
+  }
+}

@@ -18,9 +18,10 @@ import type { User, InviteMemberInput } from "@nexusai/shared";
 
 interface TenantAdminPageProps {
   onOpenApiKeyModal: () => void;
+  onOpenSupabaseModal: () => void;
 }
 
-export const TenantAdminPage: React.FC<TenantAdminPageProps> = ({ onOpenApiKeyModal }) => {
+export const TenantAdminPage: React.FC<TenantAdminPageProps> = ({ onOpenApiKeyModal, onOpenSupabaseModal }) => {
   const { user, organization, customApiKey } = useAuth();
   const [members, setMembers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
@@ -109,35 +110,45 @@ export const TenantAdminPage: React.FC<TenantAdminPageProps> = ({ onOpenApiKeyMo
   const getRoleBadge = (role: string) => {
     switch (role) {
       case "owner":
-        return <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-amber-500/20 text-amber-300 border border-amber-500/40">OWNER</span>;
+        return <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-amber-500/20 text-amber-300 border border-amber-500/40">OWNER</span>;
       case "admin":
-        return <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">ADMIN</span>;
+        return <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">ADMIN</span>;
       default:
-        return <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-slate-500/20 text-slate-300 border border-slate-500/40">EMPLOYEE</span>;
+        return <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-slate-500/20 text-slate-300 border border-slate-500/40">EMPLOYEE</span>;
     }
   };
 
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="glass-panel p-6 rounded-2xl flex flex-wrap items-center justify-between gap-4">
+      <div className="glass-panel p-6 rounded-3xl flex flex-wrap items-center justify-between gap-4 border border-purple-500/20 shadow-glow">
         <div>
-          <h2 className="text-lg font-bold text-white flex items-center gap-2">
+          <h2 className="text-lg font-black text-white flex items-center gap-2">
             <ShieldCheck className="w-5 h-5 text-purple-400" />
-            Enterprise Tenant Administration & Governance
+            Company Settings & Team Access
           </h2>
-          <p className="text-xs text-slate-400">
-            Manage organization telemetry, Role-Based Access Control (RBAC), and security compliance.
+          <p className="text-xs text-slate-300">
+            Manage your company profile, team member permissions, and database connections.
           </p>
         </div>
 
-        <button
-          onClick={() => setShowInviteModal(true)}
-          className="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs shadow-glow transition-all flex items-center gap-1.5"
-        >
-          <UserPlus className="w-4 h-4" />
-          Onboard Employee
-        </button>
+        <div className="flex items-center space-x-2.5">
+          <button
+            onClick={onOpenSupabaseModal}
+            className="px-4 py-2.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 font-bold text-xs shadow-md transition-all flex items-center gap-1.5"
+          >
+            <Database className="w-4 h-4 text-emerald-400" />
+            Supabase DB Settings
+          </button>
+
+          <button
+            onClick={() => setShowInviteModal(true)}
+            className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-xs shadow-glow transition-all flex items-center gap-1.5"
+          >
+            <UserPlus className="w-4 h-4" />
+            + Add Team Member
+          </button>
+        </div>
       </div>
 
       {/* Grid: Tenant Telemetry + AI Governance Settings */}
@@ -214,52 +225,60 @@ export const TenantAdminPage: React.FC<TenantAdminPageProps> = ({ onOpenApiKeyMo
           </form>
         </div>
 
-        {/* Right: Security & Isolation Architecture Card */}
-        <div className="lg:col-span-6 glass-panel p-6 rounded-2xl flex flex-col justify-between space-y-4">
+        {/* Right: Security & Supabase Cloud Architecture Card */}
+        <div className="lg:col-span-6 glass-panel p-6 rounded-3xl flex flex-col justify-between space-y-4 border border-emerald-500/20 shadow-xl">
           <div>
             <div className="flex items-center justify-between pb-3 border-b border-white/5 mb-3">
-              <h3 className="text-sm font-bold text-white flex items-center gap-2">
-                <Lock className="w-4 h-4 text-emerald-400" />
-                Data Isolation & Zero-Leakage Architecture
+              <h3 className="text-sm font-extrabold text-white flex items-center gap-2">
+                <Database className="w-4 h-4 text-emerald-400" />
+                Supabase & Cloud Security
               </h3>
-              <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 uppercase">
-                ACTIVE
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 uppercase">
+                ACTIVE & SECURE
               </span>
             </div>
 
             <div className="space-y-3 text-xs">
-              <div className="p-3 rounded-xl bg-nexus-950/60 border border-white/5 space-y-1">
-                <div className="font-semibold text-slate-200 flex items-center gap-2">
-                  <Database className="w-3.5 h-3.5 text-indigo-400" />
-                  PostgreSQL Row Level Security (RLS)
+              <div className="p-3.5 rounded-2xl bg-nexus-950/80 border border-emerald-500/20 space-y-1.5">
+                <div className="font-bold text-white flex items-center justify-between">
+                  <span className="flex items-center gap-2 text-emerald-300">
+                    <Database className="w-4 h-4 text-emerald-400" />
+                    Supabase PostgreSQL Connection
+                  </span>
+                  <button
+                    onClick={onOpenSupabaseModal}
+                    className="text-[11px] text-emerald-400 hover:text-emerald-300 font-bold underline"
+                  >
+                    Configure →
+                  </button>
                 </div>
-                <p className="text-slate-400 text-[11px] leading-relaxed">
-                  All queries execute with <code>organization_id</code> binding. Cross-tenant leakage is cryptographically prevented at database connection pool levels.
+                <p className="text-slate-300 text-[11px] leading-relaxed">
+                  Your data can be stored locally or on a remote Supabase Cloud project with automatic SSL and multi-tenant isolation.
                 </p>
               </div>
 
-              <div className="p-3 rounded-xl bg-nexus-950/60 border border-white/5 space-y-1">
-                <div className="font-semibold text-slate-200 flex items-center gap-2">
-                  <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                  AI Model Boundary (@google/genai)
+              <div className="p-3.5 rounded-2xl bg-nexus-950/80 border border-white/5 space-y-1.5">
+                <div className="font-bold text-white flex items-center gap-2 text-cyan-300">
+                  <Sparkles className="w-4 h-4 text-cyan-400" />
+                  AI Data Privacy (@google/genai)
                 </div>
-                <p className="text-slate-400 text-[11px] leading-relaxed">
-                  Gemini 2.5 Flash operates in stateless enterprise inference mode. Proprietary context is never utilized to train shared foundation weights.
+                <p className="text-slate-300 text-[11px] leading-relaxed">
+                  Gemini 2.5 Flash processes requests in private enterprise mode. Your uploaded company documents are never used to train public models.
                 </p>
               </div>
             </div>
           </div>
 
           <div className="pt-3 border-t border-white/5 flex items-center justify-between">
-            <span className="text-xs text-slate-400">
-              Gemini API Key: <span className="font-mono text-indigo-300">{customApiKey ? "Custom Client Key" : "Server Environment Default"}</span>
+            <span className="text-xs text-slate-300">
+              Gemini API Key: <strong className="text-indigo-300 font-mono">{customApiKey ? "Custom Client Key" : "Server Default"}</strong>
             </span>
             <button
               onClick={onOpenApiKeyModal}
-              className="px-3 py-1.5 rounded-lg bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 border border-indigo-500/30 text-xs font-semibold flex items-center gap-1.5 transition-all"
+              className="px-3.5 py-1.5 rounded-xl bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 border border-indigo-500/30 text-xs font-bold flex items-center gap-1.5 transition-all"
             >
               <KeyRound className="w-3.5 h-3.5" />
-              Configure Key
+              Change Key
             </button>
           </div>
         </div>

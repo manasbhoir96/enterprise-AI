@@ -11,11 +11,15 @@ const { Pool } = pg;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const connectionString = process.env.DATABASE_URL || "postgresql://localhost:5432/nexusai_db";
+const isRemoteOrSupabase = connectionString.includes("supabase") || connectionString.includes(".com") || connectionString.includes(".net");
+
 export const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || "postgresql://localhost:5432/nexusai_db",
+  connectionString,
   max: 20,
   idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 5000,
+  connectionTimeoutMillis: 7000,
+  ssl: isRemoteOrSupabase ? { rejectUnauthorized: false } : undefined,
 });
 
 pool.on("error", (err) => {

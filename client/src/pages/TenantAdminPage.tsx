@@ -11,6 +11,9 @@ import {
   Database,
   Cpu,
   Sparkles,
+  Copy,
+  Check,
+  Terminal,
 } from "lucide-react";
 import { apiRequest } from "../lib/api.js";
 import { useAuth } from "../context/AuthContext.js";
@@ -37,6 +40,30 @@ export const TenantAdminPage: React.FC<TenantAdminPageProps> = () => {
   const [orgIndustry, setOrgIndustry] = useState(organization?.industry || "");
   const [complianceLevel, setComplianceLevel] = useState("SOC2 Type II & HIPAA");
   const [settingsSaved, setSettingsSaved] = useState(false);
+
+  // API Key & Integration state
+  const [copiedKey, setCopiedKey] = useState(false);
+  const [customGeminiKey, setCustomGeminiKey] = useState(() => localStorage.getItem("nexus_gemini_key") || "");
+  const [keySaved, setKeySaved] = useState(false);
+
+  const tenantApiKey = organization?.api_key || `nx_live_${organization?.id?.replace(/-/g, "").substring(0, 24) || "sample"}`;
+
+  const handleCopyKey = () => {
+    navigator.clipboard.writeText(tenantApiKey);
+    setCopiedKey(true);
+    setTimeout(() => setCopiedKey(false), 2000);
+  };
+
+  const handleSaveGeminiKey = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (customGeminiKey.trim()) {
+      localStorage.setItem("nexus_gemini_key", customGeminiKey.trim());
+    } else {
+      localStorage.removeItem("nexus_gemini_key");
+    }
+    setKeySaved(true);
+    setTimeout(() => setKeySaved(false), 2500);
+  };
 
   const loadMembers = async () => {
     try {
@@ -259,6 +286,115 @@ export const TenantAdminPage: React.FC<TenantAdminPageProps> = () => {
               SOC2 TYPE II VERIFIED
             </span>
           </div>
+        </div>
+      </div>
+
+      {/* Enterprise API Keys & Data Access Protocols */}
+      <div className="bg-white p-6 rounded-3xl border border-gold-300/80 shadow-luxuryCard space-y-5">
+        <div className="flex flex-wrap items-center justify-between pb-3 border-b border-gold-200/80 gap-2">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-gold-50 border border-gold-300 flex items-center justify-center text-gold-700 shadow-2xs">
+              <KeyRound className="w-4 h-4" />
+            </div>
+            <div>
+              <h3 className="text-sm font-bold text-slate-900 font-serif-luxury tracking-wide">
+                Enterprise API Keys & Direct Data Access
+              </h3>
+              <p className="text-[11px] text-slate-500">
+                Sovereign cryptographic keys for accessing tenant knowledge assets, Copilot queries, and automated AI workflows.
+              </p>
+            </div>
+          </div>
+          <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold uppercase bg-emerald-50 text-emerald-800 border border-emerald-300">
+            TLS 1.3 Active
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {/* Tenant Live API Key */}
+          <div className="p-4 rounded-2xl bg-[#FCFBF8] border border-gold-200/80 space-y-2.5 shadow-2xs">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold text-slate-800 font-serif flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-gold-700" />
+                Sovereign Tenant API Key
+              </span>
+              <span className="text-[10px] font-mono text-slate-500 font-medium">Header: x-api-key</span>
+            </div>
+            <p className="text-[11px] text-slate-600 leading-relaxed">
+              Use this key to programmatically query and ingest data into <strong>{organization?.name || "your organization"}</strong> partition.
+            </p>
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                readOnly
+                value={tenantApiKey}
+                className="w-full px-3 py-1.5 rounded-lg text-xs font-mono bg-white text-slate-800 border border-gold-300 select-all"
+              />
+              <button
+                type="button"
+                onClick={handleCopyKey}
+                className="px-3 py-1.5 rounded-lg gold-foil-btn text-white text-xs font-bold flex items-center gap-1 shrink-0 shadow-2xs transition-all hover:scale-105"
+              >
+                {copiedKey ? (
+                  <>
+                    <Check className="w-3.5 h-3.5" />
+                    Copied!
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-3.5 h-3.5" />
+                    Copy
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* Custom Google Gemini API Key */}
+          <div className="p-4 rounded-2xl bg-[#FCFBF8] border border-gold-200/80 space-y-2.5 shadow-2xs">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold text-slate-800 font-serif flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-gold-700" />
+                Google Gemini API Key
+              </span>
+              <span className={`text-[10px] font-bold font-mono px-2 py-0.5 rounded ${customGeminiKey ? "bg-emerald-50 text-emerald-800 border border-emerald-300" : "bg-gold-50 text-gold-900 border border-gold-200"}`}>
+                {customGeminiKey ? "Custom Key Active" : "Server Enterprise Key Active"}
+              </span>
+            </div>
+            <p className="text-[11px] text-slate-600 leading-relaxed">
+              Inference is powered by Gemini 3.8/3.5 Flash. You may optionally supply a custom API key from Google AI Studio.
+            </p>
+            <form onSubmit={handleSaveGeminiKey} className="flex items-center gap-2">
+              <input
+                type="password"
+                value={customGeminiKey}
+                onChange={(e) => setCustomGeminiKey(e.target.value)}
+                placeholder="AIzaSy... (Leave empty to use server default)"
+                className="w-full px-3 py-1.5 rounded-lg text-xs font-mono bg-white text-slate-800 border border-gold-300 focus:outline-none focus:border-gold-500 shadow-2xs"
+              />
+              <button
+                type="submit"
+                className="px-3 py-1.5 rounded-lg bg-slate-900 text-white hover:bg-slate-800 text-xs font-bold shrink-0 shadow-2xs transition-all cursor-pointer"
+              >
+                {keySaved ? "Saved!" : "Save Key"}
+              </button>
+            </form>
+          </div>
+        </div>
+
+        {/* cURL Example Terminal Snippet */}
+        <div className="p-4 rounded-2xl bg-[#0B0F19] border border-gold-500/30 text-white space-y-2">
+          <div className="flex items-center justify-between text-xs font-mono text-gold-400">
+            <span className="flex items-center gap-1.5">
+              <Terminal className="w-3.5 h-3.5 text-[#D4AF37]" />
+              Direct API Access Proof (Access User Data via API Key):
+            </span>
+            <span className="text-[10px] text-slate-400">cURL / REST</span>
+          </div>
+          <pre className="text-[11px] font-mono text-slate-300 overflow-x-auto p-2.5 rounded-lg bg-black/60 border border-white/5">
+{`curl -X GET "http://localhost:5005/api/knowledge" \\
+  -H "x-api-key: ${tenantApiKey}"`}
+          </pre>
         </div>
       </div>
 

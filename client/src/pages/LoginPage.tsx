@@ -38,6 +38,15 @@ interface DemoPersona {
 
 const DEMO_PERSONAS: DemoPersona[] = [
   {
+    id: "acem",
+    name: "Manas Bhoir",
+    email: "manasbhoir96@gmail.com",
+    role: "Managing Partner & CEO",
+    department: "ACEM CORP Executive",
+    badge: "ACEM Partition Owner",
+    description: "Full sovereign governance over ACEM Corp enterprise partition, AI Copilot, and knowledge assets",
+  },
+  {
     id: "exec",
     name: "Elena Vance",
     email: "admin@acme.com",
@@ -215,21 +224,22 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
           </div>
 
           {error && (
-            <div className="mb-6 p-4 rounded-xl bg-[#FF3366]/10 border border-[#FF3366]/40 text-[#FF3366] text-xs font-quant flex flex-wrap items-center justify-between gap-2">
+            <div className="mb-6 p-4 rounded-xl bg-[#FF3366]/10 border border-[#FF3366]/40 text-[#FF3366] text-xs font-quant flex flex-wrap items-center justify-between gap-2 shadow-[0_0_15px_rgba(255,51,102,0.15)]">
               <div className="flex items-center gap-2">
                 <span className="font-bold">Notice:</span> {error}
               </div>
-              {error.toLowerCase().includes("already exists") && (
+              {(error.toLowerCase().includes("already exists") || error.toLowerCase().includes("registered")) && (
                 <button
                   type="button"
                   onClick={() => {
                     setMode("login");
-                    setEmail(regEmail || email);
+                    setEmail(regEmail || email || "manasbhoir96@gmail.com");
+                    setPassword("password123");
                     setError(null);
                   }}
-                  className="px-3 py-1 rounded-lg bg-gold-500/20 text-[#D4AF37] border border-gold-500/40 hover:bg-gold-500 hover:text-white font-bold text-[11px] transition-all"
+                  className="px-3.5 py-1.5 rounded-lg gold-foil-btn text-white font-bold text-xs transition-all shadow-[0_0_12px_rgba(212,175,55,0.4)]"
                 >
-                  Switch to Sign In →
+                  Switch to Sign In with this Email →
                 </button>
               )}
             </div>
@@ -404,6 +414,23 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
                     placeholder="elena@acme.com"
                     className="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs font-quant text-white"
                   />
+                  {regEmail.toLowerCase().trim() === "manasbhoir96@gmail.com" && (
+                    <div className="mt-2 p-2.5 rounded-lg bg-gold-500/15 border border-gold-500/40 text-[11px] font-quant text-amber-200 flex items-center justify-between gap-1.5">
+                      <span>⚡ Account exists for <strong>ACEM CORP</strong>!</span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setMode("login");
+                          setEmail("manasbhoir96@gmail.com");
+                          setPassword("password123");
+                          setError(null);
+                        }}
+                        className="px-2 py-0.5 rounded bg-[#D4AF37] text-black font-bold text-[10px] hover:bg-[#E5C158] transition-all cursor-pointer"
+                      >
+                        Sign In Now →
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
 

@@ -29,12 +29,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
 
       try {
-        const res = await apiRequest<{ user: User & { org_name?: string; industry?: string } }>("/auth/me");
+        const res = await apiRequest<{ user: User & { org_name?: string; industry?: string; org_api_key?: string } }>("/auth/me");
         setUser(res.user);
         setOrganization({
           id: res.user.organization_id,
           name: res.user.org_name || "Enterprise Tenant",
           industry: res.user.industry || null,
+          api_key: res.user.org_api_key,
           created_at: res.user.created_at,
         });
       } catch (err) {

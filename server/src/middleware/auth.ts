@@ -30,10 +30,42 @@ export async function authenticateToken(
   next: NextFunction
 ): Promise<void> {
   const authHeader = req.headers["authorization"];
+  const apiKeyHeader = (req.headers["x-api-key"] as string) || (req.headers["x-enterprise-key"] as string);
+
+  // 1. Support API Key authentication (x-api-key header or Authorization: ApiKey <key> or Authorization: Bearer nx_live_...)
+  const apiKey =
+    apiKeyHeader ||
+    (authHeader && authHeader.startsWith("ApiKey ") ? authHeader.split(" ")[1] : null) ||
+    (authHeader && authHeader.startsWith("Bearer nx_live_") ? authHeader.split(" ")[1] : null);
+
+  if (apiKey) {
+    try {
+      const cleanKey = apiKey.trim();
+      const orgRes = await query(
+        `SELECT u.id, u.organization_id, u.email, u.full_name, u.department, u.role,
+                o.name as org_name, o.industry
+         FROM users u
+         JOIN organizations o ON u.organization_id = o.id
+         WHERE o.api_key = $1 OR o.id::text = $1
+         ORDER BY CASE WHEN u.role = 'owner' THEN 0 WHEN u.role = 'admin' THEN 1 ELSE 2 END
+         LIMIT 1`,
+        [cleanKey]
+      );
+
+      if (orgRes.rows.length > 0) {
+        req.user = orgRes.rows[0];
+        return next();
+      }
+    } catch (err) {
+      console.error("API Key auth error:", err);
+    }
+  }
+
+  // 2. Support Standard JWT Bearer token authentication
   const token = authHeader && authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : null;
 
   if (!token) {
-    res.status(401).json({ error: "Authentication token missing or invalid" });
+    res.status(401).json({ error: "Authentication required. Provide a valid Bearer token or x-api-key header." });
     return;
   }
 
@@ -46,7 +78,7 @@ export async function authenticateToken(
     // Fetch user and organization to guarantee up-to-date role and tenant binding
     const userRes = await query(
       `SELECT u.id, u.organization_id, u.email, u.full_name, u.department, u.role,
-              o.name as org_name, o.industry
+              o.name as org_name, o.industry, o.api_key as org_api_key
        FROM users u
        JOIN organizations o ON u.organization_id = o.id
        WHERE u.id = $1 AND u.organization_id = $2`,

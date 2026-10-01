@@ -7,6 +7,7 @@ import { RegisterTenantSchema, LoginSchema } from "@nexusai/shared";
 const router = Router();
 
 router.post("/register-tenant", validateBody(RegisterTenantSchema), registerTenant);
+router.post("/register", validateBody(RegisterTenantSchema), registerTenant);
 router.post("/login", validateBody(LoginSchema), login);
 router.get("/me", authenticateToken, getCurrentUser);
 

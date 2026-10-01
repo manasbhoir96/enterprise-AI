@@ -18,10 +18,11 @@ export async function registerTenant(req: Request, res: Response): Promise<void>
     const passwordHash = await bcrypt.hash(adminPassword, 10);
 
     const result = await transaction(async (client) => {
-      // 1. Create Organization
+      // 1. Create Organization with sovereign API Key
+      const apiKey = "nx_live_" + Math.random().toString(36).substring(2, 14) + Math.random().toString(36).substring(2, 14);
       const orgRes = await client.query(
-        "INSERT INTO organizations (name, industry) VALUES ($1, $2) RETURNING id, name, industry, created_at",
-        [organizationName, industry]
+        "INSERT INTO organizations (name, industry, api_key) VALUES ($1, $2, $3) RETURNING id, name, industry, api_key, created_at",
+        [organizationName, industry, apiKey]
       );
       const org = orgRes.rows[0];
 
@@ -42,6 +43,16 @@ export async function registerTenant(req: Request, res: Response): Promise<void>
          ($1, $2, 'Quarterly Financial Health Synthesizer', 'Synthesize financial statements, budget variances, and cost anomalies for executive quarterly review.', 'Finance & Accounting'),
          ($1, $2, 'HR Policy & Onboarding Assistant', 'Verify departmental compliance, employee leave provisions, and corporate code of conduct adherence.', 'Human Resources')`,
         [org.id, user.id]
+      );
+
+      // 4. Create default Knowledge Assets for the organization so Gemini API key immediately accesses data
+      await client.query(
+        `INSERT INTO knowledge_assets (organization_id, uploaded_by, title, content_text, department_tag, classification)
+         VALUES 
+         ($1, $2, $3 || ' Enterprise AI Governance & Operating Charter', 'SOVEREIGN ENTERPRISE AI GOVERNANCE CHARTER\n\n1. SCOPE & OBJECTIVES\nAll autonomous workflows operate strictly within ' || $3 || ' sovereign tenant boundaries with zero data cross-leakage.\n\n2. COMPLIANCE & PRIVACY\nData is encrypted under SOC2 Type II protocols with cryptographic tenant isolation. Internal queries are processed with audit logging.\n\n3. EXPENDITURE CONTROLS\nAutomated actions exceeding $25,000 require manual sign-off from authorized personnel.', 'Executive Leadership', 'internal'),
+         ($1, $2, $3 || ' Master Services & Vendor Terms', 'MASTER SERVICES AGREEMENT (MSA)\n\nCLAUSE 5: INDEMNIFICATION & LIABILITY\n' || $3 || ' holds comprehensive mutual indemnification with liability capped at 12 months fees.\n\nCLAUSE 8: SERVICE AVAILABILITY\nVendor commits to 99.95% system uptime measured on a monthly basis.', 'Legal & Compliance', 'confidential'),
+         ($1, $2, $3 || ' Corporate Expense & Travel Policy', 'TRAVEL & EXPENSE REIMBURSEMENT POLICY\n\n1. Air travel: Standard corporate travel is economy class for domestic flights under 5 hours. Business class authorized for international travel exceeding 6 hours with VP approval.\n2. Meals: Daily per diem allowance is $80/day ($20 breakfast, $25 lunch, $35 dinner).\n3. Lodging: Maximum room rate is $250/night for Tier 1 cities.', 'Finance & Accounting', 'internal')`,
+        [org.id, user.id, organizationName]
       );
 
       return { org, user };
@@ -70,7 +81,7 @@ export async function login(req: Request, res: Response): Promise<void> {
   try {
     const userRes = await query(
       `SELECT u.id, u.organization_id, u.email, u.password_hash, u.full_name, u.department, u.role,
-              o.name as org_name, o.industry
+              o.name as org_name, o.industry, o.api_key
        FROM users u
        JOIN organizations o ON u.organization_id = o.id
        WHERE LOWER(u.email) = LOWER($1)`,
@@ -105,6 +116,7 @@ export async function login(req: Request, res: Response): Promise<void> {
         id: user.organization_id,
         name: user.org_name,
         industry: user.industry,
+        api_key: user.api_key,
       },
     });
   } catch (error) {

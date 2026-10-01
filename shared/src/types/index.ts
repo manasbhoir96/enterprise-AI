@@ -6,6 +6,7 @@ export interface Organization {
   id: string;
   name: string;
   industry: string | null;
+  api_key?: string;
   created_at: string;
 }
 

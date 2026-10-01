@@ -86,8 +86,9 @@ npm run seed
 ```bash
 npm run dev
 ```
-- **Backend API**: `http://localhost:5000`
+- **Backend API**: `http://localhost:5005`
 - **Frontend App**: `http://localhost:5173`
+- **Public Secured Tunnel**: `npm run tunnel`
 
 ---
 
@@ -99,15 +100,15 @@ npm run dev
 | **Marcus Reed** | Org Admin / Legal | `marcus.reed@acme.com` | `password123` |
 | **Sarah Chen** | Employee / HR | `sarah.chen@acme.com` | `password123` |
 
-*Quick 1-Click Demo Login buttons are available on the landing page for instant evaluation!*
+*Interactive 1-Click Demo Login cards are available on the login page for instant access!*
 
 ---
 
-## 🛡️ Gemini API Key Configuration
-NexusAI supports live Google Gemini API keys:
-1. Set `GEMINI_API_KEY=your_key` in `.env`.
-2. Or open the **"Config Key"** modal in the top navigation or Tenant Administration page to test your personal key directly in the browser!
-3. If no key is set, NexusAI engages its internal deterministic RAG synthesizer so evaluators can inspect every workflow without broken screens.
+## 🛡️ Gemini AI Configuration
+NexusAI is powered by the official `@google/genai` SDK using `gemini-3.8-flash`:
+1. Copy `example.env` to `.env` (and `server/.env`).
+2. Add your Gemini API key: `GEMINI_API_KEY=your_key_here`.
+3. If no key is set, NexusAI engages its deterministic enterprise fallback pipeline so evaluators can test every feature reliably.
 
 ---
 

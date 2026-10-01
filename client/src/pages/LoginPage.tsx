@@ -98,7 +98,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
     setError(null);
     setIsLoading(true);
     try {
-      await login({ email, password });
+      await login({ email: email.trim(), password });
       onSuccess();
     } catch (err: any) {
       setError(err.message || "Failed to authenticate. Check credentials.");
@@ -110,14 +110,18 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
   const handleRegisterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    if (regPassword.length < 8) {
+      setError("Master Password must be at least 8 characters long.");
+      return;
+    }
     setIsLoading(true);
     try {
       const payload: RegisterTenantInput = {
-        organizationName: orgName,
+        organizationName: orgName.trim(),
         industry,
-        adminEmail: regEmail,
+        adminEmail: regEmail.trim(),
         adminPassword: regPassword,
-        fullName: fullName,
+        fullName: fullName.trim(),
       };
       await register(payload);
       onSuccess();
@@ -142,43 +146,43 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0F19] flex flex-col justify-center py-12 sm:px-6 lg:px-8 selection:bg-[#00FFA3]/30 selection:text-[#00FFA3] relative overflow-hidden">
+    <div className="min-h-screen bg-[#0B0F19] flex flex-col justify-center py-12 sm:px-6 lg:px-8 selection:bg-gold-500/30 selection:text-white relative overflow-hidden">
       {/* Background radial glows */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#00E5FF]/8 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#7000FF]/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,229,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,229,255,0.02)_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gold-600/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none" />
 
       {/* Main Container Card */}
       <div className="sm:mx-auto sm:w-full sm:max-w-2xl relative z-10 px-4">
-        <div className="glass-panel rounded-3xl border border-[#00E5FF]/30 p-8 sm:p-10 shadow-[0_0_50px_rgba(0,0,0,0.85)] relative overflow-hidden">
+        <div className="glass-panel rounded-3xl border border-gold-500/30 p-8 sm:p-10 shadow-[0_0_50px_rgba(0,0,0,0.85)] relative overflow-hidden">
           {/* Holographic Security Ribbon across top */}
           <div className="absolute top-0 left-0 right-0 h-1.5 money-hologram-ribbon" />
 
           {/* Header Branding */}
           <div className="text-center space-y-3 mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-[#00FFA3] via-[#00E5FF] to-[#7000FF] p-[2px] shadow-[0_0_25px_rgba(0,229,255,0.4)]">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-[#D4AF37] via-[#FFF] to-[#C5A059] p-[1.5px] shadow-[0_0_25px_rgba(212,175,55,0.4)]">
               <div className="w-full h-full bg-[#050811] rounded-[14px] flex items-center justify-center">
-                <Cpu className="w-8 h-8 text-[#00FFA3] animate-pulse" />
+                <Cpu className="w-8 h-8 text-[#D4AF37] animate-pulse" />
               </div>
             </div>
 
             <div>
               <div className="flex items-center justify-center space-x-2">
-                <span className="w-2 h-2 rounded-full bg-[#00FFA3] animate-ping" />
-                <span className="text-[11px] font-quant font-bold text-[#00FFA3] uppercase tracking-widest">
+                <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-ping" />
+                <span className="text-[11px] font-quant font-bold text-[#D4AF37] uppercase tracking-widest">
                   ENTERPRISE OPERATIONAL LAYER
                 </span>
               </div>
               <h1 className="text-3xl font-bold font-quant text-white tracking-tight mt-1">
-                QUANTIS<span className="text-[#00E5FF]">.AI</span>
+                QUANTIS<span className="text-[#D4AF37]">.AI</span>
               </h1>
-              <p className="text-xs text-slate-400 mt-1 max-w-md mx-auto">
+              <p className="text-xs text-slate-300 mt-1 max-w-md mx-auto">
                 Holographic Enterprise Intelligence, Grounded RAG & Autonomous Agentic Workflows
               </p>
             </div>
 
             {/* Mode Switcher */}
-            <div className="inline-flex p-1 rounded-xl bg-black/60 border border-white/10 mt-2">
+            <div className="inline-flex p-1 rounded-xl bg-black/60 border border-gold-500/20 mt-2">
               <button
                 type="button"
                 onClick={() => {
@@ -187,7 +191,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
                 }}
                 className={`px-4 py-1.5 rounded-lg text-xs font-quant font-bold transition-all ${
                   mode === "login"
-                    ? "bg-[#00FFA3] text-[#050811] shadow-[0_0_12px_rgba(0,255,163,0.4)]"
+                    ? "gold-foil-btn text-white shadow-[0_0_12px_rgba(212,175,55,0.4)]"
                     : "text-slate-400 hover:text-white"
                 }`}
               >
@@ -201,7 +205,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
                 }}
                 className={`px-4 py-1.5 rounded-lg text-xs font-quant font-bold transition-all ${
                   mode === "register"
-                    ? "bg-[#00E5FF] text-[#050811] shadow-[0_0_12px_rgba(0,229,255,0.4)]"
+                    ? "gold-foil-btn text-white shadow-[0_0_12px_rgba(212,175,55,0.4)]"
                     : "text-slate-400 hover:text-white"
                 }`}
               >
@@ -220,10 +224,10 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
           {mode === "login" && (
             <div className="mb-8 space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-quant font-bold uppercase tracking-wider text-slate-400">
+                <span className="text-[11px] font-quant font-bold uppercase tracking-wider text-slate-300">
                   ⚡ 1-Click Executive Personas:
                 </span>
-                <span className="text-[10px] font-quant text-[#00FFA3]">Instant VIP Access</span>
+                <span className="text-[10px] font-quant text-[#D4AF37] font-bold">Instant VIP Access</span>
               </div>
 
               <div className="grid grid-cols-1 gap-2.5">
@@ -235,18 +239,18 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
                       onClick={() => handleSelectPersona(p)}
                       className={`p-3.5 rounded-2xl border transition-all cursor-pointer flex items-center justify-between group ${
                         isSelected
-                          ? "bg-black/60 border-[#00FFA3]/60 shadow-[0_0_15px_rgba(0,255,163,0.2)]"
-                          : "bg-black/40 border-white/10 hover:border-[#00E5FF]/40"
+                          ? "bg-black/60 border-gold-500/60 shadow-[0_0_15px_rgba(212,175,55,0.25)]"
+                          : "bg-black/40 border-gold-500/20 hover:border-gold-500/50"
                       }`}
                     >
                       <div className="flex items-center space-x-3 truncate">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00FFA3] to-[#00E5FF] flex items-center justify-center text-[#050811] font-bold text-xs font-quant shrink-0 shadow-[0_0_10px_rgba(0,255,163,0.3)]">
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#D4AF37] to-[#C5A059] flex items-center justify-center text-[#050811] font-bold text-xs font-quant shrink-0 shadow-[0_0_10px_rgba(212,175,55,0.3)]">
                           {p.name.charAt(0)}
                         </div>
                         <div className="truncate">
                           <div className="flex items-center gap-2">
                             <span className="text-xs font-bold font-quant text-white truncate">{p.name}</span>
-                            <span className="text-[10px] font-quant font-semibold px-2 py-0.5 rounded bg-[#00FFA3]/10 text-[#00FFA3] border border-[#00FFA3]/30">
+                            <span className="text-[10px] font-quant font-semibold px-2 py-0.5 rounded bg-gold-500/15 text-[#D4AF37] border border-gold-500/30">
                               {p.badge}
                             </span>
                           </div>
@@ -261,7 +265,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
                           handleQuickLogin(p.email);
                         }}
                         disabled={isLoading}
-                        className="ml-2.5 px-3 py-1.5 rounded-xl text-xs font-quant font-bold bull-market-btn shrink-0 flex items-center gap-1"
+                        className="ml-2.5 px-3 py-1.5 rounded-xl text-xs font-quant font-bold gold-foil-btn shrink-0 flex items-center gap-1"
                       >
                         Enter →
                       </button>
@@ -286,7 +290,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="glass-input w-full pl-10 pr-4 py-2.5 rounded-xl text-xs font-quant"
+                    className="glass-input w-full pl-10 pr-4 py-2.5 rounded-xl text-xs font-quant text-white"
                     placeholder="officer@acme.com"
                   />
                 </div>
@@ -303,7 +307,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="glass-input w-full pl-10 pr-10 py-2.5 rounded-xl text-xs font-quant"
+                    className="glass-input w-full pl-10 pr-10 py-2.5 rounded-xl text-xs font-quant text-white"
                     placeholder="••••••••••••"
                   />
                   <button
@@ -319,7 +323,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bull-market-btn py-3 rounded-xl text-xs font-quant font-bold flex items-center justify-center gap-2 mt-2 shadow-[0_0_20px_rgba(0,255,163,0.3)]"
+                className="w-full gold-foil-btn py-3 rounded-xl text-xs font-quant font-bold flex items-center justify-center gap-2 mt-2 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
               >
                 <span>{isLoading ? "Authenticating Sovereign Session..." : "Sign In to Quantis Terminal"}</span>
                 <ArrowRight className="w-4 h-4" />
@@ -337,7 +341,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
                   value={orgName}
                   onChange={(e) => setOrgName(e.target.value)}
                   placeholder="Acme Global Sovereign Capital"
-                  className="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs font-quant"
+                  className="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs font-quant text-white"
                 />
               </div>
 
@@ -348,7 +352,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
                 <select
                   value={industry}
                   onChange={(e) => setIndustry(e.target.value)}
-                  className="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs font-quant"
+                  className="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs font-quant text-white cursor-pointer"
                 >
                   <option value="Institutional Wealth & Private Equity" className="bg-[#0B0F19]">
                     Institutional Wealth & Private Equity
@@ -370,12 +374,12 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="Elena Vance"
-                    className="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs font-quant"
+                    className="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs font-quant text-white"
                   />
                 </div>
                 <div>
                   <label className="block text-xs font-quant font-semibold text-slate-300 mb-1">
-                    Officer Email
+                    Officer Corporate Email
                   </label>
                   <input
                     type="email"
@@ -383,29 +387,35 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
                     value={regEmail}
                     onChange={(e) => setRegEmail(e.target.value)}
                     placeholder="elena@acme.com"
-                    className="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs font-quant"
+                    className="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs font-quant text-white"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-quant font-semibold text-slate-300 mb-1">
-                  Master Password
-                </label>
+                <div className="flex items-center justify-between mb-1">
+                  <label className="block text-xs font-quant font-semibold text-slate-300">
+                    Master Password
+                  </label>
+                  <span className={`text-[10px] font-quant ${regPassword.length >= 8 ? "text-[#00FFA3]" : "text-slate-400"}`}>
+                    {regPassword.length >= 8 ? "✓ Min 8 chars met" : "Min 8 characters required"}
+                  </span>
+                </div>
                 <input
                   type="password"
                   required
+                  minLength={8}
                   value={regPassword}
                   onChange={(e) => setRegPassword(e.target.value)}
                   placeholder="••••••••••••"
-                  className="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs font-quant"
+                  className="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs font-quant text-white"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bull-market-btn py-3 rounded-xl text-xs font-quant font-bold flex items-center justify-center gap-2 mt-2"
+                className="w-full gold-foil-btn py-3 rounded-xl text-xs font-quant font-bold flex items-center justify-center gap-2 mt-2 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
               >
                 <span>{isLoading ? "Provisioning Isolated Tenant..." : "Initialize Quantis Partition"}</span>
                 <ArrowRight className="w-4 h-4" />
@@ -414,19 +424,19 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
           )}
 
           {/* Pillars of Enterprise AI */}
-          <div className="grid grid-cols-3 gap-3 pt-6 border-t border-white/10 mt-6 text-center">
-            <div className="p-3 rounded-xl bg-black/40 border border-white/5 space-y-1">
-              <ShieldCheck className="w-4 h-4 text-[#00FFA3] mx-auto" />
+          <div className="grid grid-cols-3 gap-3 pt-6 border-t border-gold-500/20 mt-6 text-center">
+            <div className="p-3 rounded-xl bg-black/40 border border-gold-500/15 space-y-1">
+              <ShieldCheck className="w-4 h-4 text-[#D4AF37] mx-auto" />
               <p className="text-[11px] font-quant font-bold text-white">Grounded RAG</p>
               <p className="text-[9px] text-slate-400">Zero data leakage</p>
             </div>
-            <div className="p-3 rounded-xl bg-black/40 border border-white/5 space-y-1">
-              <Cpu className="w-4 h-4 text-[#00E5FF] mx-auto" />
+            <div className="p-3 rounded-xl bg-black/40 border border-gold-500/15 space-y-1">
+              <Cpu className="w-4 h-4 text-[#D4AF37] mx-auto" />
               <p className="text-[11px] font-quant font-bold text-white">Agentic DAG</p>
               <p className="text-[9px] text-slate-400">Human-in-the-loop</p>
             </div>
-            <div className="p-3 rounded-xl bg-black/40 border border-white/5 space-y-1">
-              <Layers className="w-4 h-4 text-[#C084FC] mx-auto" />
+            <div className="p-3 rounded-xl bg-black/40 border border-gold-500/15 space-y-1">
+              <Layers className="w-4 h-4 text-[#D4AF37] mx-auto" />
               <p className="text-[11px] font-quant font-bold text-white">ERP Embedded</p>
               <p className="text-[9px] text-slate-400">SOC-2 Type II</p>
             </div>

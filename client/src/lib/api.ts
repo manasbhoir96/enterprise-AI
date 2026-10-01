@@ -36,7 +36,11 @@ export async function apiRequest<T = any>(
   const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
-    throw new ApiError(data.error || "An unexpected API error occurred", response.status, data.details);
+    let errorMsg = data.error || "An unexpected API error occurred";
+    if (Array.isArray(data.details) && data.details.length > 0) {
+      errorMsg = data.details.map((d: any) => d.message || d.field).filter(Boolean).join(". ");
+    }
+    throw new ApiError(errorMsg, response.status, data.details);
   }
 
   return data as T;

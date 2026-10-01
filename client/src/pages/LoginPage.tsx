@@ -215,8 +215,23 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
           </div>
 
           {error && (
-            <div className="mb-6 p-4 rounded-xl bg-[#FF3366]/10 border border-[#FF3366]/40 text-[#FF3366] text-xs font-quant flex items-center gap-2">
-              <span className="font-bold">Error:</span> {error}
+            <div className="mb-6 p-4 rounded-xl bg-[#FF3366]/10 border border-[#FF3366]/40 text-[#FF3366] text-xs font-quant flex flex-wrap items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <span className="font-bold">Notice:</span> {error}
+              </div>
+              {error.toLowerCase().includes("already exists") && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMode("login");
+                    setEmail(regEmail || email);
+                    setError(null);
+                  }}
+                  className="px-3 py-1 rounded-lg bg-gold-500/20 text-[#D4AF37] border border-gold-500/40 hover:bg-gold-500 hover:text-white font-bold text-[11px] transition-all"
+                >
+                  Switch to Sign In →
+                </button>
+              )}
             </div>
           )}
 

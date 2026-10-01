@@ -1,0 +1,11 @@
+import { Router } from "express";
+import { listKnowledge, ingestKnowledge, deleteKnowledge } from "../controllers/knowledge.controller.js";
+import { authenticateToken } from "../middleware/auth.js";
+import { validateBody } from "../middleware/validate.js";
+import { IngestKnowledgeSchema } from "@nexusai/shared";
+const router = Router();
+router.use(authenticateToken);
+router.get("/", listKnowledge);
+router.post("/ingest", validateBody(IngestKnowledgeSchema), ingestKnowledge);
+router.delete("/:id", deleteKnowledge);
+export default router;

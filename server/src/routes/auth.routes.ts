@@ -1,0 +1,13 @@
+import { Router } from "express";
+import { registerTenant, login, getCurrentUser } from "../controllers/auth.controller.js";
+import { authenticateToken } from "../middleware/auth.js";
+import { validateBody } from "../middleware/validate.js";
+import { RegisterTenantSchema, LoginSchema } from "@nexusai/shared";
+
+const router = Router();
+
+router.post("/register-tenant", validateBody(RegisterTenantSchema), registerTenant);
+router.post("/login", validateBody(LoginSchema), login);
+router.get("/me", authenticateToken, getCurrentUser);
+
+export default router;

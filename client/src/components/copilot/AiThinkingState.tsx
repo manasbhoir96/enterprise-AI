@@ -27,19 +27,16 @@ export const AiThinkingState: React.FC<AiThinkingStateProps> = ({
   }, [steps.length]);
 
   return (
-    <div className="w-full glass-panel rounded-2xl p-5 border border-[#00E5FF]/30 shadow-[0_0_30px_rgba(0,229,255,0.15)] relative overflow-hidden my-3">
-      {/* Laser Scanning Line */}
-      <div className="absolute inset-0 hologram-laser-sweep pointer-events-none" />
-
+    <div className="w-full glass-panel rounded-2xl p-5 border border-gold-500/30 shadow-[0_0_30px_rgba(197,160,89,0.15)] relative overflow-hidden my-3">
       <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-5 relative z-10">
         {/* Pulsating Holographic Quantum Orb */}
         <div className="relative flex items-center justify-center shrink-0">
-          <div className="w-16 h-16 rounded-full ai-thinking-orb flex items-center justify-center relative shadow-[0_0_30px_rgba(0,255,163,0.6)]">
+          <div className="w-16 h-16 rounded-full ai-thinking-orb flex items-center justify-center relative shadow-[0_0_30px_rgba(212,175,55,0.6)]">
             <Cpu className="w-7 h-7 text-[#050811] animate-pulse" />
           </div>
           {/* Outer concentric rotating ring */}
-          <div className="absolute -inset-2 rounded-full border border-dashed border-[#00E5FF]/40 animate-spin" style={{ animationDuration: "12s" }} />
-          <div className="absolute -inset-4 rounded-full border border-[#7000FF]/25 animate-ping" style={{ animationDuration: "3s" }} />
+          <div className="absolute -inset-2 rounded-full border border-dashed border-gold-400/40 animate-spin" style={{ animationDuration: "12s" }} />
+          <div className="absolute -inset-4 rounded-full border border-gold-300/20 animate-ping" style={{ animationDuration: "3s" }} />
         </div>
 
         {/* Status text & dancing waveform */}

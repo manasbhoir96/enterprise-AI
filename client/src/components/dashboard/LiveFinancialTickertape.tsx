@@ -29,15 +29,15 @@ const TICKER_DATA: TickerItem[] = [
 
 export const LiveFinancialTickertape: React.FC = () => {
   return (
-    <div className="w-full bg-[#050811]/90 backdrop-blur-md border-b border-[#00E5FF]/20 overflow-hidden py-1.5 px-2 relative z-30 select-none">
+    <div className="w-full bg-[#050811]/95 backdrop-blur-md border-b border-gold-500/20 overflow-hidden py-1.5 px-2 relative z-30 select-none">
       {/* Edge gradient fade masks */}
       <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[#050811] to-transparent z-10 pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#050811] to-transparent z-10 pointer-events-none" />
 
       {/* Live Badge indicator */}
-      <div className="absolute left-3 top-1/2 -translate-y-1/2 z-20 hidden md:flex items-center space-x-1.5 px-2 py-0.5 rounded-full bg-[#0B0F19] border border-[#00FFA3]/40 shadow-[0_0_10px_rgba(0,255,163,0.3)]">
-        <span className="w-1.5 h-1.5 rounded-full bg-[#00FFA3] animate-pulse" />
-        <span className="text-[10px] font-quant font-bold tracking-wider text-[#00FFA3] uppercase">QUANTIS LIVE</span>
+      <div className="absolute left-3 top-1/2 -translate-y-1/2 z-20 hidden md:flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full bg-[#0B0F19] border border-gold-500/40 shadow-[0_0_10px_rgba(212,175,55,0.25)]">
+        <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-pulse" />
+        <span className="text-[10px] font-quant font-bold tracking-wider text-[#D4AF37] uppercase">QUANTIS LIVE</span>
       </div>
 
       <div className="animate-tickertape flex items-center space-x-8 pl-28">
@@ -45,12 +45,12 @@ export const LiveFinancialTickertape: React.FC = () => {
         {[...TICKER_DATA, ...TICKER_DATA].map((item, idx) => (
           <div
             key={`${item.id}-${idx}`}
-            className="inline-flex items-center space-x-2 text-xs py-0.5 px-2 rounded hover:bg-white/[0.04] transition-colors cursor-pointer group"
+            className="inline-flex items-center space-x-2 text-xs py-0.5 px-2 rounded hover:bg-white/[0.05] transition-colors cursor-pointer group"
           >
-            <span className="font-quant font-bold text-slate-300 group-hover:text-[#00E5FF] transition-colors">
+            <span className="font-quant font-bold text-white group-hover:text-[#D4AF37] transition-colors">
               {item.symbol}
             </span>
-            <span className="font-quant text-slate-400 font-medium">
+            <span className="font-quant text-slate-300 font-medium">
               {item.value}
             </span>
             {item.change && (

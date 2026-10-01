@@ -108,31 +108,31 @@ function AppContent() {
         {/* Main Workspace Canvas */}
         <div className="flex-1 flex flex-col min-w-0 overflow-y-auto bg-gradient-to-b from-[#0B0F19] via-[#080C14] to-[#050811]">
           {/* Top Header Bar */}
-          <header className="h-16 border-b border-[#00E5FF]/20 bg-[#050811]/90 backdrop-blur-xl px-6 flex items-center justify-between sticky top-0 z-20 shadow-md">
+          <header className="h-16 border-b border-gold-500/20 bg-[#050811]/90 backdrop-blur-xl px-6 flex items-center justify-between sticky top-0 z-20 shadow-md">
             <div className="flex items-center space-x-3.5">
               <h2 className="text-base font-bold text-white tracking-tight flex items-center gap-2">
                 <span>{getPageTitle()}</span>
               </h2>
-              <span className="hidden md:inline-flex text-[11px] font-quant font-semibold px-2.5 py-0.5 rounded-full bg-black/60 text-[#00E5FF] border border-[#00E5FF]/30">
+              <span className="hidden md:inline-flex text-[11px] font-quant font-semibold px-2.5 py-0.5 rounded-full bg-black/60 text-[#D4AF37] border border-gold-500/30">
                 🏢 {organization?.name || "Acme Global Treasury"}
               </span>
             </div>
 
             <div className="flex items-center space-x-3">
               {/* AI Engine Status Chip */}
-              <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-black/50 border border-[#00FFA3]/30 text-white text-xs font-quant shadow-[0_0_10px_rgba(0,255,163,0.15)]">
-                <span className="w-2 h-2 rounded-full bg-[#00FFA3] animate-pulse" />
-                <Sparkles className="w-3.5 h-3.5 text-[#00FFA3]" />
-                <span className="text-[#00FFA3] font-bold">RAG ACTIVE</span>
-                <span className="text-slate-400">| Gemini 2.5</span>
+              <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-black/50 border border-gold-500/30 text-white text-xs font-quant shadow-[0_0_10px_rgba(212,175,55,0.15)]">
+                <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse" />
+                <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+                <span className="text-[#D4AF37] font-bold">RAG ACTIVE</span>
+                <span className="text-slate-300">| Gemini 2.5</span>
               </div>
 
               {/* Share Public Link Button */}
               <button
                 onClick={() => setIsShareModalOpen(true)}
-                className="bull-market-btn px-4 py-2 rounded-xl text-xs font-quant font-bold transition-all flex items-center gap-1.5"
+                className="gold-foil-btn px-4 py-2 rounded-xl text-xs font-quant font-bold transition-all flex items-center gap-1.5"
               >
-                <Share2 className="w-3.5 h-3.5" />
+                <Share2 className="w-3.5 h-3.5 text-white" />
                 <span>Share Terminal</span>
               </button>
             </div>

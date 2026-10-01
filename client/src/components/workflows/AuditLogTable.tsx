@@ -18,25 +18,25 @@ export const AuditLogTable: React.FC<AuditLogTableProps> = ({ executions }) => {
   };
 
   return (
-    <div className="rounded-3xl overflow-hidden glass-panel border border-[#00E5FF]/25 shadow-[0_0_35px_rgba(0,0,0,0.8)]">
-      <div className="p-5 border-b border-white/10 bg-[#050811]/90 flex items-center justify-between">
+    <div className="rounded-3xl overflow-hidden glass-panel border border-gold-500/30 shadow-[0_0_35px_rgba(0,0,0,0.8)]">
+      <div className="p-5 border-b border-gold-500/20 bg-[#050811]/90 flex items-center justify-between">
         <div>
           <h3 className="text-sm font-bold font-quant text-white tracking-wide flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-[#00FFA3]" />
+            <ShieldCheck className="w-4 h-4 text-[#D4AF37]" />
             Audit Ledger & Historical Covenant Executions
           </h3>
-          <p className="text-[11px] text-slate-400">
+          <p className="text-[11px] text-slate-300">
             Immutable cryptographic audit trail for every contract review and automated AI covenant verification.
           </p>
         </div>
-        <span className="text-[11px] font-quant font-bold px-3 py-1 rounded-full bg-[#00FFA3]/10 border border-[#00FFA3]/30 text-[#00FFA3]">
+        <span className="text-[11px] font-quant font-bold px-3 py-1 rounded-full bg-gold-500/15 border border-gold-500/30 text-[#D4AF37]">
           {executions.length} Certified Records
         </span>
       </div>
 
       <div className="overflow-x-auto">
         <table className="w-full text-left text-xs">
-          <thead className="bg-black/50 text-slate-400 uppercase tracking-wider text-[10px] font-bold border-b border-white/10 font-quant">
+          <thead className="bg-black/50 text-slate-400 uppercase tracking-wider text-[10px] font-bold border-b border-gold-500/20 font-quant">
             <tr>
               <th className="py-3.5 px-4">Date & Time</th>
               <th className="py-3.5 px-4">Audit Protocol</th>
@@ -49,7 +49,7 @@ export const AuditLogTable: React.FC<AuditLogTableProps> = ({ executions }) => {
           <tbody className="divide-y divide-white/5">
             {executions.length === 0 ? (
               <tr>
-                <td colSpan={6} className="py-10 text-center text-slate-500 font-medium font-quant">
+                <td colSpan={6} className="py-10 text-center text-slate-400 font-medium font-quant">
                   No automated audit executions logged to the Quantis ledger yet.
                 </td>
               </tr>
@@ -74,10 +74,10 @@ export const AuditLogTable: React.FC<AuditLogTableProps> = ({ executions }) => {
                     <span
                       className={`px-2 py-0.5 rounded-full text-[10px] font-quant font-bold uppercase ${
                         item.status === "completed"
-                          ? "bg-[#00FFA3]/10 text-[#00FFA3] border border-[#00FFA3]/30"
+                          ? "bg-gold-500/15 text-[#D4AF37] border border-gold-500/30"
                           : item.status === "failed"
                           ? "bg-[#FF3366]/10 text-[#FF3366] border border-[#FF3366]/30"
-                          : "bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/30"
+                          : "bg-white/10 text-white border border-white/20"
                       }`}
                     >
                       {item.status}
@@ -89,7 +89,7 @@ export const AuditLogTable: React.FC<AuditLogTableProps> = ({ executions }) => {
                   <td className="py-3.5 px-4 text-right">
                     <button
                       onClick={() => setSelectedExecution(item)}
-                      className="inline-flex items-center space-x-1 text-[11px] font-quant text-[#00E5FF] hover:text-[#00FFA3] font-bold transition-colors"
+                      className="inline-flex items-center space-x-1 text-[11px] font-quant text-[#D4AF37] hover:text-white font-bold transition-colors"
                     >
                       <span>Inspect</span>
                       <ChevronRight className="w-3.5 h-3.5" />

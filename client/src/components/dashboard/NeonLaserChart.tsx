@@ -59,17 +59,17 @@ export const NeonLaserChart: React.FC = () => {
   const currentHovered = hoveredIdx !== null ? points[hoveredIdx] : points[points.length - 1];
 
   return (
-    <div className="w-full glass-panel rounded-2xl p-5 border border-[#00FFA3]/20 shadow-[0_0_30px_rgba(0,0,0,0.6)] relative overflow-hidden">
+    <div className="w-full glass-panel rounded-2xl p-5 border border-gold-500/30 shadow-[0_0_30px_rgba(197,160,89,0.12)] relative overflow-hidden">
       {/* Background radial highlight */}
-      <div className="absolute top-0 right-0 w-80 h-80 bg-[#00FFA3]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-0 w-80 h-80 bg-gold-500/5 rounded-full blur-3xl pointer-events-none" />
 
       {/* Chart Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-white/10 gap-3 relative z-10">
         <div>
           <div className="flex items-center space-x-2">
-            <span className="w-2 h-2 rounded-full bg-[#00FFA3] animate-ping" />
-            <span className="text-[11px] font-quant font-bold tracking-wider text-[#00FFA3] uppercase">
-              HIGH-FREQUENCY LASER TELEMETRY
+            <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse" />
+            <span className="text-[11px] font-quant font-bold tracking-wider text-[#D4AF37] uppercase">
+              HIGH-FREQUENCY QUANT TELEMETRY
             </span>
           </div>
           <div className="flex items-baseline space-x-3 mt-1">
@@ -79,8 +79,8 @@ export const NeonLaserChart: React.FC = () => {
             <span className="text-xs font-quant font-bold text-[#00FFA3] flex items-center bg-[#00FFA3]/10 px-2 py-0.5 rounded border border-[#00FFA3]/30">
               <ArrowUpRight className="w-3.5 h-3.5 mr-0.5" /> +18.4% YTD
             </span>
-            <span className="text-xs font-quant text-slate-400">
-              Alpha: <strong className="text-[#00E5FF]">{currentHovered.alpha}</strong>
+            <span className="text-xs font-quant text-slate-300">
+              Alpha: <strong className="text-[#D4AF37]">{currentHovered.alpha}</strong>
             </span>
           </div>
         </div>
@@ -92,7 +92,7 @@ export const NeonLaserChart: React.FC = () => {
               onClick={() => setActiveMetric("revenue")}
               className={`px-2.5 py-1 text-xs font-quant font-semibold rounded ${
                 activeMetric === "revenue"
-                  ? "bg-[#00FFA3] text-[#050811] font-bold shadow-[0_0_10px_rgba(0,255,163,0.4)]"
+                  ? "bg-[#D4AF37] text-[#050811] font-bold shadow-[0_0_12px_rgba(212,175,55,0.4)]"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -102,7 +102,7 @@ export const NeonLaserChart: React.FC = () => {
               onClick={() => setActiveMetric("alpha")}
               className={`px-2.5 py-1 text-xs font-quant font-semibold rounded ${
                 activeMetric === "alpha"
-                  ? "bg-[#00E5FF] text-[#050811] font-bold shadow-[0_0_10px_rgba(0,229,255,0.4)]"
+                  ? "bg-white text-[#050811] font-bold shadow-[0_0_12px_rgba(255,255,255,0.3)]"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -119,17 +119,17 @@ export const NeonLaserChart: React.FC = () => {
           className="w-full h-52 overflow-visible select-none"
         >
           <defs>
-            {/* Neon Green Laser Glow Area */}
-            <linearGradient id="neonGreenGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#00FFA3" stopOpacity="0.35" />
-              <stop offset="50%" stopColor="#00E5FF" stopOpacity="0.1" />
+            {/* Gold Laser Glow Area */}
+            <linearGradient id="neonGoldGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.3" />
+              <stop offset="50%" stopColor="#C5A059" stopOpacity="0.1" />
               <stop offset="100%" stopColor="#0B0F19" stopOpacity="0" />
             </linearGradient>
 
             {/* Glowing Drop Shadow Filters for Laser Lines */}
-            <filter id="laserGlowGreen" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="0" stdDeviation="4" floodColor="#00FFA3" floodOpacity="0.9" />
-              <feDropShadow dx="0" dy="0" stdDeviation="8" floodColor="#00FFA3" floodOpacity="0.5" />
+            <filter id="laserGlowGold" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="0" stdDeviation="4" floodColor="#D4AF37" floodOpacity="0.9" />
+              <feDropShadow dx="0" dy="0" stdDeviation="8" floodColor="#C5A059" floodOpacity="0.5" />
             </filter>
 
             <filter id="laserGlowCyan" x="-20%" y="-20%" width="140%" height="140%">
@@ -166,7 +166,7 @@ export const NeonLaserChart: React.FC = () => {
           })}
 
           {/* Area Fill */}
-          <path d={areaPath} fill="url(#neonGreenGradient)" />
+          <path d={areaPath} fill="url(#neonGoldGradient)" />
 
           {/* Secondary Alpha Laser Line */}
           <path
@@ -183,9 +183,9 @@ export const NeonLaserChart: React.FC = () => {
           <path
             d={linePath}
             fill="none"
-            stroke="#00FFA3"
+            stroke="#D4AF37"
             strokeWidth="3.2"
-            filter="url(#laserGlowGreen)"
+            filter="url(#laserGlowGold)"
           />
 
           {/* Interactive Data Nodes */}
@@ -207,7 +207,7 @@ export const NeonLaserChart: React.FC = () => {
                   cy={y}
                   r={isHovered ? 6 : 4}
                   fill="#050811"
-                  stroke={isHovered ? "#00FFA3" : "#00E5FF"}
+                  stroke={isHovered ? "#D4AF37" : "#00E5FF"}
                   strokeWidth={isHovered ? "3" : "2"}
                   className="transition-all duration-200"
                 />
@@ -217,7 +217,7 @@ export const NeonLaserChart: React.FC = () => {
                     cy={y}
                     r="12"
                     fill="none"
-                    stroke="#00FFA3"
+                    stroke="#D4AF37"
                     strokeWidth="1.5"
                     opacity="0.6"
                     className="animate-ping"
@@ -228,7 +228,7 @@ export const NeonLaserChart: React.FC = () => {
                   x={x}
                   y={height - 8}
                   textAnchor="middle"
-                  fill={isHovered ? "#00FFA3" : "#94A3B8"}
+                  fill={isHovered ? "#D4AF37" : "#94A3B8"}
                   fontSize="10"
                   fontFamily="JetBrains Mono"
                   fontWeight={isHovered ? "bold" : "normal"}
@@ -245,8 +245,8 @@ export const NeonLaserChart: React.FC = () => {
       <div className="flex items-center justify-between pt-3 border-t border-white/5 text-xs text-slate-400">
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-1.5">
-            <span className="w-3 h-1 bg-[#00FFA3] rounded-full shadow-[0_0_8px_#00FFA3]" />
-            <span className="font-quant text-[11px] text-slate-300">Revenue Trajectory ($M)</span>
+            <span className="w-3 h-1 bg-[#D4AF37] rounded-full shadow-[0_0_8px_#D4AF37]" />
+            <span className="font-quant text-[11px] text-white">Revenue Trajectory ($M)</span>
           </div>
           <div className="flex items-center space-x-1.5">
             <span className="w-3 h-1 bg-[#00E5FF] rounded-full shadow-[0_0_8px_#00E5FF]" />

@@ -35,13 +35,11 @@ export const WorkflowManagerPage: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* Top Executive Fiduciary Header */}
-      <div className="glass-panel p-6 rounded-3xl border border-[#00E5FF]/25 shadow-[0_0_35px_rgba(0,0,0,0.8)] flex flex-wrap items-center justify-between gap-4 relative overflow-hidden">
-        <div className="absolute inset-0 hologram-laser-sweep pointer-events-none" />
-
+      <div className="glass-panel p-6 rounded-3xl border border-gold-500/30 shadow-[0_0_35px_rgba(0,0,0,0.8)] flex flex-wrap items-center justify-between gap-4 relative overflow-hidden">
         <div className="flex items-center space-x-3.5 relative z-10">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#00FFA3] via-[#00E5FF] to-[#7000FF] p-[1.5px] shadow-[0_0_15px_rgba(0,229,255,0.4)] shrink-0">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#D4AF37] via-[#FFF] to-[#C5A059] p-[1.5px] shadow-[0_0_15px_rgba(212,175,55,0.4)] shrink-0">
             <div className="w-full h-full bg-[#050811] rounded-[14px] flex items-center justify-center">
-              <Cpu className="w-6 h-6 text-[#00FFA3] animate-pulse" />
+              <Cpu className="w-6 h-6 text-[#D4AF37] animate-pulse" />
             </div>
           </div>
           <div>
@@ -49,11 +47,11 @@ export const WorkflowManagerPage: React.FC = () => {
               <h2 className="text-base font-bold font-quant text-white tracking-wide">
                 Autonomous Covenant & Fiduciary Review Engine
               </h2>
-              <span className="text-[10px] font-bold font-quant px-2.5 py-0.5 rounded-full bg-[#00FFA3]/10 text-[#00FFA3] border border-[#00FFA3]/30 uppercase tracking-wider">
+              <span className="text-[10px] font-bold font-quant px-2.5 py-0.5 rounded-full bg-gold-500/15 text-[#D4AF37] border border-gold-500/40 uppercase tracking-wider">
                 AGENTIC DAG
               </span>
             </div>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs text-slate-300 mt-0.5">
               Deterministic statutory verification, indemnification audits, and automated risk scoring backed by Gemini 2.5 Flash.
             </p>
           </div>

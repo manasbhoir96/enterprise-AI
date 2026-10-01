@@ -112,13 +112,13 @@ export const CopilotChatWindow: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-140px)] glass-panel rounded-3xl border border-[#00E5FF]/25 shadow-[0_0_35px_rgba(0,0,0,0.8)] overflow-hidden">
+    <div className="flex flex-col h-[calc(100vh-140px)] glass-panel rounded-3xl border border-gold-500/30 shadow-[0_0_35px_rgba(0,0,0,0.8)] overflow-hidden">
       {/* Top Header */}
-      <div className="p-4 px-6 border-b border-white/10 bg-[#050811]/90 flex flex-wrap items-center justify-between gap-3 relative z-10">
+      <div className="p-4 px-6 border-b border-gold-500/20 bg-[#050811]/90 flex flex-wrap items-center justify-between gap-3 relative z-10">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00FFA3] via-[#00E5FF] to-[#7000FF] p-[1.5px] shadow-[0_0_15px_rgba(0,229,255,0.4)]">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#D4AF37] via-[#FFF] to-[#C5A059] p-[1.5px] shadow-[0_0_15px_rgba(212,175,55,0.4)]">
             <div className="w-full h-full bg-[#050811] rounded-[9px] flex items-center justify-center">
-              <Bot className="w-5 h-5 text-[#00E5FF]" />
+              <Bot className="w-5 h-5 text-[#D4AF37]" />
             </div>
           </div>
           <div>
@@ -126,12 +126,12 @@ export const CopilotChatWindow: React.FC = () => {
               <h2 className="text-sm font-bold font-quant text-white">
                 Quantis Copilot Terminal
               </h2>
-              <span className="w-2 h-2 rounded-full bg-[#00FFA3] animate-pulse" />
-              <span className="text-[10px] font-quant text-[#00FFA3] bg-[#00FFA3]/10 px-2 py-0.5 rounded border border-[#00FFA3]/30">
+              <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse" />
+              <span className="text-[10px] font-quant text-[#D4AF37] bg-gold-500/15 px-2 py-0.5 rounded border border-gold-500/30">
                 ZERO HALLUCINATION
               </span>
             </div>
-            <p className="text-[11px] text-slate-400">
+            <p className="text-[11px] text-slate-300">
               Grounded in Tenant Vector Partitions • Gemini 2.5 Flash
             </p>
           </div>
@@ -139,12 +139,12 @@ export const CopilotChatWindow: React.FC = () => {
 
         <div className="flex items-center space-x-2.5">
           {/* Department Filter */}
-          <div className="flex items-center space-x-1.5 bg-black/60 px-2.5 py-1.5 rounded-xl border border-white/10 text-xs">
-            <Filter className="w-3.5 h-3.5 text-[#00E5FF]" />
+          <div className="flex items-center space-x-1.5 bg-black/60 px-2.5 py-1.5 rounded-xl border border-gold-500/20 text-xs">
+            <Filter className="w-3.5 h-3.5 text-[#D4AF37]" />
             <select
               value={departmentContext}
               onChange={(e) => setDepartmentContext(e.target.value)}
-              className="bg-transparent text-slate-300 font-quant text-xs focus:outline-none cursor-pointer"
+              className="bg-transparent text-slate-200 font-quant text-xs focus:outline-none cursor-pointer"
             >
               <option value="All Departments" className="bg-[#0B0F19]">All Departments</option>
               <option value="Executive" className="bg-[#0B0F19]">Executive / Treasury</option>
@@ -179,8 +179,8 @@ export const CopilotChatWindow: React.FC = () => {
               <div
                 className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 border ${
                   isUser
-                    ? "bg-gradient-to-br from-[#7000FF] to-[#00E5FF] text-white border-white/20 shadow-[0_0_12px_rgba(112,0,255,0.4)]"
-                    : "bg-[#050811] text-[#00FFA3] border-[#00FFA3]/40 shadow-[0_0_12px_rgba(0,255,163,0.3)]"
+                    ? "bg-gradient-to-br from-[#D4AF37] to-[#8E6A2B] text-white border-white/30 shadow-[0_0_12px_rgba(212,175,55,0.4)]"
+                    : "bg-[#050811] text-[#D4AF37] border-gold-500/40 shadow-[0_0_12px_rgba(212,175,55,0.3)]"
                 }`}
               >
                 {isUser ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
@@ -190,19 +190,19 @@ export const CopilotChatWindow: React.FC = () => {
               <div
                 className={`max-w-[80%] rounded-2xl p-4 space-y-2 border transition-all ${
                   isUser
-                    ? "bg-gradient-to-br from-[#7000FF]/30 to-[#00E5FF]/20 text-white border-[#00E5FF]/30 shadow-[0_0_20px_rgba(0,229,255,0.1)]"
-                    : "glass-panel border-[#00E5FF]/25 shadow-[0_0_25px_rgba(0,0,0,0.6)]"
+                    ? "bg-gradient-to-br from-[#C5A059]/20 to-[#D4AF37]/10 text-white border-gold-500/40 shadow-[0_0_20px_rgba(212,175,55,0.15)]"
+                    : "glass-panel border-gold-500/20 shadow-[0_0_25px_rgba(0,0,0,0.6)]"
                 }`}
               >
-                <div className="text-xs leading-relaxed whitespace-pre-wrap text-slate-200">
+                <div className="text-xs leading-relaxed whitespace-pre-wrap text-slate-100">
                   {msg.text}
                 </div>
 
                 {/* Grounded Citation Chips */}
                 {msg.citations && msg.citations.length > 0 && (
                   <div className="pt-2 border-t border-white/10 space-y-1.5">
-                    <p className="text-[10px] font-quant font-bold text-[#00E5FF] flex items-center gap-1">
-                      <BookOpen className="w-3 h-3 text-[#00FFA3]" />
+                    <p className="text-[10px] font-quant font-bold text-[#D4AF37] flex items-center gap-1">
+                      <BookOpen className="w-3 h-3 text-[#D4AF37]" />
                       Grounded Citations ({msg.citations.length}):
                     </p>
                     <div className="flex flex-wrap gap-1.5">
@@ -210,10 +210,10 @@ export const CopilotChatWindow: React.FC = () => {
                         <button
                           key={cite.id}
                           onClick={() => setActiveCitation(cite)}
-                          className="px-2.5 py-1 rounded-lg bg-black/60 hover:bg-black/90 text-[#00E5FF] border border-[#00E5FF]/30 hover:border-[#00FFA3] text-[10px] font-quant flex items-center gap-1 transition-all"
+                          className="px-2.5 py-1 rounded-lg bg-black/60 hover:bg-black/90 text-slate-200 border border-gold-500/30 hover:border-gold-400 text-[10px] font-quant flex items-center gap-1 transition-all"
                         >
                           <span className="truncate max-w-[150px]">{cite.title}</span>
-                          <span className="text-[8px] uppercase px-1 rounded bg-[#00FFA3]/15 text-[#00FFA3] font-bold">
+                          <span className="text-[8px] uppercase px-1 rounded bg-gold-500/15 text-[#D4AF37] font-bold border border-gold-500/30">
                             {cite.classification}
                           </span>
                         </button>
@@ -226,7 +226,7 @@ export const CopilotChatWindow: React.FC = () => {
                 <div className="flex items-center justify-between text-[9px] pt-1 text-slate-400 font-quant">
                   <span>{msg.timestamp}</span>
                   {!isUser && msg.latencyMs && (
-                    <span className="flex items-center gap-1 text-[#00FFA3]">
+                    <span className="flex items-center gap-1 text-[#D4AF37]">
                       <Clock className="w-2.5 h-2.5" />
                       {msg.latencyMs}ms • {msg.modelUsed}
                     </span>
@@ -245,13 +245,13 @@ export const CopilotChatWindow: React.FC = () => {
 
       {/* Suggested Questions Pills */}
       {messages.length <= 2 && !isLoading && (
-        <div className="px-6 py-2 bg-[#050811]/90 border-t border-white/5 flex flex-wrap items-center gap-2">
-          <span className="text-[10px] font-quant text-slate-400">PROMPTS:</span>
+        <div className="px-6 py-2 bg-[#050811]/90 border-t border-gold-500/15 flex flex-wrap items-center gap-2">
+          <span className="text-[10px] font-quant text-[#D4AF37] font-bold">PROMPTS:</span>
           {suggestedQuestions.map((q, idx) => (
             <button
               key={idx}
               onClick={() => handleSend(q)}
-              className="text-[11px] font-quant px-2.5 py-1 rounded-lg bg-black/50 hover:bg-black/80 text-slate-300 hover:text-[#00E5FF] border border-white/10 hover:border-[#00E5FF]/40 transition-all truncate max-w-[260px]"
+              className="text-[11px] font-quant px-2.5 py-1 rounded-lg bg-black/50 hover:bg-black/80 text-slate-300 hover:text-white border border-gold-500/20 hover:border-gold-500/50 transition-all truncate max-w-[260px]"
             >
               {q}
             </button>
@@ -260,7 +260,7 @@ export const CopilotChatWindow: React.FC = () => {
       )}
 
       {/* Input Bar */}
-      <div className="p-4 px-6 border-t border-white/10 bg-[#050811]/95 relative z-10">
+      <div className="p-4 px-6 border-t border-gold-500/20 bg-[#050811]/95 relative z-10">
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -282,11 +282,11 @@ export const CopilotChatWindow: React.FC = () => {
             disabled={!inputText.trim() || isLoading}
             className={`p-3 rounded-2xl transition-all duration-300 ${
               inputText.trim() && !isLoading
-                ? "bull-market-btn text-[#050811] cursor-pointer hover:scale-105"
+                ? "gold-foil-btn cursor-pointer hover:scale-105"
                 : "bg-white/5 text-slate-600 border border-white/5 cursor-not-allowed"
             }`}
           >
-            <Send className="w-4 h-4" />
+            <Send className="w-4 h-4 text-white" />
           </button>
         </form>
       </div>

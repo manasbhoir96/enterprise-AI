@@ -52,24 +52,21 @@ export const ExecutiveDashboard: React.FC<ExecutiveDashboardProps> = ({ onNaviga
   return (
     <div className="space-y-6">
       {/* Top Welcome & Holographic Telemetry Header */}
-      <div className="p-6 rounded-3xl glass-panel relative overflow-hidden border border-[#00E5FF]/25 shadow-[0_0_35px_rgba(0,0,0,0.8)] flex flex-wrap items-center justify-between gap-4">
-        {/* Laser Scanning overlay */}
-        <div className="absolute inset-0 hologram-laser-sweep pointer-events-none" />
-
+      <div className="p-6 rounded-3xl glass-panel relative overflow-hidden border border-gold-500/30 shadow-[0_0_35px_rgba(0,0,0,0.8)] flex flex-wrap items-center justify-between gap-4">
         <div className="space-y-1.5 z-10">
           <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#00FFA3] animate-pulse" />
-            <span className="text-[10px] font-quant font-bold text-[#00FFA3] tracking-widest uppercase bg-[#00FFA3]/10 px-2.5 py-0.5 rounded-md border border-[#00FFA3]/30 shadow-[0_0_10px_rgba(0,255,163,0.2)]">
-              QUANTIS HOLOGRAPHIC ENCLAVE ACTIVE
+            <span className="w-2.5 h-2.5 rounded-full bg-[#D4AF37] animate-pulse" />
+            <span className="text-[10px] font-quant font-bold text-[#D4AF37] tracking-widest uppercase bg-gold-500/15 px-2.5 py-0.5 rounded-md border border-gold-500/40 shadow-[0_0_10px_rgba(212,175,55,0.2)]">
+              QUANTIS SOVEREIGN ENCLAVE ACTIVE
             </span>
-            <span className="text-[10px] font-quant text-slate-400 bg-white/5 px-2 py-0.5 rounded border border-white/10">
+            <span className="text-[10px] font-quant text-slate-300 bg-white/5 px-2 py-0.5 rounded border border-white/10">
               SOC-2 TYPE II
             </span>
           </div>
           <h1 className="text-2xl font-bold font-quant text-white tracking-tight">
-            Welcome, {user?.full_name || "Elena Vance"}
+            Welcome, <span className="gold-accent-text">{user?.full_name || "Elena Vance"}</span>
           </h1>
-          <p className="text-xs text-slate-400 font-medium">
+          <p className="text-xs text-slate-300 font-medium">
             {organization?.name || "Acme Global Treasury"} • Institutional Asset Telemetry & Agentic AI Layer
           </p>
         </div>
@@ -78,16 +75,16 @@ export const ExecutiveDashboard: React.FC<ExecutiveDashboardProps> = ({ onNaviga
         <div className="flex items-center gap-3 z-10">
           <button
             onClick={() => onNavigate("/copilot")}
-            className="bull-market-btn px-4 py-2.5 rounded-xl text-xs font-quant font-bold transition-all duration-300 flex items-center gap-1.5 hover:scale-105"
+            className="gold-foil-btn px-4 py-2.5 rounded-xl text-xs font-quant font-bold transition-all duration-300 flex items-center gap-1.5 hover:scale-105"
           >
-            <Bot className="w-4 h-4 text-[#050811]" />
+            <Bot className="w-4 h-4 text-white" />
             <span>Launch Copilot</span>
           </button>
           <button
             onClick={() => onNavigate("/workflows")}
             className="hologram-btn px-4 py-2.5 rounded-xl text-xs font-quant font-bold transition-all flex items-center gap-1.5 hover:scale-105"
           >
-            <ShieldCheck className="w-4 h-4 text-[#00FFA3]" />
+            <ShieldCheck className="w-4 h-4 text-[#D4AF37]" />
             <span>Audit Contracts</span>
           </button>
         </div>

@@ -42,17 +42,17 @@ export const Interactive3DHologram: React.FC = () => {
     }
 
     const material = new THREE.MeshBasicMaterial({
-      color: 0x00e5ff,
+      color: 0xd4af37, // Rich 24K Gold Wireframe
       wireframe: wireframeMode,
       transparent: true,
-      opacity: 0.85,
+      opacity: 0.9,
     });
 
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
     meshRef.current = mesh;
 
-    // Orbiting holographic particle cloud
+    // Orbiting holographic particle cloud (Diamond & Gold dust)
     const particlesCount = 350;
     const posArray = new Float32Array(particlesCount * 3);
     for (let i = 0; i < particlesCount * 3; i += 3) {
@@ -64,21 +64,21 @@ export const Interactive3DHologram: React.FC = () => {
     particlesGeo.setAttribute("position", new THREE.BufferAttribute(posArray, 3));
     const particlesMat = new THREE.PointsMaterial({
       size: 0.04,
-      color: 0x00ffa3,
+      color: 0xfffdf5, // Pure White Diamond Sparkles
       transparent: true,
-      opacity: 0.75,
+      opacity: 0.85,
     });
     const particleCloud = new THREE.Points(particlesGeo, particlesMat);
     scene.add(particleCloud);
     pointsRef.current = particleCloud;
 
-    // Outer quantum ring
+    // Outer gold sovereign ring
     const ringGeo = new THREE.RingGeometry(2.3, 2.34, 48);
     const ringMat = new THREE.MeshBasicMaterial({
-      color: 0x7000ff,
+      color: 0xc5a059, // Sovereign Gold Ring
       side: THREE.DoubleSide,
       transparent: true,
-      opacity: 0.6,
+      opacity: 0.7,
     });
     const ring = new THREE.Mesh(ringGeo, ringMat);
     ring.rotation.x = Math.PI / 3;
@@ -154,18 +154,15 @@ export const Interactive3DHologram: React.FC = () => {
   }, [activeGeo, wireframeMode]);
 
   return (
-    <div className="relative w-full rounded-2xl glass-panel p-4 overflow-hidden border border-[#00E5FF]/25 shadow-[0_0_30px_rgba(0,229,255,0.12)]">
-      {/* Laser Sweep Beam */}
-      <div className="absolute inset-0 hologram-laser-sweep pointer-events-none" />
-
+    <div className="relative w-full rounded-2xl glass-panel p-4 overflow-hidden border border-gold-500/30 shadow-[0_0_30px_rgba(197,160,89,0.12)]">
       {/* Header telemetry */}
       <div className="flex items-center justify-between relative z-10 mb-2">
         <div className="flex items-center space-x-2">
-          <div className="w-2.5 h-2.5 rounded-full bg-[#00FFA3] animate-ping" />
-          <span className="text-xs font-quant font-bold tracking-wider text-[#00FFA3] uppercase">
-            3D QUANTIS HOLOGRAPHIC CORE
+          <div className="w-2.5 h-2.5 rounded-full bg-[#D4AF37] animate-pulse" />
+          <span className="text-xs font-quant font-bold tracking-wider text-white uppercase">
+            3D QUANTIS <span className="text-[#D4AF37]">CORE</span>
           </span>
-          <span className="text-[10px] font-quant text-slate-400 bg-black/40 px-2 py-0.5 rounded border border-white/10">
+          <span className="text-[10px] font-quant text-slate-300 bg-black/50 px-2 py-0.5 rounded border border-white/10">
             {fps} FPS | WEBGL 2.0
           </span>
         </div>

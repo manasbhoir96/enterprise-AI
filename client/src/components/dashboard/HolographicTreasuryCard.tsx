@@ -62,13 +62,10 @@ export const HolographicTreasuryCard: React.FC = () => {
           transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
           transition: isHovered ? "transform 0.1s ease-out" : "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
         }}
-        className="preserve-3d relative rounded-3xl glass-panel border border-[#00E5FF]/30 p-6 md:p-8 shadow-[0_0_40px_rgba(0,0,0,0.8)] overflow-hidden group hover:border-[#00FFA3]/60 transition-all duration-300"
+        className="preserve-3d relative rounded-3xl glass-panel border border-gold-500/35 p-6 md:p-8 shadow-[0_0_40px_rgba(0,0,0,0.85)] overflow-hidden group hover:border-gold-400 transition-all duration-300"
       >
-        {/* Holographic Laser Sweep */}
-        <div className="absolute inset-0 hologram-laser-sweep pointer-events-none" />
-
         {/* Holographic Security Ribbon across the Card */}
-        <div className="absolute top-0 right-16 w-12 h-full money-hologram-ribbon opacity-80 pointer-events-none transform -skew-x-12 translate-z-10 flex flex-col justify-around py-4 items-center overflow-hidden">
+        <div className="absolute top-0 right-16 w-12 h-full money-hologram-ribbon opacity-85 pointer-events-none transform -skew-x-12 translate-z-10 flex flex-col justify-around py-4 items-center overflow-hidden">
           <span className="text-[9px] font-black tracking-widest text-[#050811] -rotate-90 whitespace-nowrap font-quant">
             ★ QUANTIS ★
           </span>
@@ -87,18 +84,18 @@ export const HolographicTreasuryCard: React.FC = () => {
         <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/10 relative z-10 translate-z-20">
           <div className="flex items-center space-x-3.5">
             {/* Spinning Holographic Core Medallion */}
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#00FFA3] via-[#00E5FF] to-[#7000FF] p-[2px] shadow-[0_0_20px_rgba(0,255,163,0.5)] shrink-0">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#D4AF37] via-[#FFF] to-[#C5A059] p-[2px] shadow-[0_0_20px_rgba(212,175,55,0.5)] shrink-0">
               <div className="w-full h-full bg-[#050811] rounded-[14px] flex items-center justify-center">
-                <Coins className="w-6 h-6 text-[#00FFA3] animate-pulse" />
+                <Coins className="w-6 h-6 text-[#D4AF37] animate-pulse" />
               </div>
             </div>
 
             <div>
               <div className="flex items-center space-x-2">
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-quant font-bold text-[#00FFA3] bg-[#00FFA3]/10 border border-[#00FFA3]/30">
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-quant font-bold text-[#D4AF37] bg-gold-500/15 border border-gold-500/40">
                   TIER 1 SOVEREIGN ASSET
                 </span>
-                <span className="text-[10px] font-quant text-slate-400">SERIES 2026-A</span>
+                <span className="text-[10px] font-quant text-slate-300">SERIES 2026-A</span>
               </div>
               <h2 className="text-lg md:text-xl font-bold font-quant text-white mt-0.5">
                 Quantis Fiduciary Treasury & Liquidity Ledger
@@ -113,8 +110,8 @@ export const HolographicTreasuryCard: React.FC = () => {
                 onClick={() => setUnitMode("usd")}
                 className={`px-3 py-1 text-xs font-quant font-semibold rounded-lg transition-all ${
                   unitMode === "usd"
-                    ? "bg-[#00FFA3] text-[#050811] font-bold shadow-[0_0_10px_rgba(0,255,163,0.4)]"
-                    : "text-slate-400 hover:text-white"
+                    ? "bg-[#D4AF37] text-[#050811] font-bold shadow-[0_0_12px_rgba(212,175,55,0.4)]"
+                    : "text-slate-300 hover:text-white"
                 }`}
               >
                 USD ($)
@@ -123,8 +120,8 @@ export const HolographicTreasuryCard: React.FC = () => {
                 onClick={() => setUnitMode("quant")}
                 className={`px-3 py-1 text-xs font-quant font-semibold rounded-lg transition-all ${
                   unitMode === "quant"
-                    ? "bg-[#00E5FF] text-[#050811] font-bold shadow-[0_0_10px_rgba(0,229,255,0.4)]"
-                    : "text-slate-400 hover:text-white"
+                    ? "bg-[#D4AF37] text-[#050811] font-bold shadow-[0_0_12px_rgba(212,175,55,0.4)]"
+                    : "text-slate-300 hover:text-white"
                 }`}
               >
                 Troy Oz (Au)
@@ -135,10 +132,10 @@ export const HolographicTreasuryCard: React.FC = () => {
             <button
               onClick={triggerVerification}
               disabled={verifying}
-              className="p-2 rounded-xl bg-black/60 hover:bg-black/90 border border-white/10 hover:border-[#00FFA3] text-slate-300 hover:text-[#00FFA3] transition-all flex items-center gap-1.5 text-xs font-quant"
+              className="p-2 rounded-xl bg-black/60 hover:bg-black/90 border border-white/10 hover:border-gold-400 text-slate-300 hover:text-[#D4AF37] transition-all flex items-center gap-1.5 text-xs font-quant"
               title="Verify cryptographic proof with smart contract"
             >
-              <RefreshCw className={`w-3.5 h-3.5 ${verifying ? "animate-spin text-[#00FFA3]" : ""}`} />
+              <RefreshCw className={`w-3.5 h-3.5 ${verifying ? "animate-spin text-[#D4AF37]" : ""}`} />
               <span className="hidden sm:inline">{verifying ? "Verifying..." : "Verify Hash"}</span>
             </button>
           </div>

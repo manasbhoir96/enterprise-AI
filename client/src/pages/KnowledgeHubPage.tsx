@@ -73,33 +73,30 @@ export const KnowledgeHubPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Header */}
-      <div className="p-6 rounded-3xl glass-panel relative overflow-hidden border border-[#00E5FF]/25 shadow-[0_0_35px_rgba(0,0,0,0.8)] flex flex-wrap items-center justify-between gap-4">
-        {/* Laser Scanning overlay */}
-        <div className="absolute inset-0 hologram-laser-sweep pointer-events-none" />
-
+      <div className="p-6 rounded-3xl glass-panel relative overflow-hidden border border-gold-500/30 shadow-[0_0_35px_rgba(0,0,0,0.8)] flex flex-wrap items-center justify-between gap-4">
         <div className="space-y-1.5 z-10">
           <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#00FFA3] animate-pulse" />
-            <span className="text-[10px] font-quant font-bold text-[#00FFA3] tracking-widest uppercase bg-[#00FFA3]/10 px-2.5 py-0.5 rounded-md border border-[#00FFA3]/30">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#D4AF37] animate-pulse" />
+            <span className="text-[10px] font-quant font-bold text-[#D4AF37] tracking-widest uppercase bg-gold-500/15 px-2.5 py-0.5 rounded-md border border-gold-500/40">
               VECTOR EMBEDDINGS ACTIVE
             </span>
-            <span className="text-[10px] font-quant text-slate-400 bg-white/5 px-2 py-0.5 rounded border border-white/10">
+            <span className="text-[10px] font-quant text-slate-300 bg-white/5 px-2 py-0.5 rounded border border-white/10">
               AES-256 ENCRYPTED
             </span>
           </div>
           <h1 className="text-2xl font-bold font-quant text-white tracking-tight">
             RAG Knowledge Vault & Vector Index
           </h1>
-          <p className="text-xs text-slate-400 font-medium">
+          <p className="text-xs text-slate-300 font-medium">
             Tenant-isolated institutional knowledge base powering zero-hallucination Copilot reasoning.
           </p>
         </div>
 
         <button
           onClick={() => setShowUploader(!showUploader)}
-          className="bull-market-btn px-4 py-2.5 rounded-xl text-xs font-quant font-bold transition-all flex items-center gap-1.5 z-10 hover:scale-105"
+          className="gold-foil-btn px-4 py-2.5 rounded-xl text-xs font-quant font-bold transition-all flex items-center gap-1.5 z-10 hover:scale-105"
         >
-          <Plus className="w-4 h-4 text-[#050811]" />
+          <Plus className="w-4 h-4 text-white" />
           <span>Deposit Vector Document</span>
         </button>
       </div>
@@ -125,8 +122,8 @@ export const KnowledgeHubPage: React.FC = () => {
               onClick={() => setSelectedDept(dept)}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-quant font-semibold whitespace-nowrap transition-all border ${
                 selectedDept === dept
-                  ? "bg-[#00FFA3] text-[#050811] border-[#00FFA3] font-bold shadow-[0_0_12px_rgba(0,255,163,0.35)]"
-                  : "bg-black/40 text-slate-400 border-white/10 hover:bg-black/60 hover:text-white hover:border-[#00E5FF]/40"
+                  ? "gold-foil-btn text-white border-gold-400 font-bold shadow-[0_0_15px_rgba(212,175,55,0.4)]"
+                  : "bg-black/40 text-slate-300 border-gold-500/20 hover:bg-black/60 hover:text-white hover:border-gold-500/50"
               }`}
             >
               {dept}
@@ -136,7 +133,7 @@ export const KnowledgeHubPage: React.FC = () => {
 
         {/* Search Input */}
         <div className="relative min-w-[260px]">
-          <Search className="w-4 h-4 text-[#00E5FF] absolute left-3 top-2.5" />
+          <Search className="w-4 h-4 text-[#D4AF37] absolute left-3 top-2.5" />
           <input
             type="text"
             value={searchQuery}
@@ -149,19 +146,19 @@ export const KnowledgeHubPage: React.FC = () => {
 
       {/* Document Grid */}
       {loading ? (
-        <div className="py-12 text-center text-xs font-quant text-[#00FFA3]">
+        <div className="py-12 text-center text-xs font-quant text-[#D4AF37]">
           Retrieving vault documents & cryptographic certificates...
         </div>
       ) : assets.length === 0 ? (
-        <div className="p-12 text-center rounded-3xl glass-panel border border-dashed border-[#00E5FF]/30 space-y-3">
-          <BookOpen className="w-8 h-8 text-[#00E5FF] mx-auto" />
+        <div className="p-12 text-center rounded-3xl glass-panel border border-dashed border-gold-500/30 space-y-3">
+          <BookOpen className="w-8 h-8 text-[#D4AF37] mx-auto" />
           <h3 className="text-sm font-bold font-quant text-white">No vault records found</h3>
-          <p className="text-xs text-slate-400 max-w-md mx-auto">
+          <p className="text-xs text-slate-300 max-w-md mx-auto">
             Deposit organizational policies, vendor MSAs, or compliance audits to index into the Quantis Copilot.
           </p>
           <button
             onClick={() => setShowUploader(true)}
-            className="px-5 py-2.5 rounded-xl bull-market-btn text-[#050811] text-xs font-quant font-bold"
+            className="px-5 py-2.5 rounded-xl gold-foil-btn text-white text-xs font-quant font-bold"
           >
             Deposit First Document
           </button>
@@ -172,15 +169,15 @@ export const KnowledgeHubPage: React.FC = () => {
             <div
               key={asset.id}
               onClick={() => setPreviewAsset(asset)}
-              className="glass-panel p-5 rounded-2xl border border-white/10 hover:border-[#00E5FF]/50 hover:shadow-[0_0_25px_rgba(0,229,255,0.2)] hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col justify-between group"
+              className="glass-panel p-5 rounded-2xl border border-gold-500/20 hover:border-gold-500/50 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)] hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col justify-between group"
             >
               <div>
                 <div className="flex items-start justify-between gap-2 mb-3">
-                  <div className="p-2.5 rounded-xl bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/30 group-hover:bg-[#00FFA3]/10 group-hover:text-[#00FFA3] group-hover:border-[#00FFA3]/40 transition-colors">
+                  <div className="p-2.5 rounded-xl bg-gold-500/15 text-[#D4AF37] border border-gold-500/30 group-hover:border-gold-400 transition-colors">
                     <FileText className="w-5 h-5" />
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <span className="text-[10px] font-quant font-bold px-2 py-0.5 rounded-full bg-[#00FFA3]/10 text-[#00FFA3] border border-[#00FFA3]/30">
+                    <span className="text-[10px] font-quant font-bold px-2 py-0.5 rounded-full bg-gold-500/15 text-[#D4AF37] border border-gold-500/30">
                       {asset.department_tag || "Enterprise"}
                     </span>
                     <button
@@ -193,16 +190,16 @@ export const KnowledgeHubPage: React.FC = () => {
                   </div>
                 </div>
 
-                <h3 className="text-sm font-bold text-white group-hover:text-[#00E5FF] transition-colors line-clamp-1 mb-1">
+                <h3 className="text-sm font-bold text-white group-hover:text-[#D4AF37] transition-colors line-clamp-1 mb-1">
                   {asset.title}
                 </h3>
-                <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed">
+                <p className="text-xs text-slate-300 line-clamp-2 leading-relaxed">
                   {asset.summary || asset.content_text.slice(0, 160)}
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-white/10 mt-4 flex items-center justify-between text-[11px] font-quant text-slate-400">
-                <span className="text-[#00E5FF] font-semibold">{Math.max(1, Math.ceil(asset.content_text.length / 400))} vectors</span>
+              <div className="pt-4 border-t border-gold-500/15 mt-4 flex items-center justify-between text-[11px] font-quant text-slate-300">
+                <span className="text-[#D4AF37] font-semibold">{Math.max(1, Math.ceil(asset.content_text.length / 400))} vectors</span>
                 <span>{new Date(asset.created_at).toLocaleDateString()}</span>
               </div>
             </div>
@@ -213,10 +210,10 @@ export const KnowledgeHubPage: React.FC = () => {
       {/* Document Inspector Modal */}
       {previewAsset && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="glass-panel border border-[#00E5FF]/40 rounded-3xl max-w-2xl w-full p-6 space-y-4 shadow-[0_0_50px_rgba(0,229,255,0.3)]">
-            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+          <div className="glass-panel border border-gold-500/40 rounded-3xl max-w-2xl w-full p-6 space-y-4 shadow-[0_0_50px_rgba(212,175,55,0.3)]">
+            <div className="flex items-center justify-between border-b border-gold-500/20 pb-3">
               <div className="flex items-center space-x-2">
-                <Shield className="w-5 h-5 text-[#00FFA3]" />
+                <Shield className="w-5 h-5 text-[#D4AF37]" />
                 <h3 className="text-sm font-bold font-quant text-white">Vector Ingestion Record</h3>
               </div>
               <button
@@ -228,24 +225,24 @@ export const KnowledgeHubPage: React.FC = () => {
             </div>
 
             <div className="space-y-2">
-              <h4 className="text-sm font-bold text-[#00E5FF] font-quant">{previewAsset.title}</h4>
-              <div className="flex items-center gap-3 text-xs font-quant text-slate-400">
+              <h4 className="text-sm font-bold text-white font-quant">{previewAsset.title}</h4>
+              <div className="flex items-center gap-3 text-xs font-quant text-slate-300">
                 <span>Department: {previewAsset.department_tag || "General"}</span>
                 <span>•</span>
                 <span>Security: {previewAsset.classification}</span>
                 <span>•</span>
                 <span>Vectors: {Math.max(1, Math.ceil(previewAsset.content_text.length / 400))}</span>
               </div>
-              <div className="p-4 bg-black/60 rounded-xl border border-white/10 text-xs font-mono text-slate-200 leading-relaxed max-h-72 overflow-y-auto">
+              <div className="p-4 bg-black/60 rounded-xl border border-gold-500/20 text-xs font-mono text-slate-200 leading-relaxed max-h-72 overflow-y-auto">
                 {previewAsset.content_text}
               </div>
             </div>
 
-            <div className="pt-2 border-t border-white/10 flex items-center justify-between text-[10px] font-quant text-slate-400">
+            <div className="pt-2 border-t border-gold-500/20 flex items-center justify-between text-[10px] font-quant text-slate-400">
               <span>Tenant Partition: Isolated</span>
               <button
                 onClick={() => setPreviewAsset(null)}
-                className="bull-market-btn px-4 py-1.5 rounded-lg text-[#050811] font-bold text-xs"
+                className="gold-foil-btn px-4 py-1.5 rounded-lg text-white font-bold text-xs"
               >
                 Done
               </button>

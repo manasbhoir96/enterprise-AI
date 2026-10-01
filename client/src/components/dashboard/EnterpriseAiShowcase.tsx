@@ -179,27 +179,27 @@ export const EnterpriseAiShowcase: React.FC = () => {
   ];
 
   return (
-    <div className="w-full glass-panel rounded-2xl p-6 border border-[#00E5FF]/20 shadow-[0_0_35px_rgba(0,0,0,0.7)] relative overflow-hidden">
+    <div className="w-full glass-panel rounded-2xl p-6 border border-gold-500/25 shadow-[0_0_35px_rgba(0,0,0,0.7)] relative overflow-hidden">
       {/* Background glow highlights */}
-      <div className="absolute top-0 right-1/4 w-72 h-72 bg-[#00E5FF]/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-72 h-72 bg-[#7000FF]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-1/4 w-72 h-72 bg-gold-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-1/4 w-72 h-72 bg-[#00E5FF]/5 rounded-full blur-3xl pointer-events-none" />
 
       {/* Header with Enterprise AI badge */}
       <div className="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-white/10 gap-4">
         <div>
           <div className="flex items-center space-x-2">
-            <span className="px-2.5 py-1 rounded-full text-xs font-quant font-bold text-[#00FFA3] bg-[#00FFA3]/10 border border-[#00FFA3]/30">
+            <span className="px-2.5 py-1 rounded-full text-xs font-quant font-bold text-[#D4AF37] bg-gold-500/15 border border-gold-500/30">
               OPERATIONAL LAYER
             </span>
-            <span className="text-xs text-slate-400 font-quant">STRATEGIC ENTERPRISE AI</span>
+            <span className="text-xs text-slate-300 font-quant">STRATEGIC ENTERPRISE AI</span>
           </div>
           <h2 className="text-xl md:text-2xl font-bold text-white mt-1.5 flex items-center space-x-2">
             <span>What is Enterprise AI?</span>
-            <span className="text-[#00E5FF] text-sm font-normal hidden sm:inline">
+            <span className="text-[#D4AF37] text-sm font-normal hidden sm:inline">
               — The Autonomous Operational Backbone
             </span>
           </h2>
-          <p className="text-sm text-slate-400 max-w-3xl mt-1">
+          <p className="text-sm text-slate-300 max-w-3xl mt-1">
             The strategic integration of generative AI, predictive machine learning, and agentic workflows directly into
             core systems to eliminate manual bottlenecks, secure institutional memory, and automate revenue operations.
           </p>
@@ -212,9 +212,9 @@ export const EnterpriseAiShowcase: React.FC = () => {
               setActiveTab("problems");
               setSelectedItem(0);
             }}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               activeTab === "problems"
-                ? "bg-[#00FFA3] text-[#050811] shadow-[0_0_15px_rgba(0,255,163,0.4)] font-bold"
+                ? "bg-[#D4AF37] text-[#050811] shadow-[0_0_15px_rgba(212,175,55,0.4)] font-bold"
                 : "text-slate-400 hover:text-white"
             }`}
           >
@@ -225,9 +225,9 @@ export const EnterpriseAiShowcase: React.FC = () => {
               setActiveTab("architecture");
               setSelectedItem(0);
             }}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               activeTab === "architecture"
-                ? "bg-[#00E5FF] text-[#050811] shadow-[0_0_15px_rgba(0,229,255,0.4)] font-bold"
+                ? "bg-white text-[#050811] shadow-[0_0_15px_rgba(255,255,255,0.3)] font-bold"
                 : "text-slate-400 hover:text-white"
             }`}
           >
@@ -238,9 +238,9 @@ export const EnterpriseAiShowcase: React.FC = () => {
               setActiveTab("stakeholders");
               setSelectedItem(0);
             }}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               activeTab === "stakeholders"
-                ? "bg-[#7000FF] text-white shadow-[0_0_15px_rgba(112,0,255,0.4)] font-bold"
+                ? "bg-[#C5A059] text-[#050811] shadow-[0_0_15px_rgba(197,160,89,0.4)] font-bold"
                 : "text-slate-400 hover:text-white"
             }`}
           >

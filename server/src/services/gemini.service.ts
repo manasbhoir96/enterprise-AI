@@ -33,8 +33,40 @@ export interface CopilotQueryParams {
   customApiKey?: string;
 }
 
+const CANDIDATE_MODELS = [
+  GEMINI_MODEL,
+  "gemini-3.7-flash",
+  "gemini-3.5-flash",
+  "gemini-2.5-flash-lite",
+  "gemini-flash-latest",
+  "gemini-3.8-flash",
+];
+
+async function generateWithModelFallback(client: any, requestPayload: { contents: any; config?: any }) {
+  const models = Array.from(new Set(CANDIDATE_MODELS));
+  let lastError: any = null;
+
+  for (const model of models) {
+    try {
+      const res = await client.models.generateContent({
+        ...requestPayload,
+        model,
+      });
+      return { response: res, modelUsed: model };
+    } catch (err: any) {
+      lastError = err;
+      // If temporary overload or model name alias, cascade to next available model
+      if (err.status === 503 || err.status === 429 || err.status === 404 || err.status === 500) {
+        continue;
+      }
+      throw err;
+    }
+  }
+  throw lastError;
+}
+
 /**
- * Execute Risk & Compliance Analysis Workflow using Gemini 2.5 Flash
+ * Execute Risk & Compliance Analysis Workflow using Gemini
  */
 export async function executeRiskAssessmentWorkflow(
   params: WorkflowExecutionParams
@@ -53,8 +85,7 @@ Identify all potential compliance violations, financial risks, and operational b
 
   if (client) {
     try {
-      const response = await client.models.generateContent({
-        model: GEMINI_MODEL,
+      const { response } = await generateWithModelFallback(client, {
         contents: prompt,
         config: {
           systemInstruction: SYSTEM_PROMPT_NEXUS,
@@ -138,8 +169,7 @@ Instructions:
 
   if (client) {
     try {
-      const response = await client.models.generateContent({
-        model: GEMINI_MODEL,
+      const { response, modelUsed } = await generateWithModelFallback(client, {
         contents: prompt,
         config: {
           systemInstruction: SYSTEM_PROMPT_NEXUS,
@@ -159,7 +189,7 @@ Instructions:
       return {
         answer,
         citations,
-        modelUsed: GEMINI_MODEL,
+        modelUsed: modelUsed || GEMINI_MODEL,
         executionTimeMs: Date.now() - startTime,
       };
     } catch (err) {

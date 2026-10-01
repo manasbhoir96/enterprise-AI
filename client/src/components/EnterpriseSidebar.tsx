@@ -98,8 +98,10 @@ export const EnterpriseSidebar: React.FC<EnterpriseSidebarProps> = ({
       {/* Brand & Organization Switcher */}
       <div className="p-4 border-b border-gold-500/15 bg-gradient-to-b from-gold-50/50 to-white">
         <div className="flex items-center space-x-3 mb-3.5">
-          <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-gold-600 via-gold-500 to-amber-600 flex items-center justify-center shadow-goldSoft border border-gold-400/50 transition-transform duration-300 hover:scale-105">
-            <Landmark className="w-5 h-5 text-white" />
+          <div className="perspective-800">
+            <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-gold-600 via-gold-500 to-amber-600 flex items-center justify-center shadow-goldSoft border border-gold-400/70 transition-transform duration-300 hover:scale-110 hover:rotate-6">
+              <Landmark className="w-5 h-5 text-white drop-shadow-xs" />
+            </div>
           </div>
           <div>
             <h1 className="text-base font-extrabold tracking-tight text-slate-900 flex items-center gap-1.5 font-serif-luxury">
@@ -109,10 +111,10 @@ export const EnterpriseSidebar: React.FC<EnterpriseSidebarProps> = ({
           </div>
         </div>
 
-        {/* Tenant Box - Luxury Private Wealth Style */}
-        <div className="p-2.5 rounded-xl border border-gold-400/30 bg-gradient-to-r from-gold-50/80 via-white to-gold-50/40 flex items-center justify-between shadow-xs transition-all duration-200 hover:border-gold-500/60">
+        {/* Tenant Box - Luxury Private Wealth Style with Hologram Accent */}
+        <div className="p-2.5 rounded-xl border border-gold-400/30 bg-gradient-to-r from-gold-50/80 via-white to-gold-50/40 flex items-center justify-between shadow-xs transition-all duration-200 hover:border-gold-500/60 hover:-translate-y-0.5">
           <div className="flex items-center space-x-2.5 overflow-hidden">
-            <div className="w-8 h-8 rounded-lg bg-gold-100 flex items-center justify-center shrink-0 border border-gold-300/60">
+            <div className="w-8 h-8 rounded-lg bg-gold-100 flex items-center justify-center shrink-0 border border-gold-300/60 shadow-2xs">
               <Building2 className="w-4 h-4 text-gold-800" />
             </div>
             <div className="truncate">
@@ -124,7 +126,7 @@ export const EnterpriseSidebar: React.FC<EnterpriseSidebarProps> = ({
               </p>
             </div>
           </div>
-          <span className="text-[9px] font-mono px-2 py-0.5 rounded-full bg-gold-200/50 text-gold-900 border border-gold-300/80 font-bold">
+          <span className="money-hologram-badge text-[8px] font-mono px-2 py-0.5 rounded-full text-gold-950 font-black shadow-2xs">
             TIER 1
           </span>
         </div>

@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { StatCardWidget } from "../components/dashboard/StatCardWidget.js";
 import { HelpGuideBanner } from "../components/HelpGuideBanner.js";
+import { HolographicTreasuryCard } from "../components/dashboard/HolographicTreasuryCard.js";
 import { apiRequest } from "../lib/api.js";
 import { useAuth } from "../context/AuthContext.js";
 import type { DashboardMetrics } from "@nexusai/shared";
@@ -74,20 +75,23 @@ export const ExecutiveDashboard: React.FC<ExecutiveDashboardProps> = ({ onNaviga
         <div className="flex items-center gap-3 z-10">
           <button
             onClick={() => onNavigate("/copilot")}
-            className="gold-foil-btn px-4 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 flex items-center gap-1.5 shadow-goldSoft"
+            className="gold-foil-btn px-4 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 flex items-center gap-1.5 shadow-goldSoft hover:scale-105"
           >
             <Bot className="w-4 h-4" />
             <span>Consult Copilot</span>
           </button>
           <button
             onClick={() => onNavigate("/workflows")}
-            className="px-4 py-2.5 rounded-xl bg-white hover:bg-gold-50 text-gold-900 border border-gold-400/60 text-xs font-bold shadow-xs transition-all flex items-center gap-1.5 hover:border-gold-600"
+            className="px-4 py-2.5 rounded-xl bg-white hover:bg-gold-50 text-gold-900 border border-gold-400/60 text-xs font-bold shadow-xs transition-all flex items-center gap-1.5 hover:border-gold-600 hover:scale-105"
           >
             <Scale className="w-4 h-4 text-gold-700" />
             <span>Audit Document</span>
           </button>
         </div>
       </div>
+
+      {/* 3D Holographic Treasury Asset Card */}
+      <HolographicTreasuryCard />
 
       {/* Primary KPI Stat Grid (Wall Street Gold Theme) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

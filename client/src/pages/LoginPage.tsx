@@ -149,11 +149,14 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
       <div className="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center z-10">
         {/* Left Column: Classic Financial Institution Banner & VIP Persona Selector */}
         <div className="lg:col-span-6 space-y-6">
-          {/* Logo & Platform Crest */}
+          {/* Logo & Platform Crest with 3D Coin */}
           <div className="flex items-center space-x-3.5">
-            <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-gold-600 via-gold-500 to-amber-600 p-0.5 shadow-goldSoft flex items-center justify-center border border-gold-300">
-              <div className="w-full h-full bg-white rounded-[14px] flex items-center justify-center">
-                <Landmark className="w-6 h-6 text-gold-700" />
+            <div className="perspective-800">
+              <div className="gold-coin-3d animate-coin-spin shadow-goldGlow cursor-pointer hover:scale-110 transition-transform">
+                <div className="gold-coin-rim"></div>
+                <div className="relative text-white font-serif-luxury font-black text-2xl drop-shadow-md">
+                  $
+                </div>
               </div>
             </div>
             <div>
@@ -161,11 +164,11 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
                 <span className="text-2xl font-bold tracking-tight text-slate-900 font-serif-luxury">
                   Nexus<span className="gold-foil-text font-serif">Sovereign</span>
                 </span>
-                <span className="text-[10px] uppercase font-extrabold tracking-widest px-2.5 py-0.5 rounded-full bg-gold-100 text-gold-900 border border-gold-300 font-serif">
-                  EST. 2026
+                <span className="money-hologram-badge text-[9px] uppercase font-mono font-black tracking-widest px-2.5 py-0.5 rounded-full text-gold-950 border border-gold-400 shadow-2xs">
+                  24K MINTED
                 </span>
               </div>
-              <p className="text-xs text-gold-800 font-medium">Institutional AI Knowledge & Workflow Governance</p>
+              <p className="text-xs text-gold-800 font-medium">Institutional AI Knowledge & Sovereign Wealth Governance</p>
             </div>
           </div>
 
@@ -267,11 +270,17 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
           </div>
         </div>
 
-        {/* Right Column: Pristine Luxury Auth Vault Card */}
-        <div className="lg:col-span-6">
-          <div className="p-8 rounded-3xl bg-white border border-gold-400/40 shadow-cardHover relative backdrop-blur-2xl">
+        {/* Right Column: Pristine Luxury Auth Vault Card with 3D Hologram */}
+        <div className="lg:col-span-6 perspective-1000">
+          <div className="p-8 rounded-3xl bg-white border-2 border-gold-400/60 shadow-2xl relative backdrop-blur-2xl preserve-3d banknote-guilloche hologram-scanline overflow-hidden">
+            {/* Top Edge Banknote Hologram Foil Strip */}
+            <div className="money-hologram-ribbon -mx-8 -mt-8 mb-6 py-1.5 px-6 flex items-center justify-between text-[9px] font-mono font-black text-slate-900 tracking-wider shadow-inner">
+              <span>★ SOVEREIGN ENCLAVE AUTHENTICATOR</span>
+              <span>100% HARDWARE ENCRYPTED ★</span>
+            </div>
+
             {/* Animated Tab Switcher */}
-            <div className="flex items-center rounded-2xl bg-[#F8F9FA] p-1.5 mb-6 border border-gold-300/50">
+            <div className="flex items-center rounded-2xl bg-[#F8F9FA] p-1.5 mb-6 border border-gold-300/50 relative z-10 translate-z-10">
               <button
                 type="button"
                 onClick={() => {

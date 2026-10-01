@@ -122,26 +122,26 @@ All telemetry, audit trails, and access logs must be retained in immutable WORM 
   };
 
   return (
-    <div className="glass-panel p-6 rounded-3xl relative border border-indigo-500/30 shadow-2xl">
+    <div className="p-6 rounded-3xl bg-white border border-gold-300/80 shadow-luxuryCard relative">
       <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
         <div>
-          <h3 className="text-base font-extrabold text-white flex items-center gap-2">
-            <UploadCloud className="w-5 h-5 text-indigo-400" />
-            Upload a Company Document
+          <h3 className="text-base font-bold text-slate-900 font-serif-luxury tracking-wide flex items-center gap-2">
+            <UploadCloud className="w-5 h-5 text-gold-700" />
+            Ingest Document to Institutional Vault
           </h3>
-          <p className="text-xs text-slate-300">
-            Add company policies, handbooks, or vendor contracts so your AI copilot can learn them.
+          <p className="text-xs text-slate-500">
+            Deposit covenants, legal guidelines, and operational runbooks for immediate zero-shot vector indexing.
           </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-1.5 text-xs">
-          <span className="text-slate-400 text-[11px] font-semibold">💡 Try a Sample Document:</span>
+          <span className="text-slate-500 text-[11px] font-semibold font-serif">Quick Financial Templates:</span>
           {sampleTemplates.map((t, i) => (
             <button
               key={i}
               type="button"
               onClick={() => handleApplyTemplate(t)}
-              className="px-2.5 py-1 rounded-lg bg-indigo-500/15 hover:bg-indigo-500/30 text-indigo-300 border border-indigo-500/30 text-[11px] font-bold transition-all"
+              className="px-2.5 py-1 rounded-lg bg-gold-50 hover:bg-gold-100 text-gold-900 border border-gold-300 text-[11px] font-semibold transition-all shadow-2xs hover:scale-105"
             >
               {t.label}
             </button>
@@ -150,14 +150,14 @@ All telemetry, audit trails, and access logs must be retained in immutable WORM 
       </div>
 
       {error && (
-        <div className="mb-4 p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2">
+        <div className="mb-4 p-3.5 rounded-xl bg-rose-50 border border-rose-300 text-rose-800 text-xs flex items-center gap-2">
           <AlertCircle className="w-4 h-4 shrink-0" />
           {error}
         </div>
       )}
 
       {successMsg && (
-        <div className="mb-4 p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs flex items-center gap-2">
+        <div className="mb-4 p-3.5 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs flex items-center gap-2">
           <CheckCircle2 className="w-4 h-4 shrink-0" />
           {successMsg}
         </div>
@@ -166,27 +166,27 @@ All telemetry, audit trails, and access logs must be retained in immutable WORM 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           <div className="md:col-span-2">
-            <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-300 mb-1">
-              Document Name / Title
+            <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 font-serif mb-1">
+              Document Legal Name / Instrument
             </label>
             <input
               type="text"
               required
-              placeholder="e.g. Acme Remote Work Policy (2025)"
+              placeholder="e.g. Master Services Agreement & Indemnity Schedule (2025)"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs"
+              className="w-full px-3.5 py-2.5 rounded-xl text-xs bg-[#FCFBF8] text-slate-900 border border-gold-300/80 focus:outline-none focus:border-gold-500 shadow-2xs placeholder:text-slate-400"
             />
           </div>
 
           <div>
-            <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-300 mb-1">
-              Department
+            <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 font-serif mb-1">
+              Fiduciary Department
             </label>
             <select
               value={departmentTag}
               onChange={(e) => setDepartmentTag(e.target.value)}
-              className="glass-input w-full px-3 py-2.5 rounded-xl text-xs bg-nexus-900"
+              className="w-full px-3 py-2.5 rounded-xl text-xs bg-[#FCFBF8] text-slate-900 border border-gold-300/80 focus:outline-none focus:border-gold-500 shadow-2xs font-medium cursor-pointer"
             >
               <option value="Legal & Compliance">Legal & Compliance</option>
               <option value="Human Resources">Human Resources</option>
@@ -200,8 +200,8 @@ All telemetry, audit trails, and access logs must be retained in immutable WORM 
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 items-center">
           <div>
-            <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-300 mb-1">
-              Privacy / Access Level
+            <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 font-serif mb-1">
+              Security Classification Level
             </label>
             <div className="grid grid-cols-4 gap-2">
               {(["public", "internal", "confidential", "restricted"] as DataClassification[]).map((level) => (
@@ -209,14 +209,14 @@ All telemetry, audit trails, and access logs must be retained in immutable WORM 
                   type="button"
                   key={level}
                   onClick={() => setClassification(level)}
-                  className={`py-2 px-2 rounded-xl text-[10px] font-extrabold uppercase tracking-wider transition-all border ${
+                  className={`py-2 px-2 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-all border font-mono ${
                     classification === level
                       ? level === "restricted"
-                        ? "bg-rose-500/25 text-rose-200 border-rose-500 shadow-md shadow-rose-500/20"
+                        ? "bg-rose-100 text-rose-900 border-rose-400 shadow-sm"
                         : level === "confidential"
-                        ? "bg-amber-500/25 text-amber-200 border-amber-500 shadow-md shadow-amber-500/20"
-                        : "bg-indigo-600/30 text-indigo-200 border-indigo-400 shadow-md shadow-indigo-500/20"
-                      : "bg-white/[0.03] text-slate-400 border-white/5 hover:bg-white/[0.07]"
+                        ? "bg-amber-100 text-amber-900 border-amber-400 shadow-sm"
+                        : "bg-gold-100 text-gold-950 border-gold-400 shadow-sm font-black"
+                      : "bg-[#FCFBF8] text-slate-600 border-gold-200 hover:bg-gold-50 hover:text-slate-900"
                   }`}
                 >
                   {level}
@@ -226,52 +226,52 @@ All telemetry, audit trails, and access logs must be retained in immutable WORM 
           </div>
 
           <div>
-            <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-300 mb-1">
-              Or Choose a File from Your Computer (.txt, .md)
+            <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 font-serif mb-1">
+              Import Local Document (.txt, .md, .json)
             </label>
             <input
               type="file"
               accept=".txt,.md,.json,.pdf,.doc"
               onChange={handleFileUpload}
-              className="text-xs text-slate-400 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-indigo-600/20 file:text-indigo-300 hover:file:bg-indigo-600/30 file:cursor-pointer cursor-pointer"
+              className="text-xs text-slate-600 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-gold-100 file:text-gold-900 hover:file:bg-gold-200 file:cursor-pointer cursor-pointer"
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-300 mb-1">
-            Document Content (Type or paste the text here)
+          <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 font-serif mb-1">
+            Instrument Full Text Payload
           </label>
           <textarea
             rows={5}
             required
             value={contentText}
             onChange={(e) => setContentText(e.target.value)}
-            placeholder="Paste contract terms, internal policy clauses, employee handbook text, or vendor SLAs..."
-            className="glass-input w-full p-3 rounded-xl text-xs font-mono leading-relaxed"
+            placeholder="Paste verified contract articles, covenants, dispute resolution clauses, or internal regulatory directives..."
+            className="w-full p-3.5 rounded-xl text-xs font-mono leading-relaxed bg-[#FCFBF8] text-slate-900 border border-gold-300/80 focus:outline-none focus:border-gold-500 shadow-inner"
           ></textarea>
         </div>
 
         <div className="flex items-center justify-between pt-2">
-          <div className="flex items-center gap-1.5 text-xs text-emerald-400">
-            <Shield className="w-4 h-4" />
-            <span>🔒 Encrypted and private to your company</span>
+          <div className="flex items-center gap-1.5 text-xs text-gold-900 font-medium">
+            <Shield className="w-4 h-4 text-gold-700" />
+            <span>Cryptographically sealed under Tenant Vault Key</span>
           </div>
 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 text-white font-bold text-xs shadow-glow transition-all disabled:opacity-50 flex items-center gap-2"
+            className="px-6 py-2.5 rounded-xl gold-foil-btn text-white font-bold text-xs shadow-goldSoft transition-all disabled:opacity-50 flex items-center gap-2"
           >
             {isSubmitting ? (
               <>
                 <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                Saving & Indexing Document...
+                Cryptographic Indexing in Progress...
               </>
             ) : (
               <>
                 <Sparkles className="w-4 h-4" />
-                Save & Index Document
+                Commit to Sovereign Vault
               </>
             )}
           </button>

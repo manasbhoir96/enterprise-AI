@@ -107,35 +107,35 @@ export const TenantAdminPage: React.FC<TenantAdminPageProps> = () => {
   const getRoleBadge = (role: string) => {
     switch (role) {
       case "owner":
-        return <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-amber-500/20 text-amber-300 border border-amber-500/40">OWNER</span>;
+        return <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-gold-100 text-gold-950 border border-gold-400 font-mono shadow-2xs">MANAGING PARTNER</span>;
       case "admin":
-        return <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">ADMIN</span>;
+        return <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-amber-50 text-amber-900 border border-amber-300 font-mono shadow-2xs">OFFICER / ADMIN</span>;
       default:
-        return <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-slate-500/20 text-slate-300 border border-slate-500/40">EMPLOYEE</span>;
+        return <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-slate-100 text-slate-800 border border-slate-300 font-mono shadow-2xs">ASSOCIATE</span>;
     }
   };
 
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="glass-panel p-6 rounded-3xl flex flex-wrap items-center justify-between gap-4 border border-purple-500/20 shadow-glow">
+      <div className="p-6 rounded-3xl bg-white border border-gold-300/80 shadow-luxuryCard flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h2 className="text-lg font-black text-white flex items-center gap-2">
-            <ShieldCheck className="w-5 h-5 text-purple-400" />
-            Company Settings & Team Access
+          <h2 className="text-lg font-bold text-slate-900 font-serif-luxury tracking-wide flex items-center gap-2">
+            <ShieldCheck className="w-5 h-5 text-gold-700" />
+            Institutional Governance & Capital Access
           </h2>
-          <p className="text-xs text-slate-300">
-            Manage your company profile, team member permissions, and organization governance.
+          <p className="text-xs text-slate-500">
+            Fiduciary oversight, multi-tenant RBAC delegations, and regulatory compliance telemetry.
           </p>
         </div>
 
         <div className="flex items-center space-x-2.5">
           <button
             onClick={() => setShowInviteModal(true)}
-            className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-xs shadow-glow transition-all flex items-center gap-1.5"
+            className="px-5 py-2.5 rounded-xl gold-foil-btn text-white font-bold text-xs shadow-goldSoft transition-all flex items-center gap-1.5 hover:scale-105"
           >
             <UserPlus className="w-4 h-4" />
-            + Add Team Member
+            + Induct Enterprise Officer
           </button>
         </div>
       </div>
@@ -143,50 +143,50 @@ export const TenantAdminPage: React.FC<TenantAdminPageProps> = () => {
       {/* Grid: Tenant Telemetry + AI Governance Settings */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left: Organization Telemetry Form */}
-        <div className="lg:col-span-6 glass-panel p-6 rounded-2xl space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b border-white/5">
-            <h3 className="text-sm font-bold text-white flex items-center gap-2">
-              <Building2 className="w-4 h-4 text-indigo-400" />
-              Organization Profile & Telemetry
+        <div className="lg:col-span-6 bg-white p-6 rounded-3xl border border-gold-300/80 shadow-luxuryCard space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-gold-200/80">
+            <h3 className="text-sm font-bold text-slate-900 font-serif-luxury flex items-center gap-2">
+              <Building2 className="w-4 h-4 text-gold-700" />
+              Sovereign Entity Profile & Metadata
             </h3>
-            <span className="text-[10px] font-mono text-slate-400">
-              Tenant ID: {organization?.id.substring(0, 8)}...
+            <span className="text-[10px] font-mono text-gold-900 font-bold px-2 py-0.5 rounded bg-gold-50 border border-gold-200">
+              TENANT: {organization?.id.substring(0, 8)}...
             </span>
           </div>
 
           <form onSubmit={handleSaveSettings} className="space-y-3.5">
             <div>
-              <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
-                Organization Legal Entity
+              <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 font-serif mb-1">
+                Chartered Legal Entity
               </label>
               <input
                 type="text"
                 value={orgName}
                 onChange={(e) => setOrgName(e.target.value)}
-                className="glass-input w-full px-3 py-2 rounded-xl text-xs"
+                className="w-full px-3.5 py-2 rounded-xl text-xs bg-[#FCFBF8] text-slate-900 border border-gold-300/80 focus:outline-none focus:border-gold-500 shadow-2xs"
               />
             </div>
 
             <div>
-              <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
-                Industry Sector
+              <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 font-serif mb-1">
+                Primary Financial Sector
               </label>
               <input
                 type="text"
                 value={orgIndustry}
                 onChange={(e) => setOrgIndustry(e.target.value)}
-                className="glass-input w-full px-3 py-2 rounded-xl text-xs"
+                className="w-full px-3.5 py-2 rounded-xl text-xs bg-[#FCFBF8] text-slate-900 border border-gold-300/80 focus:outline-none focus:border-gold-500 shadow-2xs"
               />
             </div>
 
             <div>
-              <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
-                Compliance & Regulatory Baseline
+              <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 font-serif mb-1">
+                Mandated Statutory Standard
               </label>
               <select
                 value={complianceLevel}
                 onChange={(e) => setComplianceLevel(e.target.value)}
-                className="glass-input w-full px-3 py-2 rounded-xl text-xs bg-nexus-900"
+                className="w-full px-3.5 py-2 rounded-xl text-xs bg-[#FCFBF8] text-slate-900 border border-gold-300/80 focus:outline-none focus:border-gold-500 shadow-2xs font-medium cursor-pointer"
               >
                 <option value="SOC2 Type II & HIPAA">SOC2 Type II & HIPAA (Healthcare/Cloud)</option>
                 <option value="SOC2 Type II & ISO 27001">SOC2 Type II & ISO 27001 (Enterprise SaaS)</option>
@@ -196,18 +196,18 @@ export const TenantAdminPage: React.FC<TenantAdminPageProps> = () => {
             </div>
 
             <div className="pt-2 flex items-center justify-between">
-              <span className="text-[11px] text-slate-400">Strict multi-tenant boundaries verified</span>
+              <span className="text-[11px] text-slate-500 font-medium">Cryptographic tenant boundaries enforced</span>
               <button
                 type="submit"
-                className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-xs transition-colors flex items-center gap-1.5"
+                className="px-5 py-2 rounded-xl gold-foil-btn text-white font-bold text-xs shadow-goldSoft transition-all flex items-center gap-1.5 hover:scale-105"
               >
                 {settingsSaved ? (
                   <>
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                    Updated!
+                    <CheckCircle2 className="w-3.5 h-3.5 text-white" />
+                    Ledger Updated!
                   </>
                 ) : (
-                  <>Save Telemetry</>
+                  <>Commit Changes</>
                 )}
               </button>
             </div>
@@ -215,100 +215,100 @@ export const TenantAdminPage: React.FC<TenantAdminPageProps> = () => {
         </div>
 
         {/* Right: Security & Enterprise Governance Card */}
-        <div className="lg:col-span-6 glass-panel p-6 rounded-3xl flex flex-col justify-between space-y-4 border border-indigo-500/20 shadow-xl">
+        <div className="lg:col-span-6 bg-white p-6 rounded-3xl border border-gold-300/80 shadow-luxuryCard flex flex-col justify-between space-y-4">
           <div>
-            <div className="flex items-center justify-between pb-3 border-b border-white/5 mb-3">
-              <h3 className="text-sm font-extrabold text-white flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                Enterprise Security & Governance
+            <div className="flex items-center justify-between pb-3 border-b border-gold-200/80 mb-3">
+              <h3 className="text-sm font-bold text-slate-900 font-serif-luxury flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-gold-700" />
+                Institutional Security & RLS Isolation
               </h3>
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 uppercase">
-                ACTIVE & COMPLIANT
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-300 uppercase tracking-wider font-mono">
+                COMPLIANT & AUDITED
               </span>
             </div>
 
             <div className="space-y-3 text-xs">
-              <div className="p-3.5 rounded-2xl bg-nexus-950/80 border border-emerald-500/20 space-y-1.5">
-                <div className="font-bold text-white flex items-center gap-2 text-emerald-300">
-                  <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                  Multi-Tenant Cryptographic Isolation
+              <div className="p-4 rounded-2xl bg-[#FCFBF8] border border-gold-200/80 space-y-1.5 shadow-2xs">
+                <div className="font-bold text-slate-900 font-serif flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                  Multi-Tenant Cryptographic Partitioning
                 </div>
-                <p className="text-slate-300 text-[11px] leading-relaxed">
-                  Every document, workflow, and user record is strictly bound to your organization's unique tenant ID with Row-Level Security (RLS).
+                <p className="text-slate-600 text-[11px] leading-relaxed">
+                  Every document, AI prompt session, and workflow record is strictly bound to your organization's sovereign ID with Row-Level Security.
                 </p>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-nexus-950/80 border border-indigo-500/20 space-y-1.5">
-                <div className="font-bold text-white flex items-center gap-2 text-cyan-300">
-                  <Sparkles className="w-4 h-4 text-cyan-400" />
-                  Enterprise AI Pipeline (Gemini 3.8 Flash)
+              <div className="p-4 rounded-2xl bg-[#FCFBF8] border border-gold-200/80 space-y-1.5 shadow-2xs">
+                <div className="font-bold text-slate-900 font-serif flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-gold-700" />
+                  Zero-Leak AI Pipeline (Gemini 3.8 Flash)
                 </div>
-                <p className="text-slate-300 text-[11px] leading-relaxed">
-                  AI analysis executes entirely through a secured, isolated backend pipeline. Your internal data is never cached or used for public model training.
+                <p className="text-slate-600 text-[11px] leading-relaxed">
+                  High-throughput reasoning executes exclusively through an isolated backend tunnel. Enterprise data is never retained for public model training.
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="pt-3 border-t border-white/5 flex items-center justify-between">
-            <span className="text-xs text-slate-300 flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              Role-Based Access Control (RBAC) Enforced
+          <div className="pt-3 border-t border-gold-100 flex items-center justify-between">
+            <span className="text-xs text-slate-600 flex items-center gap-1.5 font-medium">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              Role-Based Access Control (RBAC) Active
             </span>
-            <span className="text-[10px] font-mono text-indigo-300 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20 font-semibold">
-              SOC2 TYPE II
+            <span className="text-[10px] font-mono text-gold-900 bg-gold-50 px-2.5 py-1 rounded-md border border-gold-200 font-bold shadow-2xs">
+              SOC2 TYPE II VERIFIED
             </span>
           </div>
         </div>
       </div>
 
       {/* RBAC Member Directory Table */}
-      <div className="glass-panel rounded-2xl overflow-hidden">
-        <div className="p-4 border-b border-white/5 flex items-center justify-between">
+      <div className="rounded-3xl overflow-hidden bg-white border border-gold-300/80 shadow-luxuryCard">
+        <div className="p-5 border-b border-gold-200/80 bg-[#FCFBF8] flex items-center justify-between">
           <div>
-            <h3 className="text-sm font-bold text-white flex items-center gap-2">
-              <Users className="w-4 h-4 text-indigo-400" />
-              Role-Based Access Control (RBAC) User Directory
+            <h3 className="text-sm font-bold text-slate-900 font-serif-luxury tracking-wide flex items-center gap-2">
+              <Users className="w-4 h-4 text-gold-700" />
+              Corporate Access Registry & Officer Directory
             </h3>
-            <p className="text-[11px] text-slate-400">
-              Employees provisioned within the current enterprise organization boundary.
+            <p className="text-[11px] text-slate-500">
+              Authorized personnel provisioned within the sovereign enterprise tenant partition.
             </p>
           </div>
-          <span className="text-[11px] font-mono text-slate-400">
+          <span className="text-[11px] font-mono font-bold px-3 py-1 rounded-full bg-gold-50 border border-gold-300 text-gold-900 shadow-2xs">
             {members.length} Provisioned Accounts
           </span>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-nexus-900/60 text-slate-400 uppercase tracking-wider text-[10px] font-bold border-b border-white/5">
+            <thead className="bg-[#FAF8F5] text-slate-700 uppercase tracking-wider text-[10px] font-bold border-b border-gold-200 font-serif">
               <tr>
-                <th className="py-3 px-4">Employee</th>
-                <th className="py-3 px-4">Corporate Email</th>
-                <th className="py-3 px-4">Department</th>
-                <th className="py-3 px-4">System Role</th>
-                <th className="py-3 px-4">Provisioned Date</th>
+                <th className="py-3.5 px-4">Executive / Officer</th>
+                <th className="py-3.5 px-4">Corporate Email</th>
+                <th className="py-3.5 px-4">Jurisdiction</th>
+                <th className="py-3.5 px-4">Security Role</th>
+                <th className="py-3.5 px-4">Induction Date</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5">
+            <tbody className="divide-y divide-gold-100">
               {members.map((member) => (
-                <tr key={member.id} className="hover:bg-white/[0.02] transition-colors">
-                  <td className="py-3.5 px-4 font-semibold text-slate-200 flex items-center gap-2.5">
-                    <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-[11px] font-bold text-white">
+                <tr key={member.id} className="hover:bg-gold-50/40 transition-colors">
+                  <td className="py-3.5 px-4 font-semibold text-slate-900 flex items-center gap-2.5 font-serif">
+                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-gold-600 to-amber-700 flex items-center justify-center text-[11px] font-bold text-white shadow-2xs">
                       {member.full_name.charAt(0)}
                     </div>
                     <span>{member.full_name}</span>
                   </td>
-                  <td className="py-3.5 px-4 font-mono text-slate-400 text-[11px]">
+                  <td className="py-3.5 px-4 font-mono text-slate-600 text-[11px]">
                     {member.email}
                   </td>
-                  <td className="py-3.5 px-4 text-slate-300">
+                  <td className="py-3.5 px-4 text-slate-700 font-medium">
                     {member.department || "General"}
                   </td>
                   <td className="py-3.5 px-4">
                     {getRoleBadge(member.role)}
                   </td>
-                  <td className="py-3.5 px-4 font-mono text-slate-400 text-[11px]">
+                  <td className="py-3.5 px-4 font-mono text-slate-500 text-[11px]">
                     {new Date(member.created_at).toLocaleDateString([], {
                       month: "short",
                       day: "numeric",
@@ -324,15 +324,15 @@ export const TenantAdminPage: React.FC<TenantAdminPageProps> = () => {
 
       {/* Invite Member Modal */}
       {showInviteModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in">
-          <div className="glass-panel w-full max-w-md rounded-2xl p-6 relative border border-white/10 shadow-2xl">
-            <h3 className="text-base font-bold text-white mb-1">Onboard New Team Member</h3>
-            <p className="text-xs text-slate-400 mb-4">
-              Add a corporate user with designated department and RBAC security role.
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in">
+          <div className="bg-white w-full max-w-md rounded-3xl p-6 relative border border-gold-300 shadow-2xl">
+            <h3 className="text-base font-bold text-slate-900 font-serif-luxury mb-1">Induct Corporate Officer</h3>
+            <p className="text-xs text-slate-500 mb-4">
+              Grant authenticated access with departmental boundary and RBAC privilege level.
             </p>
 
             {inviteSuccess && (
-              <div className="mb-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs flex items-center gap-2">
+              <div className="mb-4 p-3 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 shrink-0" />
                 {inviteSuccess}
               </div>
@@ -340,8 +340,8 @@ export const TenantAdminPage: React.FC<TenantAdminPageProps> = () => {
 
             <form onSubmit={handleInvite} className="space-y-3.5">
               <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
-                  Full Name
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 font-serif mb-1">
+                  Full Name & Title
                 </label>
                 <input
                   type="text"
@@ -349,13 +349,13 @@ export const TenantAdminPage: React.FC<TenantAdminPageProps> = () => {
                   placeholder="e.g. Jordan Lee"
                   value={inviteName}
                   onChange={(e) => setInviteName(e.target.value)}
-                  className="glass-input w-full px-3 py-2 rounded-xl text-xs"
+                  className="w-full px-3.5 py-2 rounded-xl text-xs bg-[#FCFBF8] text-slate-900 border border-gold-300/80 focus:outline-none focus:border-gold-500 shadow-2xs"
                 />
               </div>
 
               <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
-                  Corporate Email
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 font-serif mb-1">
+                  Institutional Email Address
                 </label>
                 <input
                   type="email"
@@ -363,18 +363,18 @@ export const TenantAdminPage: React.FC<TenantAdminPageProps> = () => {
                   placeholder="jordan.lee@company.com"
                   value={inviteEmail}
                   onChange={(e) => setInviteEmail(e.target.value)}
-                  className="glass-input w-full px-3 py-2 rounded-xl text-xs"
+                  className="w-full px-3.5 py-2 rounded-xl text-xs bg-[#FCFBF8] text-slate-900 border border-gold-300/80 focus:outline-none focus:border-gold-500 shadow-2xs"
                 />
               </div>
 
               <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
-                  Department
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 font-serif mb-1">
+                  Primary Jurisdiction / Dept
                 </label>
                 <select
                   value={inviteDept}
                   onChange={(e) => setInviteDept(e.target.value)}
-                  className="glass-input w-full px-3 py-2 rounded-xl text-xs bg-nexus-900"
+                  className="w-full px-3.5 py-2 rounded-xl text-xs bg-[#FCFBF8] text-slate-900 border border-gold-300/80 focus:outline-none focus:border-gold-500 shadow-2xs font-medium cursor-pointer"
                 >
                   <option value="Legal & Compliance">Legal & Compliance</option>
                   <option value="Human Resources">Human Resources</option>
@@ -385,16 +385,16 @@ export const TenantAdminPage: React.FC<TenantAdminPageProps> = () => {
               </div>
 
               <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
-                  Role Assignment
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 font-serif mb-1">
+                  RBAC Role Authorization
                 </label>
                 <select
                   value={inviteRole}
                   onChange={(e) => setInviteRole(e.target.value as "admin" | "employee")}
-                  className="glass-input w-full px-3 py-2 rounded-xl text-xs bg-nexus-900"
+                  className="w-full px-3.5 py-2 rounded-xl text-xs bg-[#FCFBF8] text-slate-900 border border-gold-300/80 focus:outline-none focus:border-gold-500 shadow-2xs font-medium cursor-pointer"
                 >
-                  <option value="employee">Employee (Copilot & Knowledge Hub access)</option>
-                  <option value="admin">Administrator (Workflow management & Ingestion)</option>
+                  <option value="employee">Associate (Copilot Inquiries & Vault Access)</option>
+                  <option value="admin">Managing Officer (Workflow Audit & Document Deposition)</option>
                 </select>
               </div>
 
@@ -402,16 +402,16 @@ export const TenantAdminPage: React.FC<TenantAdminPageProps> = () => {
                 <button
                   type="button"
                   onClick={() => setShowInviteModal(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:bg-white/5"
+                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-gold-50 hover:text-slate-900 transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isInviting}
-                  className="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs shadow-glow transition-all disabled:opacity-50"
+                  className="px-5 py-2.5 rounded-xl gold-foil-btn text-white font-bold text-xs shadow-goldSoft transition-all disabled:opacity-50 hover:scale-105"
                 >
-                  {isInviting ? "Onboarding..." : "Confirm & Provision"}
+                  {isInviting ? "Inducting..." : "Provision Credentials"}
                 </button>
               </div>
             </form>

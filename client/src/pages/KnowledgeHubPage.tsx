@@ -74,36 +74,36 @@ export const KnowledgeHubPage: React.FC = () => {
   const getClassificationBadge = (classification: string) => {
     switch (classification) {
       case "restricted":
-        return <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-rose-500/20 text-rose-300 border border-rose-500/40">RESTRICTED</span>;
+        return <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-rose-50 text-rose-800 border border-rose-300 font-mono">RESTRICTED</span>;
       case "confidential":
-        return <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-amber-500/20 text-amber-300 border border-amber-500/40">CONFIDENTIAL</span>;
+        return <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-50 text-amber-900 border border-amber-300 font-mono">CONFIDENTIAL</span>;
       case "public":
-        return <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">PUBLIC</span>;
+        return <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-900 border border-emerald-300 font-mono">PUBLIC</span>;
       default:
-        return <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">INTERNAL</span>;
+        return <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-gold-50 text-gold-900 border border-gold-300 font-mono">INTERNAL</span>;
     }
   };
 
   return (
     <div className="space-y-6">
       {/* Top Header */}
-      <div className="glass-panel p-6 rounded-3xl flex flex-wrap items-center justify-between gap-4 border border-indigo-500/20 shadow-glow">
+      <div className="p-6 rounded-3xl bg-white border border-gold-300/80 shadow-luxuryCard flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h2 className="text-lg font-black text-white flex items-center gap-2">
-            <Database className="w-5 h-5 text-indigo-400" />
-            Company Document Library
+          <h2 className="text-lg font-bold text-slate-900 font-serif-luxury tracking-wide flex items-center gap-2">
+            <Database className="w-5 h-5 text-gold-700" />
+            Institutional Document Vault
           </h2>
-          <p className="text-xs text-slate-300">
-            Store and organize handbooks, agreements, and policies so your AI copilot can reference them anytime.
+          <p className="text-xs text-slate-500">
+            Secure multi-tenant repository for Master Services Agreements, compliance handbooks, and fiduciary disclosures.
           </p>
         </div>
 
         <button
           onClick={() => setShowUploader(!showUploader)}
-          className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-bold text-xs shadow-glow transition-all flex items-center gap-1.5"
+          className="px-5 py-2.5 rounded-xl gold-foil-btn text-white font-bold text-xs shadow-goldSoft transition-all flex items-center gap-1.5"
         >
           <Plus className="w-4 h-4" />
-          {showUploader ? "Close Upload Box" : "+ Upload New Document"}
+          {showUploader ? "Collapse Ingestion Box" : "+ Deposit New Document"}
         </button>
       </div>
 
@@ -125,10 +125,10 @@ export const KnowledgeHubPage: React.FC = () => {
             <button
               key={dept}
               onClick={() => setSelectedDept(dept)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all border ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all border ${
                 selectedDept === dept
-                  ? "bg-indigo-600 text-white border-indigo-500 shadow-sm"
-                  : "bg-white/[0.02] text-slate-400 border-white/5 hover:bg-white/[0.05] hover:text-slate-200"
+                  ? "bg-gradient-to-r from-gold-600 to-amber-700 text-white border-gold-400 shadow-goldSoft"
+                  : "bg-white text-slate-700 border-gold-200/80 hover:bg-gold-50 hover:text-slate-900 hover:border-gold-300"
               }`}
             >
               {dept}
@@ -137,76 +137,76 @@ export const KnowledgeHubPage: React.FC = () => {
         </div>
 
         {/* Search Input */}
-        <div className="relative min-w-[240px]">
-          <Search className="w-4 h-4 text-slate-500 absolute left-3 top-2.5" />
+        <div className="relative min-w-[260px]">
+          <Search className="w-4 h-4 text-gold-700 absolute left-3 top-2.5" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search documents or clauses..."
-            className="glass-input w-full pl-9 pr-3.5 py-2 rounded-xl text-xs"
+            placeholder="Search vault clauses or covenants..."
+            className="w-full pl-9 pr-3.5 py-2 rounded-xl text-xs bg-white text-slate-800 border border-gold-300/80 focus:outline-none focus:border-gold-500 shadow-2xs placeholder:text-slate-400"
           />
         </div>
       </div>
 
       {/* Document Grid */}
       {loading ? (
-        <div className="py-12 text-center text-xs text-slate-500">
-          Loading enterprise documents...
+        <div className="py-12 text-center text-xs text-gold-800 font-medium">
+          Retrieving vault documents & cryptographic certificates...
         </div>
       ) : assets.length === 0 ? (
-        <div className="glass-panel p-12 text-center rounded-2xl border-dashed border-white/10 space-y-3">
-          <BookOpen className="w-8 h-8 text-slate-500 mx-auto" />
-          <h3 className="text-sm font-bold text-slate-300">No documents found</h3>
-          <p className="text-xs text-slate-400 max-w-md mx-auto">
-            Upload organizational policies or sample agreements to ground the AI Copilot.
+        <div className="p-12 text-center rounded-3xl bg-white border border-dashed border-gold-300 space-y-3 shadow-luxuryCard">
+          <BookOpen className="w-8 h-8 text-gold-600 mx-auto" />
+          <h3 className="text-sm font-bold text-slate-900 font-serif-luxury">No vault records found</h3>
+          <p className="text-xs text-slate-500 max-w-md mx-auto">
+            Deposit organizational policies, vendor MSAs, or compliance audits to index into the Enterprise Copilot.
           </p>
           <button
             onClick={() => setShowUploader(true)}
-            className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-glow"
+            className="px-5 py-2.5 rounded-xl gold-foil-btn text-white text-xs font-semibold shadow-goldSoft"
           >
-            Ingest First Document
+            Deposit First Document
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {assets.map((asset) => (
             <div
               key={asset.id}
               onClick={() => setPreviewAsset(asset)}
-              className="glass-panel glass-panel-hover p-5 rounded-2xl flex flex-col justify-between cursor-pointer group"
+              className="gold-card-sheen p-5 rounded-2xl bg-white border border-gold-300/70 hover:border-gold-500 hover:shadow-cardHover hover:-translate-y-1 transition-all duration-300 shadow-luxuryCard cursor-pointer flex flex-col justify-between group"
             >
               <div>
-                <div className="flex items-start justify-between gap-2 mb-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center shrink-0 border border-indigo-500/20">
+                <div className="flex items-start justify-between gap-2 mb-3">
+                  <div className="w-9 h-9 rounded-xl bg-gold-50 text-gold-800 flex items-center justify-center shrink-0 border border-gold-300 shadow-2xs group-hover:scale-105 transition-transform">
                     <FileText className="w-4 h-4" />
                   </div>
                   {getClassificationBadge(asset.classification)}
                 </div>
 
-                <h3 className="text-sm font-bold text-white group-hover:text-indigo-300 transition-colors line-clamp-1 mb-1">
+                <h3 className="text-sm font-bold text-slate-900 font-serif-luxury group-hover:text-gold-900 transition-colors line-clamp-1 mb-1">
                   {asset.title}
                 </h3>
-                <p className="text-[11px] text-slate-400 font-mono mb-3">
-                  Dept: {asset.department_tag || "General Corporate"}
+                <p className="text-[11px] text-slate-500 font-mono mb-3">
+                  Jurisdiction: <span className="text-slate-800 font-semibold">{asset.department_tag || "General Corporate"}</span>
                 </p>
 
-                <p className="text-xs text-slate-400 line-clamp-3 leading-relaxed mb-4">
+                <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed mb-4">
                   {asset.content_text}
                 </p>
               </div>
 
-              <div className="pt-3 border-t border-white/5 flex items-center justify-between text-[11px] text-slate-400">
-                <span>By {asset.uploader_name || "Admin"}</span>
+              <div className="pt-3 border-t border-gold-100 flex items-center justify-between text-[11px] text-slate-500">
+                <span>By <strong className="text-slate-700">{asset.uploader_name || "Admin"}</strong></span>
                 <div className="flex items-center space-x-2">
                   <button
                     onClick={(e) => handleDelete(asset.id, e)}
-                    className="p-1 rounded text-slate-500 hover:text-rose-400 transition-colors"
+                    className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors"
                     title="Delete document"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
-                  <span className="text-indigo-400 group-hover:translate-x-0.5 transition-transform">
+                  <span className="text-gold-700 font-bold group-hover:translate-x-1 transition-transform">
                     →
                   </span>
                 </div>
@@ -218,52 +218,52 @@ export const KnowledgeHubPage: React.FC = () => {
 
       {/* Asset Preview Modal */}
       {previewAsset && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in">
-          <div className="glass-panel w-full max-w-3xl rounded-2xl p-6 relative border border-white/10 shadow-2xl max-h-[85vh] flex flex-col">
-            <div className="flex items-start justify-between pb-4 border-b border-white/5 mb-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in">
+          <div className="bg-white w-full max-w-3xl rounded-3xl p-6 relative border border-gold-300 shadow-2xl max-h-[85vh] flex flex-col">
+            <div className="flex items-start justify-between pb-4 border-b border-gold-200/80 mb-4">
               <div>
                 <div className="flex items-center gap-2 mb-1">
-                  <h3 className="text-base font-bold text-white">{previewAsset.title}</h3>
+                  <h3 className="text-base font-bold text-slate-900 font-serif-luxury">{previewAsset.title}</h3>
                   {getClassificationBadge(previewAsset.classification)}
                 </div>
-                <p className="text-xs text-slate-400">
-                  Target Department: <span className="text-slate-200">{previewAsset.department_tag || "General"}</span> • Ingested on {new Date(previewAsset.created_at).toLocaleDateString()}
+                <p className="text-xs text-slate-500">
+                  Target Department: <span className="text-slate-800 font-semibold">{previewAsset.department_tag || "General"}</span> • Deposited on {new Date(previewAsset.created_at).toLocaleDateString()}
                 </p>
               </div>
 
               <button
                 onClick={() => setPreviewAsset(null)}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+                className="p-2 rounded-xl text-slate-400 hover:text-slate-900 hover:bg-gold-50 border border-transparent hover:border-gold-200 transition-all"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             <div className="flex-1 overflow-y-auto space-y-4">
-              <div className="p-3.5 rounded-xl bg-indigo-950/20 border border-indigo-500/20 text-xs text-indigo-300">
-                <span className="font-bold flex items-center gap-1.5 mb-1">
-                  <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
-                  AI RAG Vector Index Status: Active
+              <div className="p-3.5 rounded-2xl bg-gold-50/70 border border-gold-200 text-xs text-gold-950">
+                <span className="font-bold flex items-center gap-1.5 mb-1 font-serif text-gold-900">
+                  <Sparkles className="w-3.5 h-3.5 text-gold-700" />
+                  Zero-Shot Vector Index: Active & Authenticated
                 </span>
-                This asset is indexed for zero-shot retrieval by the Enterprise Copilot and automated workflow agents.
+                This asset is indexed for real-time citation synthesis by the Sovereign Copilot and automated covenant audit workflows.
               </div>
 
               <div>
-                <h4 className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-2">
-                  Full Document Text
+                <h4 className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2 font-serif">
+                  Document Text Record
                 </h4>
-                <div className="p-4 rounded-xl bg-nexus-950 font-mono text-xs text-slate-300 whitespace-pre-wrap leading-relaxed border border-white/5 max-h-96 overflow-y-auto">
+                <div className="p-4 rounded-2xl bg-[#FCFBF8] font-mono text-xs text-slate-800 whitespace-pre-wrap leading-relaxed border border-gold-200 max-h-96 overflow-y-auto shadow-inner">
                   {previewAsset.content_text}
                 </div>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-white/5 flex items-center justify-end mt-4">
+            <div className="pt-4 border-t border-gold-200/80 flex items-center justify-end mt-4">
               <button
                 onClick={() => setPreviewAsset(null)}
-                className="px-4 py-2 rounded-xl text-xs font-semibold bg-white/10 hover:bg-white/15 text-white transition-colors"
+                className="px-5 py-2.5 rounded-xl text-xs font-semibold gold-foil-btn text-white shadow-goldSoft transition-all"
               >
-                Close Preview
+                Close Vault Record
               </button>
             </div>
           </div>

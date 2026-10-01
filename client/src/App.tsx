@@ -34,10 +34,10 @@ function AppContent() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-nexus-950 flex flex-col items-center justify-center space-y-4">
-        <div className="w-12 h-12 border-3 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
-        <p className="text-xs text-slate-400 font-mono tracking-wider">
-          Starting NexusAI Workspace...
+      <div className="min-h-screen bg-[#F8F9FA] flex flex-col items-center justify-center space-y-4">
+        <div className="w-12 h-12 border-3 border-gold-500 border-t-transparent rounded-full animate-spin"></div>
+        <p className="text-xs text-gold-900 font-serif tracking-wider font-bold">
+          Connecting to Sovereign Enterprise Vault...
         </p>
       </div>
     );
@@ -82,7 +82,7 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen bg-nexus-950 flex selection:bg-indigo-500/30 selection:text-indigo-200">
+    <div className="min-h-screen bg-[#F8F9FA] flex selection:bg-amber-400/30 selection:text-amber-900">
       {/* Sidebar Navigation */}
       <EnterpriseSidebar
         currentPath={currentPath}
@@ -91,30 +91,30 @@ function AppContent() {
       />
 
       {/* Main Workspace Canvas */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
+      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto bg-gradient-to-b from-[#FAF8F5] via-[#F8F9FA] to-[#F3F4F6]">
         {/* Top Header Bar */}
-        <header className="h-16 border-b border-white/5 bg-nexus-900/50 backdrop-blur-xl px-6 flex items-center justify-between sticky top-0 z-20">
-          <div className="flex items-center space-x-3">
-            <h2 className="text-base font-extrabold text-white tracking-tight flex items-center gap-2">
+        <header className="h-16 border-b border-gold-500/20 bg-white/85 backdrop-blur-xl px-6 flex items-center justify-between sticky top-0 z-20 shadow-sm">
+          <div className="flex items-center space-x-3.5">
+            <h2 className="text-base font-bold text-slate-900 tracking-tight flex items-center gap-2 font-serif-luxury">
               {getPageTitle()}
             </h2>
-            <span className="hidden md:inline-flex text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
-              🏢 {organization?.name || "Acme Corporation"}
+            <span className="hidden md:inline-flex text-[11px] font-bold px-3 py-0.5 rounded-full bg-gold-50 text-gold-800 border border-gold-300 shadow-sm">
+              🏛️ {organization?.name || "Acme Sovereign Capital"}
             </span>
           </div>
 
-          <div className="flex items-center space-x-2.5">
+          <div className="flex items-center space-x-3">
             {/* AI Active Indicator */}
-            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-semibold">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <Sparkles className="w-3.5 h-3.5 text-violet-400" />
+            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gold-50/80 border border-gold-300/60 text-gold-900 text-xs font-semibold shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <Sparkles className="w-3.5 h-3.5 text-gold-600" />
               <span>Gemini 3.8 Flash AI Active</span>
             </div>
 
             {/* Share Public Link Button */}
             <button
               onClick={() => setIsShareModalOpen(true)}
-              className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white shadow-cyanGlow transition-all flex items-center gap-1.5"
+              className="gold-foil-btn px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shadow-goldSoft"
             >
               <Share2 className="w-3.5 h-3.5" />
               <span>Share App (Public Link)</span>

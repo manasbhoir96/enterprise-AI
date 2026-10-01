@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-  Cpu,
+  Landmark,
   ShieldCheck,
   Building2,
   Lock,
@@ -14,7 +14,9 @@ import {
   EyeOff,
   Briefcase,
   FileCheck2,
-  Users,
+  Award,
+  TrendingUp,
+  Scale,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext.js";
 import type { RegisterTenantInput } from "@nexusai/shared";
@@ -29,8 +31,7 @@ interface DemoPersona {
   email: string;
   role: string;
   department: string;
-  avatarColor: string;
-  accentBorder: string;
+  badge: string;
   description: string;
 }
 
@@ -39,31 +40,28 @@ const DEMO_PERSONAS: DemoPersona[] = [
     id: "exec",
     name: "Elena Vance",
     email: "admin@acme.com",
-    role: "CEO & Executive",
-    department: "Executive Leadership",
-    avatarColor: "from-violet-500 via-indigo-500 to-cyan-400",
-    accentBorder: "hover:border-violet-400 focus:border-violet-400",
-    description: "Full executive access to all company telemetry and metrics",
+    role: "Managing Partner & CEO",
+    department: "Executive Committee",
+    badge: "Full Sovereign Authority",
+    description: "Full fiduciary oversight across treasury, analytics, and tenant permissions",
   },
   {
     id: "legal",
     name: "Marcus Reed",
     email: "marcus.reed@acme.com",
-    role: "VP of Legal",
-    department: "Legal & Compliance",
-    avatarColor: "from-cyan-500 to-blue-600",
-    accentBorder: "hover:border-cyan-400 focus:border-cyan-400",
-    description: "Reviews contracts, MSAs, and compliance audit workflows",
+    role: "General Counsel & VP Risk",
+    department: "Legal & Regulatory",
+    badge: "Risk & Compliance",
+    description: "Audits high-value MSAs, indemnification clauses, and capital covenants",
   },
   {
     id: "hr",
     name: "Sarah Chen",
     email: "sarah.chen@acme.com",
-    role: "Director of HR",
-    department: "Human Resources",
-    avatarColor: "from-emerald-400 to-teal-600",
-    accentBorder: "hover:border-emerald-400 focus:border-emerald-400",
-    description: "Answers company policy, benefits, and handbook questions",
+    role: "Managing Director, People",
+    department: "Human Capital",
+    badge: "Human Capital",
+    description: "Oversees global enterprise policies, employee covenants, and compensations",
   },
 ];
 
@@ -79,7 +77,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
 
   // Register form state
   const [orgName, setOrgName] = useState("");
-  const [industry, setIndustry] = useState("Enterprise Cloud & AI Solutions");
+  const [industry, setIndustry] = useState("Institutional Wealth & Private Equity");
   const [regEmail, setRegEmail] = useState("");
   const [regPassword, setRegPassword] = useState("");
   const [fullName, setFullName] = useState("");
@@ -102,7 +100,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
       await login({ email, password });
       onSuccess();
     } catch (err: any) {
-      setError(err.message || "Failed to sign in. Please verify your credentials.");
+      setError(err.message || "Failed to authenticate with sovereign vault.");
     } finally {
       setIsLoading(false);
     }
@@ -123,7 +121,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
       await register(payload);
       onSuccess();
     } catch (err: any) {
-      setError(err.message || "Failed to create organization.");
+      setError(err.message || "Failed to charter institutional organization.");
     } finally {
       setIsLoading(false);
     }
@@ -136,97 +134,91 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
       await quickDemoLogin(demoEmail);
       onSuccess();
     } catch (err: any) {
-      setError(err.message || "Failed to sign in with demo profile.");
+      setError(err.message || "Failed to sign in with executive credentials.");
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-nexus-950 flex flex-col justify-center relative overflow-hidden p-4 md:p-8 selection:bg-indigo-500/30 selection:text-indigo-200">
-      {/* Dynamic ambient fluid background glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-gradient-to-tr from-indigo-600/15 via-violet-600/15 to-transparent rounded-full blur-[140px] pointer-events-none"></div>
-      <div className="absolute bottom-10 left-10 w-[400px] h-[400px] bg-gradient-to-tr from-cyan-600/15 to-transparent rounded-full blur-[110px] pointer-events-none"></div>
+    <div className="min-h-screen bg-[#FBFBFD] flex flex-col justify-center relative overflow-hidden p-4 md:p-8 selection:bg-amber-400/30 selection:text-amber-900">
+      {/* Ambient classic marble gold glow */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-gold-300/15 via-amber-200/10 to-transparent rounded-full blur-[150px] pointer-events-none"></div>
+      <div className="absolute bottom-10 right-10 w-[450px] h-[450px] bg-gradient-to-bl from-gold-400/10 to-transparent rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center z-10">
-        {/* Left Column: Friendly Hero Intro & 1-Click Persona Chooser */}
+        {/* Left Column: Classic Financial Institution Banner & VIP Persona Selector */}
         <div className="lg:col-span-6 space-y-6">
-          {/* Logo & Platform Badge */}
+          {/* Logo & Platform Crest */}
           <div className="flex items-center space-x-3.5">
-            <div className="w-13 h-13 rounded-2xl bg-gradient-to-tr from-indigo-500 via-indigo-600 to-cyan-400 p-0.5 shadow-xl shadow-indigo-500/25 flex items-center justify-center">
-              <div className="w-full h-full bg-slate-950/40 rounded-[14px] flex items-center justify-center backdrop-blur-sm">
-                <Cpu className="w-6 h-6 text-cyan-300" />
+            <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-gold-600 via-gold-500 to-amber-600 p-0.5 shadow-goldSoft flex items-center justify-center border border-gold-300">
+              <div className="w-full h-full bg-white rounded-[14px] flex items-center justify-center">
+                <Landmark className="w-6 h-6 text-gold-700" />
               </div>
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-2xl font-black tracking-tight text-white">
-                  Nexus<span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">AI</span>
+                <span className="text-2xl font-bold tracking-tight text-slate-900 font-serif-luxury">
+                  Nexus<span className="gold-foil-text font-serif">Sovereign</span>
                 </span>
-                <span className="text-[10px] uppercase font-extrabold tracking-widest px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                  ENTERPRISE
+                <span className="text-[10px] uppercase font-extrabold tracking-widest px-2.5 py-0.5 rounded-full bg-gold-100 text-gold-900 border border-gold-300 font-serif">
+                  EST. 2026
                 </span>
               </div>
-              <p className="text-xs text-slate-300 font-medium">Smart AI Copilot for Your Company Documents</p>
+              <p className="text-xs text-gold-800 font-medium">Institutional AI Knowledge & Workflow Governance</p>
             </div>
           </div>
 
-          {/* Value Headline */}
+          {/* Headline */}
           <div className="space-y-3">
-            <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight">
-              One smart assistant for your company's{" "}
-              <span className="bg-gradient-to-r from-violet-400 via-indigo-300 to-cyan-400 bg-clip-text text-transparent">
-                policies, contracts & docs.
-              </span>
+            <h1 className="text-3xl md:text-5xl font-black text-slate-950 tracking-tight leading-tight font-serif-luxury">
+              Sovereign control for your enterprise{" "}
+              <span className="gold-foil-text font-serif italic">capital, contracts & policies.</span>
             </h1>
-            <p className="text-sm text-slate-300 leading-relaxed max-w-xl">
-              Instant answers backed by direct document citations, automated contract risk audits, and strict multi-tenant privacy.
+            <p className="text-sm text-slate-600 leading-relaxed max-w-xl font-normal">
+              Wall Street grade contextual synthesis, automated financial risk covenants, and cryptographic multi-tenant separation.
             </p>
           </div>
 
-          {/* Interactive 1-Click Demo Profiles */}
-          <div className="p-5 rounded-3xl bg-slate-900/80 border border-indigo-500/30 space-y-3.5 shadow-2xl relative overflow-hidden backdrop-blur-xl">
-            <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-indigo-500/10 via-cyan-500/10 to-transparent rounded-full blur-2xl pointer-events-none"></div>
-
+          {/* Interactive VIP Demo Personas */}
+          <div className="p-5 rounded-3xl bg-white/95 border border-gold-400/40 space-y-3.5 shadow-luxuryCard relative overflow-hidden backdrop-blur-xl">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-extrabold text-amber-300 flex items-center gap-1.5 uppercase tracking-wider">
-                <Zap className="w-4 h-4 text-amber-400 fill-amber-400" />
-                Quick Demo: Choose a Profile (1-Click Login)
+              <span className="text-xs font-bold text-gold-900 flex items-center gap-1.5 uppercase tracking-wider font-serif">
+                <Award className="w-4 h-4 text-gold-600" />
+                Select Executive Credentials (1-Click Instant Access)
               </span>
-              <span className="text-[11px] font-semibold text-slate-400">Pre-seeded Acme Corp</span>
+              <span className="text-[11px] font-semibold text-slate-500">Acme Sovereign Vault</span>
             </div>
 
-            <p className="text-[11px] text-slate-400">
-              Click any team member profile to test different roles and access controls instantly:
+            <p className="text-[11px] text-slate-500">
+              Experience the platform through distinct governing roles. Click to populate or login instantly:
             </p>
 
-            <div className="space-y-2">
+            <div className="space-y-2.5">
               {DEMO_PERSONAS.map((p) => {
                 const isSelected = selectedPersona === p.id && email === p.email;
                 return (
                   <div
                     key={p.id}
                     onClick={() => handleSelectPersona(p)}
-                    className={`p-3 rounded-2xl border cursor-pointer transition-all duration-200 flex items-center justify-between ${
+                    className={`gold-card-sheen p-3.5 rounded-2xl border cursor-pointer transition-all duration-300 flex items-center justify-between ${
                       isSelected
-                        ? "bg-indigo-950/60 border-indigo-400/80 shadow-lg shadow-indigo-500/15"
-                        : "bg-white/[0.03] border-white/10 hover:bg-white/[0.07] hover:border-white/20"
+                        ? "bg-gradient-to-r from-gold-50 via-white to-amber-50/70 border-gold-500 shadow-goldSoft -translate-y-0.5"
+                        : "bg-white border-slate-200/90 hover:border-gold-300 hover:bg-gold-50/40 hover:-translate-y-0.5 hover:shadow-sm"
                     }`}
                   >
-                    <div className="flex items-center space-x-3 truncate">
-                      <div
-                        className={`w-10 h-10 rounded-xl bg-gradient-to-tr ${p.avatarColor} flex items-center justify-center text-white font-bold text-xs shrink-0 shadow-md`}
-                      >
+                    <div className="flex items-center space-x-3.5 truncate">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-gold-500 to-amber-700 flex items-center justify-center text-white font-bold text-xs shrink-0 shadow-goldSoft border border-gold-300">
                         {p.name.charAt(0)}
                       </div>
                       <div className="truncate">
                         <div className="flex items-center gap-2">
-                          <span className="text-xs font-bold text-white truncate">{p.name}</span>
-                          <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/10 text-slate-200">
-                            {p.role}
+                          <span className="text-xs font-bold text-slate-900 truncate font-serif-luxury">{p.name}</span>
+                          <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-gold-100 text-gold-900 border border-gold-300">
+                            {p.badge}
                           </span>
                         </div>
-                        <p className="text-[11px] text-slate-400 truncate mt-0.5">{p.description}</p>
+                        <p className="text-[11px] text-slate-500 truncate mt-0.5">{p.description}</p>
                       </div>
                     </div>
 
@@ -237,9 +229,9 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
                         handleQuickLogin(p.email);
                       }}
                       disabled={isLoading}
-                      className="ml-2 px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white shrink-0 transition-all flex items-center gap-1 shadow-sm"
+                      className="ml-2.5 px-3.5 py-1.5 rounded-xl text-xs font-bold gold-foil-btn shrink-0 flex items-center gap-1 shadow-xs"
                     >
-                      Login →
+                      Enter →
                     </button>
                   </div>
                 );
@@ -247,53 +239,53 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
             </div>
           </div>
 
-          {/* Highlights */}
+          {/* Pillars of Sovereign Trust */}
           <div className="grid grid-cols-3 gap-3 pt-1">
-            <div className="p-3 rounded-2xl bg-white/[0.02] border border-white/5 space-y-1">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-indigo-300">
-                <ShieldCheck className="w-4 h-4 text-indigo-400" />
-                100% Private
+            <div className="p-3.5 rounded-2xl bg-white border border-gold-300/40 shadow-xs space-y-1 hover:border-gold-500 transition-colors">
+              <div className="flex items-center gap-1.5 text-xs font-bold text-gold-900 font-serif">
+                <ShieldCheck className="w-4 h-4 text-gold-600" />
+                Capital Safe
               </div>
-              <p className="text-[10px] text-slate-400 leading-tight">Multi-tenant isolation per organization.</p>
+              <p className="text-[10px] text-slate-500 leading-tight">Cryptographic tenant memory enclaves.</p>
             </div>
 
-            <div className="p-3 rounded-2xl bg-white/[0.02] border border-white/5 space-y-1">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-cyan-300">
-                <Sparkles className="w-4 h-4 text-cyan-400" />
-                Gemini 3.8 AI
+            <div className="p-3.5 rounded-2xl bg-white border border-gold-300/40 shadow-xs space-y-1 hover:border-gold-500 transition-colors">
+              <div className="flex items-center gap-1.5 text-xs font-bold text-gold-900 font-serif">
+                <Sparkles className="w-4 h-4 text-gold-600" />
+                Gemini 3.8 Flash
               </div>
-              <p className="text-[10px] text-slate-400 leading-tight">Instant answers with document citations.</p>
+              <p className="text-[10px] text-slate-500 leading-tight">Private intelligence with legal citations.</p>
             </div>
 
-            <div className="p-3 rounded-2xl bg-white/[0.02] border border-white/5 space-y-1">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-300">
-                <FileCheck2 className="w-4 h-4 text-emerald-400" />
-                Contract Audits
+            <div className="p-3.5 rounded-2xl bg-white border border-gold-300/40 shadow-xs space-y-1 hover:border-gold-500 transition-colors">
+              <div className="flex items-center gap-1.5 text-xs font-bold text-gold-900 font-serif">
+                <Scale className="w-4 h-4 text-gold-600" />
+                Audit Trail
               </div>
-              <p className="text-[10px] text-slate-400 leading-tight">Automated risk checks and compliance rules.</p>
+              <p className="text-[10px] text-slate-500 leading-tight">Immutable audit log for compliance.</p>
             </div>
           </div>
         </div>
 
-        {/* Right Column: Fluid Auth Card */}
+        {/* Right Column: Pristine Luxury Auth Vault Card */}
         <div className="lg:col-span-6">
-          <div className="glass-panel p-8 rounded-3xl border border-white/10 shadow-2xl relative backdrop-blur-2xl">
+          <div className="p-8 rounded-3xl bg-white border border-gold-400/40 shadow-cardHover relative backdrop-blur-2xl">
             {/* Animated Tab Switcher */}
-            <div className="flex items-center rounded-2xl bg-nexus-950/70 p-1.5 mb-6 border border-white/10">
+            <div className="flex items-center rounded-2xl bg-[#F8F9FA] p-1.5 mb-6 border border-gold-300/50">
               <button
                 type="button"
                 onClick={() => {
                   setMode("login");
                   setError(null);
                 }}
-                className={`flex-1 py-2.5 text-xs font-bold rounded-xl transition-all duration-200 flex items-center justify-center gap-2 ${
+                className={`flex-1 py-2.5 text-xs font-bold rounded-xl transition-all duration-300 flex items-center justify-center gap-2 ${
                   mode === "login"
-                    ? "bg-gradient-to-r from-indigo-600 to-indigo-500 text-white shadow-lg shadow-indigo-600/30"
-                    : "text-slate-400 hover:text-white"
+                    ? "gold-foil-btn shadow-goldSoft"
+                    : "text-slate-600 hover:text-slate-950 font-medium"
                 }`}
               >
-                <User className="w-3.5 h-3.5" />
-                Sign In
+                <Lock className="w-3.5 h-3.5" />
+                Sovereign Sign In
               </button>
               <button
                 type="button"
@@ -301,20 +293,20 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
                   setMode("register");
                   setError(null);
                 }}
-                className={`flex-1 py-2.5 text-xs font-bold rounded-xl transition-all duration-200 flex items-center justify-center gap-2 ${
+                className={`flex-1 py-2.5 text-xs font-bold rounded-xl transition-all duration-300 flex items-center justify-center gap-2 ${
                   mode === "register"
-                    ? "bg-gradient-to-r from-indigo-600 to-indigo-500 text-white shadow-lg shadow-indigo-600/30"
-                    : "text-slate-400 hover:text-white"
+                    ? "gold-foil-btn shadow-goldSoft"
+                    : "text-slate-600 hover:text-slate-950 font-medium"
                 }`}
               >
                 <Building2 className="w-3.5 h-3.5" />
-                Create Organization
+                Charter Organization
               </button>
             </div>
 
             {error && (
-              <div className="mb-5 p-3.5 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-rose-400 shrink-0"></span>
+              <div className="mb-5 p-3.5 rounded-2xl bg-rose-50 border border-rose-300 text-rose-800 text-xs flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0"></span>
                 <span>{error}</span>
               </div>
             )}
@@ -322,31 +314,31 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
             {mode === "login" ? (
               <form onSubmit={handleLoginSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1.5">
-                    Work Email Address
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1.5 font-serif">
+                    Corporate Email Address
                   </label>
                   <div className="relative">
-                    <Mail className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5 pointer-events-none" />
+                    <Mail className="w-4 h-4 text-gold-600 absolute left-3.5 top-3.5 pointer-events-none" />
                     <input
                       type="email"
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="admin@acme.com"
-                      className="glass-input w-full pl-10 pr-3.5 py-3 rounded-2xl text-xs"
+                      className="glass-input w-full pl-10 pr-3.5 py-3 rounded-2xl text-xs font-medium"
                     />
                   </div>
                 </div>
 
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
-                    <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-300">
-                      Password
+                    <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 font-serif">
+                      Security Password
                     </label>
-                    <span className="text-[11px] text-slate-400">Demo: password123</span>
+                    <span className="text-[11px] font-medium text-gold-800">Default: password123</span>
                   </div>
                   <div className="relative">
-                    <Lock className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5 pointer-events-none" />
+                    <Lock className="w-4 h-4 text-gold-600 absolute left-3.5 top-3.5 pointer-events-none" />
                     <input
                       type={showPassword ? "text" : "password"}
                       required
@@ -358,7 +350,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3.5 top-3.5 text-slate-400 hover:text-white transition-colors"
+                      className="absolute right-3.5 top-3.5 text-slate-400 hover:text-gold-700 transition-colors"
                       title={showPassword ? "Hide password" : "Show password"}
                     >
                       {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -370,16 +362,16 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 text-white font-extrabold text-xs shadow-lg shadow-indigo-500/25 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                    className="w-full py-3.5 rounded-2xl gold-foil-btn font-extrabold text-xs shadow-goldGlow transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50"
                   >
                     {isLoading ? (
                       <>
                         <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                        <span>Entering Workspace...</span>
+                        <span>Authenticating Credentials...</span>
                       </>
                     ) : (
                       <>
-                        <span>Sign In to NexusAI</span>
+                        <span className="font-serif">Access Sovereign Vault</span>
                         <ArrowRight className="w-4 h-4" />
                       </>
                     )}
@@ -390,26 +382,26 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
               <form onSubmit={handleRegisterSubmit} className="space-y-3.5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">
-                      Organization Name
+                    <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1 font-serif">
+                      Institution Name
                     </label>
                     <input
                       type="text"
                       required
-                      placeholder="e.g. Acme Corp"
+                      placeholder="e.g. Acme Sovereign Capital"
                       value={orgName}
                       onChange={(e) => setOrgName(e.target.value)}
                       className="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs"
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">
+                    <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1 font-serif">
                       Industry Sector
                     </label>
                     <input
                       type="text"
                       required
-                      placeholder="e.g. Enterprise Cloud"
+                      placeholder="e.g. Sovereign Wealth"
                       value={industry}
                       onChange={(e) => setIndustry(e.target.value)}
                       className="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs"
@@ -418,8 +410,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">
-                    Your Full Name
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1 font-serif">
+                    Managing Partner Name
                   </label>
                   <input
                     type="text"
@@ -432,13 +424,13 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1 font-serif">
                     Corporate Email
                   </label>
                   <input
                     type="email"
                     required
-                    placeholder="admin@yourcompany.com"
+                    placeholder="partner@sovereigncapital.com"
                     value={regEmail}
                     onChange={(e) => setRegEmail(e.target.value)}
                     className="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs"
@@ -446,8 +438,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">
-                    Password (Min 8 chars)
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1 font-serif">
+                    Master Password (Min 8 chars)
                   </label>
                   <input
                     type="password"
@@ -463,16 +455,16 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 text-white font-extrabold text-xs shadow-lg shadow-indigo-500/25 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                    className="w-full py-3.5 rounded-2xl gold-foil-btn font-extrabold text-xs shadow-goldGlow transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50"
                   >
                     {isLoading ? (
                       <>
                         <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                        <span>Setting Up Workspace...</span>
+                        <span>Chartering Enterprise...</span>
                       </>
                     ) : (
                       <>
-                        <span>Create Enterprise Workspace</span>
+                        <span className="font-serif">Charter Sovereign Organization</span>
                         <ArrowRight className="w-4 h-4" />
                       </>
                     )}
@@ -481,12 +473,12 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
               </form>
             )}
 
-            <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-[11px] text-slate-400">
-              <span className="flex items-center gap-1.5 text-emerald-400 font-medium">
-                <CheckCircle2 className="w-3.5 h-3.5" />
-                Private Tenant Isolation
+            <div className="mt-6 pt-4 border-t border-gold-300/40 flex items-center justify-between text-[11px] text-slate-500">
+              <span className="flex items-center gap-1.5 text-emerald-800 font-semibold">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                Fiduciary Tenant Isolation
               </span>
-              <span>AES-256 Encrypted</span>
+              <span className="font-mono text-[10px] text-gold-900">ENCRYPTION: AES-256 GCM</span>
             </div>
           </div>
         </div>

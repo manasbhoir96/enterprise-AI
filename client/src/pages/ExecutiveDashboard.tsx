@@ -14,6 +14,10 @@ import {
   FileText,
   Bot,
   Share2,
+  Landmark,
+  Coins,
+  Scale,
+  Award,
 } from "lucide-react";
 import { StatCardWidget } from "../components/dashboard/StatCardWidget.js";
 import { HelpGuideBanner } from "../components/HelpGuideBanner.js";
@@ -46,121 +50,117 @@ export const ExecutiveDashboard: React.FC<ExecutiveDashboardProps> = ({ onNaviga
 
   return (
     <div className="space-y-6">
-      {/* 3-Step Friendly Onboarding & Help Banner */}
+      {/* 3-Step Executive Protocol Banner */}
       <HelpGuideBanner onNavigate={onNavigate} />
 
-      {/* Top Welcome & Telemetry Header */}
-      <div className="glass-panel p-6 rounded-3xl relative overflow-hidden flex flex-wrap items-center justify-between gap-4 border border-indigo-500/20 shadow-glow">
-        <div className="space-y-1">
+      {/* Top Welcome & Fiduciary Telemetry Header */}
+      <div className="p-6 rounded-3xl bg-white border border-gold-400/40 shadow-luxuryCard relative overflow-hidden flex flex-wrap items-center justify-between gap-4 gold-card-sheen">
+        <div className="space-y-1 z-10">
           <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span className="text-[11px] font-bold text-emerald-400 tracking-wider uppercase">
-              System Online & Ready
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span className="text-[10px] font-bold text-emerald-800 tracking-widest uppercase font-serif bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
+              Sovereign Enclave Active & Audited
             </span>
           </div>
-          <h1 className="text-2xl font-black text-white tracking-tight">
-            Hello, {user?.full_name?.split(" ")[0] || "Team"} 👋
+          <h1 className="text-2xl font-black text-slate-900 tracking-tight font-serif-luxury">
+            Welcome, {user?.full_name || "Elena Vance"}
           </h1>
-          <p className="text-xs text-slate-300">
-            {organization?.name || "Acme Corporation"} • Your Unified Knowledge Base & AI Assistant
+          <p className="text-xs text-slate-600 font-medium">
+            {organization?.name || "Acme Sovereign Capital"} • Institutional Asset Telemetry & AI Synthesis
           </p>
         </div>
 
         {/* Quick Launch Action Pills */}
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-3 z-10">
           <button
             onClick={() => onNavigate("/copilot")}
-            className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white text-xs font-bold shadow-glow transition-all flex items-center gap-1.5"
+            className="gold-foil-btn px-4 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 flex items-center gap-1.5 shadow-goldSoft"
           >
             <Bot className="w-4 h-4" />
-            Chat with Copilot
+            <span>Consult Copilot</span>
           </button>
           <button
             onClick={() => onNavigate("/workflows")}
-            className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white text-xs font-bold shadow-cyanGlow transition-all flex items-center gap-1.5"
+            className="px-4 py-2.5 rounded-xl bg-white hover:bg-gold-50 text-gold-900 border border-gold-400/60 text-xs font-bold shadow-xs transition-all flex items-center gap-1.5 hover:border-gold-600"
           >
-            <Cpu className="w-4 h-4" />
-            Scan a Contract
+            <Scale className="w-4 h-4 text-gold-700" />
+            <span>Audit Document</span>
           </button>
         </div>
       </div>
 
-      {/* Primary KPI Stat Grid */}
+      {/* Primary KPI Stat Grid (Wall Street Gold Theme) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCardWidget
           title="Automated Reviews Run"
           value={metrics?.totalWorkflowsRun ?? 4}
           change="+32%"
           isPositive={true}
-          icon={Cpu}
-          glowColor="cyan"
-          subtitle="Contract & financial audits"
+          icon={FileCheck2}
+          subtitle="Contract & financial audits executed"
         />
 
         <StatCardWidget
-          title="Hours Saved by AI"
+          title="Analyst Hours Saved"
           value={`${metrics?.estimatedHoursSaved ?? 36} hrs`}
           change="+28%"
           isPositive={true}
           icon={Clock}
-          glowColor="indigo"
-          subtitle="4.5 hrs saved per document"
+          subtitle="4.5 hrs saved per document analyzed"
         />
 
         <StatCardWidget
-          title="Estimated Cost Saved"
+          title="Estimated Capital Saved"
           value={`$${(metrics?.estimatedCostSavings ?? 4140).toLocaleString()}`}
           change="+35%"
           isPositive={true}
           icon={DollarSign}
-          glowColor="emerald"
-          subtitle="Based on $115/hr analyst rate"
+          subtitle="Benchmark: $115/hr Wall St senior rate"
         />
 
         <StatCardWidget
-          title="System Health & SLA"
+          title="Fiduciary Health & SLA"
           value="99.98%"
-          change="Healthy"
+          change="Optimal"
           isPositive={true}
           icon={ShieldCheck}
-          glowColor="purple"
-          subtitle="All AI systems running normally"
+          subtitle="Real-time multi-tenant integrity"
         />
       </div>
 
       {/* Middle Section: Department AI Utilization & Recent Execution Stream */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left: Department AI Utilization */}
-        <div className="lg:col-span-6 glass-panel p-6 rounded-2xl flex flex-col justify-between border border-white/10">
+        {/* Left: Department Capital & Knowledge Allocation */}
+        <div className="lg:col-span-6 p-6 rounded-3xl bg-white border border-gold-300/60 shadow-luxuryCard flex flex-col justify-between hover:border-gold-500 transition-all duration-300 gold-card-sheen">
           <div>
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="text-sm font-bold text-white flex items-center gap-2">
-                  <Layers className="w-4 h-4 text-indigo-400" />
-                  Documents by Department
+                <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2 font-serif-luxury">
+                  <Layers className="w-4 h-4 text-gold-700" />
+                  Vault Distribution by Department
                 </h3>
-                <p className="text-[11px] text-slate-400">
-                  How your team's knowledge is organized across departments.
+                <p className="text-[11px] text-slate-500">
+                  Institutional data partitioning across legal, finance, and operations.
                 </p>
               </div>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
-                {metrics?.activeDepartments ?? 4} Departments
+              <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-gold-100 text-gold-900 border border-gold-300 font-serif">
+                {metrics?.activeDepartments ?? 4} Divisions
               </span>
             </div>
 
             <div className="space-y-4 pt-2">
               {[
-                { dept: "Legal & Compliance", count: 2, pct: 45, color: "bg-gradient-to-r from-violet-500 to-indigo-500" },
-                { dept: "Finance & Accounting", count: 1, pct: 25, color: "bg-gradient-to-r from-amber-500 to-orange-500" },
-                { dept: "Human Resources", count: 1, pct: 20, color: "bg-gradient-to-r from-emerald-500 to-teal-500" },
-                { dept: "Operations & Supply Chain", count: 1, pct: 10, color: "bg-gradient-to-r from-cyan-500 to-blue-500" },
+                { dept: "Legal & Regulatory Compliance", count: 2, pct: 45, color: "bg-gradient-to-r from-gold-600 via-amber-500 to-gold-400" },
+                { dept: "Finance & Capital Allocation", count: 1, pct: 25, color: "bg-gradient-to-r from-amber-600 to-amber-400" },
+                { dept: "Human Capital & Equity", count: 1, pct: 20, color: "bg-gradient-to-r from-emerald-600 to-teal-500" },
+                { dept: "Operations & Treasury Infrastructure", count: 1, pct: 10, color: "bg-gradient-to-r from-slate-700 to-slate-500" },
               ].map((item, idx) => (
                 <div key={idx} className="space-y-1.5">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="font-semibold text-slate-200">{item.dept}</span>
-                    <span className="text-slate-400 font-mono text-[11px]">{item.count} Docs ({item.pct}%)</span>
+                    <span className="font-bold text-slate-800">{item.dept}</span>
+                    <span className="text-slate-500 font-mono text-[11px] font-semibold">{item.count} Assets ({item.pct}%)</span>
                   </div>
-                  <div className="w-full h-2 rounded-full bg-white/5 overflow-hidden">
+                  <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden border border-slate-200/60">
                     <div
                       className={`h-full rounded-full ${item.color}`}
                       style={{ width: `${item.pct}%` }}
@@ -171,32 +171,32 @@ export const ExecutiveDashboard: React.FC<ExecutiveDashboardProps> = ({ onNaviga
             </div>
           </div>
 
-          <div className="pt-6 border-t border-white/5 mt-6 flex items-center justify-between">
-            <span className="text-xs text-slate-400">Indexed Library: <strong>{metrics?.totalKnowledgeAssets ?? 4} documents</strong></span>
+          <div className="pt-6 border-t border-gold-200/50 mt-6 flex items-center justify-between">
+            <span className="text-xs text-slate-500">Total Vaulted Documents: <strong className="text-slate-900">{metrics?.totalKnowledgeAssets ?? 4} files</strong></span>
             <button
               onClick={() => onNavigate("/knowledge-base")}
-              className="text-xs text-indigo-400 hover:text-indigo-300 font-semibold flex items-center gap-1"
+              className="text-xs text-gold-800 hover:text-gold-950 font-bold flex items-center gap-1 font-serif"
             >
-              Browse All Documents →
+              Browse Document Vault →
             </button>
           </div>
         </div>
 
-        {/* Right: Live Execution Stream */}
-        <div className="lg:col-span-6 glass-panel p-6 rounded-2xl flex flex-col justify-between border border-white/10">
+        {/* Right: Live Sovereign Audit Stream */}
+        <div className="lg:col-span-6 p-6 rounded-3xl bg-white border border-gold-300/60 shadow-luxuryCard flex flex-col justify-between hover:border-gold-500 transition-all duration-300 gold-card-sheen">
           <div>
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="text-sm font-bold text-white flex items-center gap-2">
-                  <Activity className="w-4 h-4 text-emerald-400" />
-                  Recent AI Tasks & Reviews
+                <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2 font-serif-luxury">
+                  <Activity className="w-4 h-4 text-emerald-600" />
+                  Recent Audit & Verification Stream
                 </h3>
-                <p className="text-[11px] text-slate-400">
-                  Live history of automated risk assessments and summaries.
+                <p className="text-[11px] text-slate-500">
+                  Immutable execution ledger of contractual reviews and risk summaries.
                 </p>
               </div>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-                LIVE LOG
+              <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-300 font-serif">
+                LIVE AUDIT
               </span>
             </div>
 
@@ -224,20 +224,20 @@ export const ExecutiveDashboard: React.FC<ExecutiveDashboardProps> = ({ onNaviga
               ).map((exec, idx) => (
                 <div
                   key={idx}
-                  className="p-3 rounded-xl bg-nexus-900/60 border border-white/5 flex items-center justify-between hover:bg-white/[0.04] transition-colors"
+                  className="p-3.5 rounded-2xl bg-[#FAF8F5] border border-gold-200/70 flex items-center justify-between hover:border-gold-400 hover:bg-gold-50/50 transition-all duration-200"
                 >
                   <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center border border-emerald-500/30">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center border border-emerald-300 shadow-xs">
                       <FileCheck2 className="w-4 h-4" />
                     </div>
                     <div>
-                      <p className="text-xs font-semibold text-slate-200">{exec.workflow_name}</p>
-                      <p className="text-[10px] text-slate-400">
-                        Run by {exec.executor_name} • {exec.execution_time_ms ? `${exec.execution_time_ms}ms` : "1.2s"}
+                      <p className="text-xs font-bold text-slate-900 font-serif-luxury">{exec.workflow_name}</p>
+                      <p className="text-[10px] text-slate-500">
+                        Executed by {exec.executor_name} • {exec.execution_time_ms ? `${exec.execution_time_ms}ms` : "1.2s"}
                       </p>
                     </div>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-emerald-100 text-emerald-900 border border-emerald-300">
                     {exec.status}
                   </span>
                 </div>
@@ -245,13 +245,13 @@ export const ExecutiveDashboard: React.FC<ExecutiveDashboardProps> = ({ onNaviga
             </div>
           </div>
 
-          <div className="pt-4 border-t border-white/5 mt-6 flex items-center justify-between">
-            <span className="text-xs text-slate-400">Every AI review is securely recorded</span>
+          <div className="pt-4 border-t border-gold-200/50 mt-6 flex items-center justify-between">
+            <span className="text-xs text-slate-500">Compliance records secured via SHA-256</span>
             <button
               onClick={() => onNavigate("/workflows")}
-              className="text-xs text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1"
+              className="text-xs text-gold-800 hover:text-gold-950 font-bold flex items-center gap-1 font-serif"
             >
-              See All Reviews →
+              Open Audit Ledger →
             </button>
           </div>
         </div>

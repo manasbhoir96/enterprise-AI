@@ -2,7 +2,6 @@ import { spawn } from "child_process";
 import fs from "fs";
 import path from "path";
 import os from "os";
-import http from "http";
 import https from "https";
 
 function getLocalIp() {
@@ -50,7 +49,7 @@ const info = {
   localUrl: `http://${localIp}:5173`,
   publicIp,
   publicUrl: null,
-  tunnelPassword: publicIp,
+  tunnelPassword: null,
   status: "starting",
   updatedAt: new Date().toISOString(),
 };
@@ -58,34 +57,60 @@ const info = {
 saveInfo(info);
 
 console.log(`🌐 Local Network Shareable URL: http://${localIp}:5173`);
-console.log(`🔒 Public Tunnel Gateway IP (Tunnel Password): ${publicIp}`);
-console.log("⚡ Starting secure public HTTPS tunnel via localtunnel with IPv4 binding...");
+console.log("⚡ Starting high-stability TLS HTTPS tunnel...");
 
-const lt = spawn("npx", ["-y", "localtunnel", "--port", "5173", "--local-host", "127.0.0.1", "--print-requests"], {
+// Start localhost.run SSH tunnel
+const ssh = spawn("ssh", [
+  "-o", "StrictHostKeyChecking=no",
+  "-o", "ServerAliveInterval=30",
+  "-o", "ExitOnForwardFailure=yes",
+  "-R", "80:localhost:5173",
+  "nokey@localhost.run"
+], {
   stdio: ["ignore", "pipe", "pipe"],
 });
 
-lt.stdout.on("data", (data) => {
+ssh.stdout.on("data", (data) => {
   const text = data.toString();
-  console.log(text.trim());
-  const match = text.match(/https:\/\/[a-zA-Z0-9-]+\.loca\.lt/);
-  if (match) {
+  const match = text.match(/https:\/\/[a-zA-Z0-9-]+\.lhr\.life/);
+  if (match && !info.publicUrl) {
     info.publicUrl = match[0];
     info.status = "active";
+    info.tunnelPassword = null;
     info.updatedAt = new Date().toISOString();
     saveInfo(info);
     console.log(`\n🎉 Public Secured HTTPS Link Ready: ${info.publicUrl}`);
-    console.log(`🔑 If asked for Tunnel Password / Endpoint IP, enter: ${publicIp}\n`);
+    console.log(`🔒 Zero-password TLS direct encrypted tunnel.\n`);
   }
 });
 
-lt.stderr.on("data", (data) => {
-  console.error("Tunnel log:", data.toString().trim());
+ssh.stderr.on("data", (data) => {
+  const text = data.toString();
+  const match = text.match(/https:\/\/[a-zA-Z0-9-]+\.lhr\.life/);
+  if (match && !info.publicUrl) {
+    info.publicUrl = match[0];
+    info.status = "active";
+    info.tunnelPassword = null;
+    info.updatedAt = new Date().toISOString();
+    saveInfo(info);
+    console.log(`\n🎉 Public Secured HTTPS Link Ready: ${info.publicUrl}\n`);
+  }
 });
 
-lt.on("close", (code) => {
-  console.log(`Tunnel closed with code ${code}`);
-  info.status = "closed";
-  saveInfo(info);
+ssh.on("close", (code) => {
+  console.log(`SSH tunnel closed with code ${code}, falling back to localtunnel...`);
+  const lt = spawn("npx", ["-y", "localtunnel", "--port", "5173", "--local-host", "127.0.0.1"], {
+    stdio: ["ignore", "pipe", "pipe"],
+  });
+  lt.stdout.on("data", (data) => {
+    const text = data.toString();
+    const match = text.match(/https:\/\/[a-zA-Z0-9-]+\.loca\.lt/);
+    if (match) {
+      info.publicUrl = match[0];
+      info.tunnelPassword = publicIp;
+      info.status = "active";
+      saveInfo(info);
+      console.log(`🎉 Public Secured HTTPS Link Ready: ${info.publicUrl}`);
+    }
+  });
 });
-

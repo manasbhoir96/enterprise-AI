@@ -304,17 +304,17 @@ export const WorkflowCanvas: React.FC<WorkflowCanvasProps> = ({
               <button
                 onClick={handleExecute}
                 disabled={isExecuting}
-                className="px-6 py-2.5 rounded-xl gold-foil-btn text-white font-bold text-xs shadow-goldSoft transition-all disabled:opacity-50 flex items-center gap-2 hover:scale-105"
+                className="px-6 py-2.5 rounded-xl bull-market-btn text-[#050811] font-bold text-xs font-quant transition-all disabled:opacity-50 flex items-center gap-2 hover:scale-105"
               >
                 {isExecuting ? (
                   <>
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    Sweeping Covenants with Gemini...
+                    <div className="w-4 h-4 border-2 border-[#050811] border-t-transparent rounded-full animate-spin"></div>
+                    Executing Agentic DAG...
                   </>
                 ) : (
                   <>
-                    <Play className="w-4 h-4 fill-white" />
-                    ⚡ Run Sovereign Audit
+                    <Play className="w-4 h-4 fill-[#050811]" />
+                    ⚡ Run Agentic Risk Sweep
                   </>
                 )}
               </button>

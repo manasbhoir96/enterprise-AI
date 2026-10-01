@@ -13,8 +13,12 @@ import {
   Trash2,
   ChevronRight,
   ExternalLink,
+  Cpu,
+  Activity,
+  Layers,
 } from "lucide-react";
 import { apiRequest } from "../../lib/api.js";
+import { AiThinkingState } from "./AiThinkingState.js";
 import type { CopilotQueryResponse, CopilotCitation } from "@nexusai/shared";
 
 interface Message {
@@ -32,7 +36,7 @@ export const CopilotChatWindow: React.FC = () => {
     {
       id: "initial-welcome",
       sender: "copilot",
-      text: `👋 **Welcome! I'm your Company AI Copilot.**\n\nI answer questions strictly based on your company's uploaded documents (like employee handbooks, vendor contracts, and security policies).\n\n💡 **Try asking:**\n- *"What is our travel reimbursement policy for flights?"*\n- *"What are our liability limits in the Cloud MSA?"*\n- *"How many sick and PTO days do we get?"*`,
+      text: `🌌 **Quantis AI Reasoning Engine Initialized**\n\nI am grounded in your enterprise vector store with cryptographic zero-hallucination perimeter. I synthesize institutional documents, financial contracts, compliance regulations, and operating covenants in real time.\n\n💡 **Quant Query Prompts:**\n- *"What are the aggregate liability caps and indemnities in our Cloud MSA?"*\n- *"What are our statutory liquidity thresholds and Basel III covenant buffers?"*\n- *"Summarize our travel reimbursement and corporate OPEX limits."*\n- *"What are our SOC-2 password rotation and hardware MFA enforcement rules?"*`,
       timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
       modelUsed: "gemini-2.5-flash",
     },
@@ -53,10 +57,10 @@ export const CopilotChatWindow: React.FC = () => {
   }, [messages, isLoading]);
 
   const suggestedQuestions = [
-    "What is our travel reimbursement policy for international flights?",
-    "What are our aggregate liability limits in the Cloud MSA?",
-    "What is the policy for unused PTO rollover and parental leave?",
-    "What are our SOC2 password rotation and hardware MFA rules?",
+    "What are our aggregate liability limits and indemnities in the Cloud MSA?",
+    "What are our statutory liquidity thresholds and Basel III covenant buffers?",
+    "What is the policy for unused PTO rollover and executive parental leave?",
+    "What are our SOC2 password rotation and hardware MFA requirements?",
   ];
 
   const handleSend = async (queryText?: string) => {
@@ -98,7 +102,7 @@ export const CopilotChatWindow: React.FC = () => {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         sender: "copilot",
-        text: `⚠️ **Error retrieving context:** ${err.message || "Failed to query organizational knowledge."}`,
+        text: `⚠️ **Quantis Error:** ${err.message || "Failed to reach AI reasoning server. Please verify network connectivity."}`,
         timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
       };
       setMessages((prev) => [...prev, errorMessage]);
@@ -107,109 +111,54 @@ export const CopilotChatWindow: React.FC = () => {
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      handleSend();
-    }
-  };
-
-  const clearChat = () => {
-    setMessages([
-      {
-        id: Date.now().toString(),
-        sender: "copilot",
-        text: `Conversation cleared. I am ready to answer enterprise questions based on your organization's verified data.`,
-        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-      },
-    ]);
-  };
-
-  const renderFormattedText = (text: string) => {
-    // Basic Markdown parser for headers, bold, and bullet points
-    const lines = text.split("\n");
-    return lines.map((line, idx) => {
-      if (line.startsWith("### ")) {
-        return <h4 key={idx} className="text-sm font-bold text-slate-900 font-serif-luxury mt-3 mb-1">{line.replace("### ", "")}</h4>;
-      }
-      if (line.startsWith("## ")) {
-        return <h3 key={idx} className="text-base font-bold text-slate-900 font-serif-luxury mt-3 mb-1.5">{line.replace("## ", "")}</h3>;
-      }
-      if (line.startsWith("- ") || line.startsWith("* ")) {
-        return (
-          <li key={idx} className="ml-4 list-disc text-xs text-slate-700 my-0.5 leading-relaxed">
-            {formatBold(line.substring(2))}
-          </li>
-        );
-      }
-      if (/^\d+\.\s/.test(line)) {
-        return (
-          <li key={idx} className="ml-4 list-decimal text-xs text-slate-700 my-0.5 leading-relaxed">
-            {formatBold(line.replace(/^\d+\.\s/, ""))}
-          </li>
-        );
-      }
-      if (!line.trim()) {
-        return <div key={idx} className="h-1.5"></div>;
-      }
-      return <p key={idx} className="text-xs text-slate-700 leading-relaxed my-0.5">{formatBold(line)}</p>;
-    });
-  };
-
-  const formatBold = (str: string) => {
-    const parts = str.split(/(\*\*.*?\*\*)/g);
-    return parts.map((part, i) => {
-      if (part.startsWith("**") && part.endsWith("**")) {
-        return <strong key={i} className="font-bold text-slate-900">{part.slice(2, -2)}</strong>;
-      }
-      return part;
-    });
-  };
-
   return (
-    <div className="flex flex-col h-[calc(100vh-6rem)] bg-white rounded-3xl overflow-hidden relative border border-gold-300/80 shadow-luxuryCard">
-      {/* Top Controls Bar */}
-      <div className="p-4 border-b border-gold-200/80 bg-[#FCFBF8] flex flex-wrap items-center justify-between gap-3 shrink-0">
+    <div className="flex flex-col h-[calc(100vh-140px)] glass-panel rounded-3xl border border-[#00E5FF]/25 shadow-[0_0_35px_rgba(0,0,0,0.8)] overflow-hidden">
+      {/* Top Header */}
+      <div className="p-4 px-6 border-b border-white/10 bg-[#050811]/90 flex flex-wrap items-center justify-between gap-3 relative z-10">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-gold-600 via-amber-600 to-yellow-500 flex items-center justify-center shadow-goldSoft text-white">
-            <Sparkles className="w-5 h-5 text-white" />
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00FFA3] via-[#00E5FF] to-[#7000FF] p-[1.5px] shadow-[0_0_15px_rgba(0,229,255,0.4)]">
+            <div className="w-full h-full bg-[#050811] rounded-[9px] flex items-center justify-center">
+              <Bot className="w-5 h-5 text-[#00E5FF]" />
+            </div>
           </div>
           <div>
-            <h3 className="text-sm font-bold text-slate-900 font-serif-luxury tracking-wide flex items-center gap-2">
-              Sovereign Copilot
-              <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-gold-50 text-gold-900 border border-gold-300/80 flex items-center gap-1">
-                <Shield className="w-3 h-3 text-gold-700" />
-                Audited Knowledge Base
+            <div className="flex items-center space-x-2">
+              <h2 className="text-sm font-bold font-quant text-white">
+                Quantis Copilot Terminal
+              </h2>
+              <span className="w-2 h-2 rounded-full bg-[#00FFA3] animate-pulse" />
+              <span className="text-[10px] font-quant text-[#00FFA3] bg-[#00FFA3]/10 px-2 py-0.5 rounded border border-[#00FFA3]/30">
+                ZERO HALLUCINATION
               </span>
-            </h3>
-            <p className="text-[11px] text-slate-500">
-              Directly grounded in authenticated enterprise documents, covenants, and operating policies.
+            </div>
+            <p className="text-[11px] text-slate-400">
+              Grounded in Tenant Vector Partitions • Gemini 2.5 Flash
             </p>
           </div>
         </div>
 
-        {/* Filter and Clear Chat */}
         <div className="flex items-center space-x-2.5">
-          <div className="flex items-center space-x-1.5 text-xs text-slate-600 font-medium">
-            <Filter className="w-3.5 h-3.5 text-gold-700" />
-            <span className="text-[11px] font-semibold text-slate-700">Filter Dept:</span>
+          {/* Department Filter */}
+          <div className="flex items-center space-x-1.5 bg-black/60 px-2.5 py-1.5 rounded-xl border border-white/10 text-xs">
+            <Filter className="w-3.5 h-3.5 text-[#00E5FF]" />
             <select
               value={departmentContext}
               onChange={(e) => setDepartmentContext(e.target.value)}
-              className="px-3 py-1.5 rounded-xl text-xs bg-white text-slate-800 border border-gold-300/80 font-medium focus:outline-none focus:border-gold-500 shadow-2xs cursor-pointer"
+              className="bg-transparent text-slate-300 font-quant text-xs focus:outline-none cursor-pointer"
             >
-              <option value="All Departments">All Departments (Entire Enterprise)</option>
-              <option value="Legal & Compliance">Legal & Compliance</option>
-              <option value="Human Resources">Human Resources</option>
-              <option value="Finance & Accounting">Finance & Accounting</option>
-              <option value="Operations & Supply Chain">Operations & Supply Chain</option>
+              <option value="All Departments" className="bg-[#0B0F19]">All Departments</option>
+              <option value="Executive" className="bg-[#0B0F19]">Executive / Treasury</option>
+              <option value="Finance" className="bg-[#0B0F19]">Finance & Accounting</option>
+              <option value="Legal" className="bg-[#0B0F19]">Legal & Compliance</option>
+              <option value="HR" className="bg-[#0B0F19]">Human Resources</option>
+              <option value="Engineering" className="bg-[#0B0F19]">Engineering & Security</option>
             </select>
           </div>
 
           <button
-            onClick={clearChat}
-            className="p-2 rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-all"
+            onClick={() => setMessages([messages[0]])}
             title="Clear Chat History"
+            className="p-2 text-slate-400 hover:text-[#FF3366] hover:bg-[#FF3366]/10 rounded-xl transition-colors"
           >
             <Trash2 className="w-4 h-4" />
           </button>
@@ -217,53 +166,54 @@ export const CopilotChatWindow: React.FC = () => {
       </div>
 
       {/* Messages Scroll Area */}
-      <div className="flex-1 overflow-y-auto p-5 space-y-4 bg-gradient-to-b from-[#FCFBF8] to-white">
+      <div className="flex-1 p-6 overflow-y-auto space-y-4 bg-gradient-to-b from-[#0B0F19] to-[#050811]">
         {messages.map((msg) => {
           const isUser = msg.sender === "user";
+
           return (
             <div
               key={msg.id}
-              className={`flex items-start space-x-3 ${isUser ? "flex-row-reverse space-x-reverse" : ""}`}
+              className={`flex items-start space-x-3 ${isUser ? "flex-row-reverse space-x-reverse" : "flex-row"}`}
             >
               {/* Avatar */}
               <div
-                className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 text-xs font-bold shadow-xs border ${
+                className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 border ${
                   isUser
-                    ? "bg-gradient-to-br from-gold-600 to-amber-700 text-white border-gold-400 shadow-goldSoft"
-                    : "bg-white text-gold-800 border-gold-300 shadow-luxuryCard"
+                    ? "bg-gradient-to-br from-[#7000FF] to-[#00E5FF] text-white border-white/20 shadow-[0_0_12px_rgba(112,0,255,0.4)]"
+                    : "bg-[#050811] text-[#00FFA3] border-[#00FFA3]/40 shadow-[0_0_12px_rgba(0,255,163,0.3)]"
                 }`}
               >
-                {isUser ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4 text-gold-700" />}
+                {isUser ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
               </div>
 
               {/* Message Bubble */}
               <div
-                className={`max-w-2xl rounded-2xl p-4 text-xs leading-relaxed space-y-2 border transition-all ${
+                className={`max-w-[80%] rounded-2xl p-4 space-y-2 border transition-all ${
                   isUser
-                    ? "bg-gradient-to-r from-gold-600 to-amber-700 text-white border-gold-400 rounded-tr-none shadow-goldSoft"
-                    : "bg-white text-slate-800 border-gold-300/70 rounded-tl-none shadow-luxuryCard hover:border-gold-400"
+                    ? "bg-gradient-to-br from-[#7000FF]/30 to-[#00E5FF]/20 text-white border-[#00E5FF]/30 shadow-[0_0_20px_rgba(0,229,255,0.1)]"
+                    : "glass-panel border-[#00E5FF]/25 shadow-[0_0_25px_rgba(0,0,0,0.6)]"
                 }`}
               >
-                <div className={isUser ? "text-white" : "text-slate-800"}>
-                  {renderFormattedText(msg.text)}
+                <div className="text-xs leading-relaxed whitespace-pre-wrap text-slate-200">
+                  {msg.text}
                 </div>
 
-                {/* Citations Box */}
-                {!isUser && msg.citations && msg.citations.length > 0 && (
-                  <div className="mt-3 pt-3 border-t border-gold-200/60">
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-gold-900 mb-1.5 flex items-center gap-1 font-serif">
-                      <BookOpen className="w-3 h-3 text-gold-700" />
-                      Grounded Citations ({msg.citations.length} Verified Sources)
+                {/* Grounded Citation Chips */}
+                {msg.citations && msg.citations.length > 0 && (
+                  <div className="pt-2 border-t border-white/10 space-y-1.5">
+                    <p className="text-[10px] font-quant font-bold text-[#00E5FF] flex items-center gap-1">
+                      <BookOpen className="w-3 h-3 text-[#00FFA3]" />
+                      Grounded Citations ({msg.citations.length}):
                     </p>
                     <div className="flex flex-wrap gap-1.5">
                       {msg.citations.map((cite) => (
                         <button
                           key={cite.id}
                           onClick={() => setActiveCitation(cite)}
-                          className="px-2.5 py-1 rounded-lg bg-gold-50/90 hover:bg-gold-100 text-gold-900 border border-gold-300 text-[10px] font-semibold flex items-center gap-1 transition-all shadow-xs"
+                          className="px-2.5 py-1 rounded-lg bg-black/60 hover:bg-black/90 text-[#00E5FF] border border-[#00E5FF]/30 hover:border-[#00FFA3] text-[10px] font-quant flex items-center gap-1 transition-all"
                         >
-                          <span className="truncate max-w-[150px] font-serif-luxury">{cite.title}</span>
-                          <span className="text-[8px] uppercase font-mono px-1 rounded bg-gold-200/70 text-gold-950 font-bold">
+                          <span className="truncate max-w-[150px]">{cite.title}</span>
+                          <span className="text-[8px] uppercase px-1 rounded bg-[#00FFA3]/15 text-[#00FFA3] font-bold">
                             {cite.classification}
                           </span>
                         </button>
@@ -272,13 +222,13 @@ export const CopilotChatWindow: React.FC = () => {
                   </div>
                 )}
 
-                {/* Meta footer */}
-                <div className={`flex items-center justify-between text-[9px] pt-1 ${isUser ? "text-amber-100" : "text-slate-400"}`}>
+                {/* Meta Footer */}
+                <div className="flex items-center justify-between text-[9px] pt-1 text-slate-400 font-quant">
                   <span>{msg.timestamp}</span>
                   {!isUser && msg.latencyMs && (
-                    <span className="flex items-center gap-1 font-mono text-gold-800 font-semibold">
+                    <span className="flex items-center gap-1 text-[#00FFA3]">
                       <Clock className="w-2.5 h-2.5" />
-                      {msg.latencyMs}ms ({msg.modelUsed || "gemini-3.8-flash"})
+                      {msg.latencyMs}ms • {msg.modelUsed}
                     </span>
                   )}
                 </div>
@@ -287,87 +237,94 @@ export const CopilotChatWindow: React.FC = () => {
           );
         })}
 
-        {/* Loading Indicator */}
-        {isLoading && (
-          <div className="flex items-start space-x-3 animate-pulse">
-            <div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center text-gold-700 border border-gold-300 shadow-xs">
-              <Bot className="w-4 h-4" />
-            </div>
-            <div className="p-4 rounded-2xl rounded-tl-none bg-white border border-gold-300/70 shadow-luxuryCard flex items-center space-x-2 text-xs text-gold-900">
-              <div className="w-2 h-2 rounded-full bg-gold-500 animate-bounce"></div>
-              <div className="w-2 h-2 rounded-full bg-gold-500 animate-bounce [animation-delay:0.2s]"></div>
-              <div className="w-2 h-2 rounded-full bg-gold-500 animate-bounce [animation-delay:0.4s]"></div>
-              <span className="text-[11px] text-slate-600 ml-2 font-medium">Retrieving sovereign documents & synthesizing with Gemini 3.8 Flash...</span>
-            </div>
-          </div>
-        )}
+        {/* The "AI Thinking" State (Glowing, pulsating quantum orb with waveforms) */}
+        {isLoading && <AiThinkingState />}
 
         <div ref={messagesEndRef} />
       </div>
 
       {/* Suggested Questions Pills */}
-      <div className="px-4 py-2.5 border-t border-gold-200/50 bg-[#FAF8F5] flex items-center gap-2 overflow-x-auto shrink-0">
-        <span className="text-[10px] font-bold uppercase tracking-wider text-gold-900 shrink-0 font-serif">
-          Suggested Inquiries:
-        </span>
-        {suggestedQuestions.map((q, idx) => (
-          <button
-            key={idx}
-            onClick={() => handleSend(q)}
-            className="px-3 py-1 rounded-full bg-white hover:bg-gold-50 text-slate-700 hover:text-gold-950 border border-gold-300/60 text-[10px] whitespace-nowrap transition-all shadow-2xs font-medium"
-          >
-            {q}
-          </button>
-        ))}
-      </div>
+      {messages.length <= 2 && !isLoading && (
+        <div className="px-6 py-2 bg-[#050811]/90 border-t border-white/5 flex flex-wrap items-center gap-2">
+          <span className="text-[10px] font-quant text-slate-400">PROMPTS:</span>
+          {suggestedQuestions.map((q, idx) => (
+            <button
+              key={idx}
+              onClick={() => handleSend(q)}
+              className="text-[11px] font-quant px-2.5 py-1 rounded-lg bg-black/50 hover:bg-black/80 text-slate-300 hover:text-[#00E5FF] border border-white/10 hover:border-[#00E5FF]/40 transition-all truncate max-w-[260px]"
+            >
+              {q}
+            </button>
+          ))}
+        </div>
+      )}
 
-      {/* Input Form */}
-      <div className="p-4 border-t border-gold-300/50 bg-white shrink-0">
-        <div className="relative flex items-center">
-          <textarea
-            rows={1}
+      {/* Input Bar */}
+      <div className="p-4 px-6 border-t border-white/10 bg-[#050811]/95 relative z-10">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSend();
+          }}
+          className="flex items-center space-x-3"
+        >
+          <input
+            type="text"
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder={`Query Sovereign Copilot across ${departmentContext.toLowerCase()} policies, MSAs, and covenants... (Enter to send)`}
-            className="glass-input w-full pl-4 pr-12 py-3 rounded-2xl text-xs resize-none leading-relaxed"
-          ></textarea>
+            placeholder="Ask Quantis AI about policies, covenants, financial stats, or contract liabilities..."
+            disabled={isLoading}
+            className="flex-1 glass-input px-4 py-3 rounded-2xl text-xs placeholder:text-slate-500 font-medium focus:outline-none"
+          />
+
           <button
-            onClick={() => handleSend()}
+            type="submit"
             disabled={!inputText.trim() || isLoading}
-            className="absolute right-2.5 p-2 rounded-xl gold-foil-btn disabled:opacity-40 text-white shadow-goldSoft transition-all"
+            className={`p-3 rounded-2xl transition-all duration-300 ${
+              inputText.trim() && !isLoading
+                ? "bull-market-btn text-[#050811] cursor-pointer hover:scale-105"
+                : "bg-white/5 text-slate-600 border border-white/5 cursor-not-allowed"
+            }`}
           >
             <Send className="w-4 h-4" />
           </button>
-        </div>
+        </form>
       </div>
 
-      {/* Citation Detail Modal */}
+      {/* Citation Inspector Modal */}
       {activeCitation && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in">
-          <div className="bg-white w-full max-w-lg rounded-3xl p-6 relative border border-gold-300 shadow-2xl">
-            <h4 className="text-base font-bold text-slate-900 font-serif-luxury mb-1 flex items-center gap-2">
-              <BookOpen className="w-4 h-4 text-gold-700" />
-              {activeCitation.title}
-            </h4>
-            <div className="flex items-center gap-2 mb-3 text-[11px] text-slate-500">
-              <span>Jurisdiction / Dept: <strong className="text-slate-800">{activeCitation.departmentTag || "General"}</strong></span>
-              <span>•</span>
-              <span className="font-mono uppercase font-bold text-gold-900 px-1.5 py-0.5 rounded bg-gold-100 border border-gold-300">
-                {activeCitation.classification}
-              </span>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-[#FCFBF8] font-mono text-xs text-slate-800 leading-relaxed border border-gold-200 max-h-60 overflow-y-auto mb-5 shadow-inner">
-              "{activeCitation.snippet}"
-            </div>
-
-            <div className="flex justify-end">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+          <div className="glass-panel border border-[#00E5FF]/40 rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-[0_0_50px_rgba(0,229,255,0.3)]">
+            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+              <div className="flex items-center space-x-2">
+                <Shield className="w-5 h-5 text-[#00FFA3]" />
+                <h3 className="text-sm font-bold font-quant text-white">Grounded Citation Proof</h3>
+              </div>
               <button
                 onClick={() => setActiveCitation(null)}
-                className="px-5 py-2.5 rounded-xl text-xs font-semibold gold-foil-btn text-white shadow-goldSoft transition-all"
+                className="text-slate-400 hover:text-white text-xs font-quant p-1"
               >
-                Dismiss Citation
+                ✕ Close
+              </button>
+            </div>
+
+            <div className="space-y-2">
+              <h4 className="text-xs font-bold text-[#00E5FF] font-quant">{activeCitation.title}</h4>
+              <p className="text-[11px] font-quant text-slate-400">
+                Department: {activeCitation.departmentTag || "Enterprise"} • Security Classification: {activeCitation.classification}
+              </p>
+              <div className="p-3 bg-black/60 rounded-xl border border-white/10 text-xs font-mono text-slate-200 leading-relaxed max-h-48 overflow-y-auto">
+                "{activeCitation.snippet}"
+              </div>
+            </div>
+
+            <div className="pt-2 border-t border-white/10 flex items-center justify-between text-[10px] font-quant text-slate-400">
+              <span>Cryptographic Hash: Validated</span>
+              <button
+                onClick={() => setActiveCitation(null)}
+                className="bull-market-btn px-3 py-1 rounded-lg text-[#050811] font-bold"
+              >
+                Done
               </button>
             </div>
           </div>

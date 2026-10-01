@@ -118,23 +118,25 @@ export const TenantAdminPage: React.FC<TenantAdminPageProps> = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="p-6 rounded-3xl bg-white border border-gold-300/80 shadow-luxuryCard flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h2 className="text-lg font-bold text-slate-900 font-serif-luxury tracking-wide flex items-center gap-2">
-            <ShieldCheck className="w-5 h-5 text-gold-700" />
+      <div className="p-6 rounded-3xl glass-panel border border-[#00E5FF]/25 shadow-[0_0_35px_rgba(0,0,0,0.8)] flex flex-wrap items-center justify-between gap-4 relative overflow-hidden">
+        <div className="absolute inset-0 hologram-laser-sweep pointer-events-none" />
+
+        <div className="relative z-10">
+          <h2 className="text-lg font-bold font-quant text-white tracking-wide flex items-center gap-2">
+            <ShieldCheck className="w-5 h-5 text-[#00FFA3]" />
             Institutional Governance & Capital Access
           </h2>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-slate-400 mt-0.5">
             Fiduciary oversight, multi-tenant RBAC delegations, and regulatory compliance telemetry.
           </p>
         </div>
 
-        <div className="flex items-center space-x-2.5">
+        <div className="flex items-center space-x-2.5 relative z-10">
           <button
             onClick={() => setShowInviteModal(true)}
-            className="px-5 py-2.5 rounded-xl gold-foil-btn text-white font-bold text-xs shadow-goldSoft transition-all flex items-center gap-1.5 hover:scale-105"
+            className="px-5 py-2.5 rounded-xl bull-market-btn text-[#050811] font-bold text-xs font-quant transition-all flex items-center gap-1.5 hover:scale-105"
           >
-            <UserPlus className="w-4 h-4" />
+            <UserPlus className="w-4 h-4 text-[#050811]" />
             + Induct Enterprise Officer
           </button>
         </div>

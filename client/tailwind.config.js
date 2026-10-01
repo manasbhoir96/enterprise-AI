@@ -8,6 +8,19 @@ export default {
   theme: {
     extend: {
       colors: {
+        void: {
+          950: "#000000",
+          900: "#050811",
+          850: "#0B0F19", // Deep Void Background
+          800: "#101626",
+          700: "#172036",
+        },
+        hologram: {
+          cyan: "#00E5FF", // Hologram Cyan
+          neon: "#00FFA3", // Bull Market Neon
+          purple: "#7000FF", // Quantum Purple
+          risk: "#FF3366", // Risk Alert Red
+        },
         gold: {
           50: "#FDFBF7",
           100: "#FAF4E8",
@@ -16,44 +29,35 @@ export default {
           400: "#DCBA6E",
           500: "#C5A059", // Imperial Banking Gold
           600: "#B38A3E", // Rich 24K Gold
-          700: "#8E6A2B", // Deep Antique Gold
+          700: "#8E6A2B",
           800: "#6C4F22",
           900: "#4A3516",
         },
-        ivory: {
-          50: "#FFFFFF",
-          100: "#FCFCFD",
-          200: "#F8F9FA",
-          300: "#F1F3F5",
-          400: "#E5E7EB",
-        },
         nexus: {
-          950: "#0A0D14",
-          900: "#111625",
-          850: "#182035",
-          800: "#1F2942",
-          700: "#2B3758",
-          600: "#3F4E75",
-          accent: "#C5A059",
-          cyan: "#0EA5E9",
-          violet: "#8B5CF6",
-          emerald: "#059669",
-          amber: "#D97706",
-          rose: "#E11D48",
+          950: "#050811",
+          900: "#0B0F19",
+          850: "#111728",
+          800: "#192238",
+          700: "#223050",
+          600: "#32446D",
+          accent: "#00E5FF",
+          cyan: "#00E5FF",
+          emerald: "#00FFA3",
+          purple: "#7000FF",
+          rose: "#FF3366",
         },
       },
       fontFamily: {
-        serif: ["'Cinzel'", "'Playfair Display'", "Georgia", "serif"],
         sans: ["'Plus Jakarta Sans'", "'Inter'", "system-ui", "-apple-system", "sans-serif"],
         mono: ["'JetBrains Mono'", "'Fira Code'", "monospace"],
       },
       boxShadow: {
-        goldGlow: "0 8px 30px -4px rgba(197, 160, 89, 0.28)",
-        goldSoft: "0 4px 20px 0 rgba(197, 160, 89, 0.14)",
-        cardHover: "0 18px 40px -8px rgba(197, 160, 89, 0.22), 0 0 0 1px rgba(197, 160, 89, 0.35)",
-        luxuryCard: "0 2px 14px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(197, 160, 89, 0.08)",
-        glow: "0 0 25px -5px rgba(197, 160, 89, 0.3)",
-        cyanGlow: "0 0 25px -5px rgba(197, 160, 89, 0.25)",
+        hologramCyan: "0 0 25px rgba(0, 229, 255, 0.35)",
+        neonGreen: "0 0 25px rgba(0, 255, 163, 0.35)",
+        quantumPurple: "0 0 25px rgba(112, 0, 255, 0.35)",
+        riskRed: "0 0 25px rgba(255, 51, 102, 0.35)",
+        glassCard: "0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.08)",
+        hologramGlow: "0 0 20px rgba(0, 229, 255, 0.25), 0 0 60px rgba(112, 0, 255, 0.15)",
       },
     },
   },

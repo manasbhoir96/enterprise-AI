@@ -8,7 +8,8 @@ import { CopilotPage } from "./pages/CopilotPage.js";
 import { KnowledgeHubPage } from "./pages/KnowledgeHubPage.js";
 import { WorkflowManagerPage } from "./pages/WorkflowManagerPage.js";
 import { TenantAdminPage } from "./pages/TenantAdminPage.js";
-import { Share2, Sparkles } from "lucide-react";
+import { LiveFinancialTickertape } from "./components/dashboard/LiveFinancialTickertape.js";
+import { Share2, Sparkles, Cpu, Activity, ShieldCheck } from "lucide-react";
 
 function AppContent() {
   const { user, organization, isLoading } = useAuth();
@@ -34,11 +35,21 @@ function AppContent() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#F8F9FA] flex flex-col items-center justify-center space-y-4">
-        <div className="w-12 h-12 border-3 border-gold-500 border-t-transparent rounded-full animate-spin"></div>
-        <p className="text-xs text-gold-900 font-serif tracking-wider font-bold">
-          Connecting to Sovereign Enterprise Vault...
-        </p>
+      <div className="min-h-screen bg-[#0B0F19] flex flex-col items-center justify-center space-y-6 text-center select-none">
+        <div className="relative">
+          <div className="w-16 h-16 rounded-full ai-thinking-orb flex items-center justify-center shadow-[0_0_40px_rgba(0,255,163,0.5)]">
+            <Cpu className="w-8 h-8 text-[#050811] animate-pulse" />
+          </div>
+          <div className="absolute -inset-3 rounded-full border border-dashed border-[#00E5FF]/40 animate-spin" style={{ animationDuration: "10s" }} />
+        </div>
+        <div>
+          <p className="text-sm font-quant font-bold text-white tracking-wider">
+            INITIALIZING QUANTIS HOLOGRAPHIC OPERATIONAL LAYER
+          </p>
+          <p className="text-xs font-quant text-slate-400 mt-1">
+            Grounding RAG Vector Index & Secure Tenant Memory...
+          </p>
+        </div>
       </div>
     );
   }
@@ -67,65 +78,71 @@ function AppContent() {
   const getPageTitle = () => {
     switch (currentPath) {
       case "/dashboard":
-        return "Company Overview & Telemetry";
+        return "Executive Treasury & Alpha Dashboard";
       case "/copilot":
-        return "Company AI Copilot";
+        return "Quantis Holographic AI Copilot";
       case "/knowledge-base":
-        return "Document Library & Knowledge Hub";
+        return "RAG Knowledge Vault & Vector Index";
       case "/workflows":
-        return "Smart Workflows & Review Engine";
+        return "Autonomous Workflows & Risk Audit";
       case "/settings/org":
-        return "Company Settings & Team Directory";
+        return "Institutional Governance & Officers";
       default:
-        return "Company Overview";
+        return "Executive Overview";
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F9FA] flex selection:bg-amber-400/30 selection:text-amber-900">
-      {/* Sidebar Navigation */}
-      <EnterpriseSidebar
-        currentPath={currentPath}
-        onNavigate={navigate}
-        onOpenShareModal={() => setIsShareModalOpen(true)}
-      />
+    <div className="min-h-screen bg-[#0B0F19] flex flex-col selection:bg-[#00FFA3]/30 selection:text-[#00FFA3]">
+      {/* Real-time Constantly Scrolling Financial & AI Tickertape */}
+      <LiveFinancialTickertape />
 
-      {/* Main Workspace Canvas */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto bg-gradient-to-b from-[#FAF8F5] via-[#F8F9FA] to-[#F3F4F6]">
-        {/* Top Header Bar */}
-        <header className="h-16 border-b border-gold-500/20 bg-white/85 backdrop-blur-xl px-6 flex items-center justify-between sticky top-0 z-20 shadow-sm">
-          <div className="flex items-center space-x-3.5">
-            <h2 className="text-base font-bold text-slate-900 tracking-tight flex items-center gap-2 font-serif-luxury">
-              {getPageTitle()}
-            </h2>
-            <span className="hidden md:inline-flex text-[11px] font-bold px-3 py-0.5 rounded-full bg-gold-50 text-gold-800 border border-gold-300 shadow-sm">
-              🏛️ {organization?.name || "Acme Sovereign Capital"}
-            </span>
-          </div>
+      <div className="flex-1 flex min-h-0">
+        {/* Sidebar Navigation */}
+        <EnterpriseSidebar
+          currentPath={currentPath}
+          onNavigate={navigate}
+          onOpenShareModal={() => setIsShareModalOpen(true)}
+        />
 
-          <div className="flex items-center space-x-3">
-            {/* AI Active Indicator */}
-            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gold-50/80 border border-gold-300/60 text-gold-900 text-xs font-semibold shadow-xs">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <Sparkles className="w-3.5 h-3.5 text-gold-600" />
-              <span>Gemini 3.8 Flash AI Active</span>
+        {/* Main Workspace Canvas */}
+        <div className="flex-1 flex flex-col min-w-0 overflow-y-auto bg-gradient-to-b from-[#0B0F19] via-[#080C14] to-[#050811]">
+          {/* Top Header Bar */}
+          <header className="h-16 border-b border-[#00E5FF]/20 bg-[#050811]/90 backdrop-blur-xl px-6 flex items-center justify-between sticky top-0 z-20 shadow-md">
+            <div className="flex items-center space-x-3.5">
+              <h2 className="text-base font-bold text-white tracking-tight flex items-center gap-2">
+                <span>{getPageTitle()}</span>
+              </h2>
+              <span className="hidden md:inline-flex text-[11px] font-quant font-semibold px-2.5 py-0.5 rounded-full bg-black/60 text-[#00E5FF] border border-[#00E5FF]/30">
+                🏢 {organization?.name || "Acme Global Treasury"}
+              </span>
             </div>
 
-            {/* Share Public Link Button */}
-            <button
-              onClick={() => setIsShareModalOpen(true)}
-              className="gold-foil-btn px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shadow-goldSoft"
-            >
-              <Share2 className="w-3.5 h-3.5" />
-              <span>Share App (Public Link)</span>
-            </button>
-          </div>
-        </header>
+            <div className="flex items-center space-x-3">
+              {/* AI Engine Status Chip */}
+              <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-black/50 border border-[#00FFA3]/30 text-white text-xs font-quant shadow-[0_0_10px_rgba(0,255,163,0.15)]">
+                <span className="w-2 h-2 rounded-full bg-[#00FFA3] animate-pulse" />
+                <Sparkles className="w-3.5 h-3.5 text-[#00FFA3]" />
+                <span className="text-[#00FFA3] font-bold">RAG ACTIVE</span>
+                <span className="text-slate-400">| Gemini 2.5</span>
+              </div>
 
-        {/* Dynamic Page View */}
-        <main className="flex-1 p-6 md:p-8 max-w-7xl w-full mx-auto space-y-6">
-          {renderCurrentPage()}
-        </main>
+              {/* Share Public Link Button */}
+              <button
+                onClick={() => setIsShareModalOpen(true)}
+                className="bull-market-btn px-4 py-2 rounded-xl text-xs font-quant font-bold transition-all flex items-center gap-1.5"
+              >
+                <Share2 className="w-3.5 h-3.5" />
+                <span>Share Terminal</span>
+              </button>
+            </div>
+          </header>
+
+          {/* Dynamic Page View */}
+          <main className="flex-1 p-6 md:p-8 max-w-7xl w-full mx-auto space-y-6">
+            {renderCurrentPage()}
+          </main>
+        </div>
       </div>
 
       {/* Global Modals */}

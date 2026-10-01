@@ -5,9 +5,10 @@ import type { IngestKnowledgeInput, DataClassification } from "@nexusai/shared";
 
 interface KnowledgeUploaderProps {
   onSuccess: () => void;
+  onClose?: () => void;
 }
 
-export const KnowledgeUploader: React.FC<KnowledgeUploaderProps> = ({ onSuccess }) => {
+export const KnowledgeUploader: React.FC<KnowledgeUploaderProps> = ({ onSuccess, onClose }) => {
   const [title, setTitle] = useState("");
   const [departmentTag, setDepartmentTag] = useState("Legal & Compliance");
   const [classification, setClassification] = useState<DataClassification>("internal");

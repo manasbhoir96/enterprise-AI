@@ -18,19 +18,15 @@ import { useAuth } from "../context/AuthContext.js";
 interface EnterpriseSidebarProps {
   currentPath: string;
   onNavigate: (path: string) => void;
-  onOpenApiKeyModal: () => void;
   onOpenShareModal: () => void;
-  onOpenSupabaseModal: () => void;
 }
 
 export const EnterpriseSidebar: React.FC<EnterpriseSidebarProps> = ({
   currentPath,
   onNavigate,
-  onOpenApiKeyModal,
   onOpenShareModal,
-  onOpenSupabaseModal,
 }) => {
-  const { user, organization, logout, customApiKey } = useAuth();
+  const { user, organization, logout } = useAuth();
 
   const navItems = [
     {
@@ -171,40 +167,19 @@ export const EnterpriseSidebar: React.FC<EnterpriseSidebarProps> = ({
             <ExternalLink className="w-3.5 h-3.5 text-cyan-400 group-hover:translate-x-0.5 transition-transform" />
           </button>
 
-          {/* Supabase Integration Button */}
-          <button
-            onClick={onOpenSupabaseModal}
-            className="w-full p-2.5 rounded-xl bg-emerald-950/30 hover:bg-emerald-950/50 border border-emerald-500/20 text-left transition-all group flex items-center justify-between"
-          >
-            <div className="flex items-center space-x-2.5">
-              <Database className="w-3.5 h-3.5 text-emerald-400" />
-              <div>
-                <p className="text-xs font-bold text-white group-hover:text-emerald-300">Supabase Database</p>
-                <p className="text-[10px] text-slate-400">Cloud PostgreSQL</p>
-              </div>
-            </div>
-            <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-semibold">
-              CONNECTED
-            </span>
-          </button>
-
-          {/* Gemini Engine Banner */}
-          <div className="p-3 rounded-xl bg-gradient-to-br from-indigo-950/40 via-purple-950/20 to-slate-900 border border-indigo-500/20">
+          {/* AI Engine Status Card (Backend Managed) */}
+          <div className="p-3 rounded-2xl bg-gradient-to-br from-indigo-950/40 via-purple-950/20 to-slate-900 border border-indigo-500/20">
             <div className="flex items-center justify-between mb-1">
               <span className="text-[11px] font-bold text-indigo-300 flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                Gemini 2.5 Flash
+                Gemini 3.8 Flash
               </span>
-              <button
-                onClick={onOpenApiKeyModal}
-                className="text-[10px] text-indigo-400 hover:text-indigo-200 underline flex items-center gap-0.5 font-medium"
-              >
-                <KeyRound className="w-3 h-3" />
-                {customApiKey ? "Key Set" : "API Key"}
-              </button>
+              <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 font-semibold">
+                ONLINE
+              </span>
             </div>
             <p className="text-[10px] text-slate-400 leading-relaxed">
-              Fast, intelligent document analysis and RAG answers.
+              Real-time enterprise copilot & automated contract auditing.
             </p>
           </div>
         </div>

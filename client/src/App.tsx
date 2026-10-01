@@ -1,26 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { AuthProvider, useAuth } from "./context/AuthContext.js";
 import { EnterpriseSidebar } from "./components/EnterpriseSidebar.js";
-import { ApiKeyModal } from "./components/ApiKeyModal.js";
 import { ShareModal } from "./components/ShareModal.js";
-import { SupabaseModal } from "./components/SupabaseModal.js";
 import { LoginPage } from "./pages/LoginPage.js";
 import { ExecutiveDashboard } from "./pages/ExecutiveDashboard.js";
 import { CopilotPage } from "./pages/CopilotPage.js";
 import { KnowledgeHubPage } from "./pages/KnowledgeHubPage.js";
 import { WorkflowManagerPage } from "./pages/WorkflowManagerPage.js";
 import { TenantAdminPage } from "./pages/TenantAdminPage.js";
-import { Building2, KeyRound, Sparkles, Share2, Database } from "lucide-react";
+import { Share2, Sparkles } from "lucide-react";
 
 function AppContent() {
-  const { user, organization, isLoading, customApiKey } = useAuth();
+  const { user, organization, isLoading } = useAuth();
   const [currentPath, setCurrentPath] = useState<string>(() => {
     const p = window.location.pathname;
     return p === "/" ? "/dashboard" : p;
   });
-  const [isApiKeyModalOpen, setIsApiKeyModalOpen] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
-  const [isSupabaseModalOpen, setIsSupabaseModalOpen] = useState(false);
 
   useEffect(() => {
     const handlePopState = () => {
@@ -62,12 +58,7 @@ function AppContent() {
       case "/workflows":
         return <WorkflowManagerPage />;
       case "/settings/org":
-        return (
-          <TenantAdminPage
-            onOpenApiKeyModal={() => setIsApiKeyModalOpen(true)}
-            onOpenSupabaseModal={() => setIsSupabaseModalOpen(true)}
-          />
-        );
+        return <TenantAdminPage />;
       default:
         return <ExecutiveDashboard onNavigate={navigate} />;
     }
@@ -96,9 +87,7 @@ function AppContent() {
       <EnterpriseSidebar
         currentPath={currentPath}
         onNavigate={navigate}
-        onOpenApiKeyModal={() => setIsApiKeyModalOpen(true)}
         onOpenShareModal={() => setIsShareModalOpen(true)}
-        onOpenSupabaseModal={() => setIsSupabaseModalOpen(true)}
       />
 
       {/* Main Workspace Canvas */}
@@ -115,6 +104,13 @@ function AppContent() {
           </div>
 
           <div className="flex items-center space-x-2.5">
+            {/* AI Active Indicator */}
+            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-semibold">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <Sparkles className="w-3.5 h-3.5 text-violet-400" />
+              <span>Gemini 3.8 Flash AI Active</span>
+            </div>
+
             {/* Share Public Link Button */}
             <button
               onClick={() => setIsShareModalOpen(true)}
@@ -122,28 +118,6 @@ function AppContent() {
             >
               <Share2 className="w-3.5 h-3.5" />
               <span>Share App (Public Link)</span>
-            </button>
-
-            {/* Supabase Button */}
-            <button
-              onClick={() => setIsSupabaseModalOpen(true)}
-              className="px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 transition-all flex items-center gap-1.5"
-            >
-              <Database className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="hidden sm:inline">Supabase DB</span>
-            </button>
-
-            {/* Gemini API Key Button */}
-            <button
-              onClick={() => setIsApiKeyModalOpen(true)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all border ${
-                customApiKey
-                  ? "bg-indigo-600/20 text-indigo-300 border-indigo-500/30"
-                  : "bg-white/5 text-slate-300 hover:text-white border-white/10 hover:bg-white/10"
-              }`}
-            >
-              <KeyRound className="w-3.5 h-3.5 text-indigo-400" />
-              <span className="hidden sm:inline">{customApiKey ? "API Key Active" : "Gemini API"}</span>
             </button>
           </div>
         </header>
@@ -155,19 +129,9 @@ function AppContent() {
       </div>
 
       {/* Global Modals */}
-      <ApiKeyModal
-        isOpen={isApiKeyModalOpen}
-        onClose={() => setIsApiKeyModalOpen(false)}
-      />
-
       <ShareModal
         isOpen={isShareModalOpen}
         onClose={() => setIsShareModalOpen(false)}
-      />
-
-      <SupabaseModal
-        isOpen={isSupabaseModalOpen}
-        onClose={() => setIsSupabaseModalOpen(false)}
       />
     </div>
   );

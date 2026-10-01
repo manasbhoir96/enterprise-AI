@@ -7,11 +7,9 @@ interface AuthContextType {
   organization: Organization | null;
   token: string | null;
   isLoading: boolean;
-  customApiKey: string | null;
   login: (credentials: LoginInput) => Promise<void>;
   register: (payload: RegisterTenantInput) => Promise<void>;
   logout: () => void;
-  setCustomApiKey: (key: string | null) => void;
   quickDemoLogin: (email: string) => Promise<void>;
 }
 
@@ -21,18 +19,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
   const [organization, setOrganization] = useState<Organization | null>(null);
   const [token, setToken] = useState<string | null>(() => localStorage.getItem("nexus_token"));
-  const [customApiKey, setApiKeyState] = useState<string | null>(() => localStorage.getItem("nexus_gemini_key"));
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  const setCustomApiKey = (key: string | null) => {
-    if (key && key.trim()) {
-      localStorage.setItem("nexus_gemini_key", key.trim());
-      setApiKeyState(key.trim());
-    } else {
-      localStorage.removeItem("nexus_gemini_key");
-      setApiKeyState(null);
-    }
-  };
 
   useEffect(() => {
     async function loadUser() {
@@ -117,11 +104,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         organization,
         token,
         isLoading,
-        customApiKey,
         login,
         register,
         logout,
-        setCustomApiKey,
         quickDemoLogin,
       }}
     >

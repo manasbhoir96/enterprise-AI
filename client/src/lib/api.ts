@@ -16,7 +16,6 @@ export async function apiRequest<T = any>(
   options: RequestInit = {}
 ): Promise<T> {
   const token = localStorage.getItem("nexus_token");
-  const customApiKey = localStorage.getItem("nexus_gemini_key");
 
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
@@ -25,10 +24,6 @@ export async function apiRequest<T = any>(
 
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
-  }
-
-  if (customApiKey) {
-    headers["x-gemini-key"] = customApiKey;
   }
 
   const url = `${API_BASE}${endpoint.startsWith("/") ? endpoint : `/${endpoint}`}`;

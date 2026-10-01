@@ -3,16 +3,25 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export const GEMINI_MODEL = "gemini-2.5-flash";
+export const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-3.8-flash";
+
+function sanitizeKey(key?: string): string | null {
+  if (!key) return null;
+  const cleaned = key.trim().replace(/\.+$/, "");
+  if (!cleaned || cleaned === "AIzaSyYourGeneratedSecretKeyHere") {
+    return null;
+  }
+  return cleaned;
+}
 
 export function getGeminiClient(customApiKey?: string): GoogleGenAI | null {
-  const apiKey = customApiKey || process.env.GEMINI_API_KEY;
-  if (!apiKey || apiKey === "AIzaSyYourGeneratedSecretKeyHere" || apiKey.trim() === "") {
+  const apiKey = sanitizeKey(customApiKey || process.env.GEMINI_API_KEY);
+  if (!apiKey) {
     return null;
   }
   return new GoogleGenAI({ apiKey });
 }
 
-export const ai = process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY !== "AIzaSyYourGeneratedSecretKeyHere"
-  ? new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY })
-  : null;
+const defaultKey = sanitizeKey(process.env.GEMINI_API_KEY);
+export const ai = defaultKey ? new GoogleGenAI({ apiKey: defaultKey }) : null;
+

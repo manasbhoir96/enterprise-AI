@@ -63,6 +63,27 @@ export async function registerTenant(req: Request, res: Response): Promise<void>
       organizationId: result.org.id,
     });
 
+    // 5. Dual-sync account to Supabase Cloud Auth
+    try {
+      const { supabase } = await import("../lib/supabase.js");
+      if (supabase) {
+        await supabase.auth.admin.createUser({
+          email: adminEmail.toLowerCase(),
+          password: adminPassword,
+          email_confirm: true,
+          user_metadata: {
+            full_name: fullName,
+            organization: organizationName,
+            industry: industry,
+            role: "owner",
+          },
+        });
+        console.log(`☁️ Synced ${adminEmail} to Supabase Auth Cloud`);
+      }
+    } catch (sbErr: any) {
+      console.warn("Supabase auth sync notice:", sbErr?.message || sbErr);
+    }
+
     res.status(201).json({
       message: "Organization registered successfully",
       token,

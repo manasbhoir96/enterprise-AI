@@ -124,6 +124,26 @@ export async function inviteOrgMember(req: Request, res: Response): Promise<void
       [orgId, email.toLowerCase(), passwordHash, fullName, department, role]
     );
 
+    // Sync invited member to Supabase Cloud Auth
+    try {
+      const { supabase } = await import("../lib/supabase.js");
+      if (supabase) {
+        await supabase.auth.admin.createUser({
+          email: email.toLowerCase(),
+          password: tempPassword,
+          email_confirm: true,
+          user_metadata: {
+            full_name: fullName,
+            department: department,
+            role: role,
+          },
+        });
+        console.log(`☁️ Synced invited member ${email} to Supabase Auth Cloud`);
+      }
+    } catch (sbErr: any) {
+      console.warn("Supabase auth sync notice:", sbErr?.message || sbErr);
+    }
+
     res.status(201).json({
       message: "Organization member onboarded successfully",
       member: result.rows[0],

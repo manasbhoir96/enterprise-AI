@@ -18,8 +18,10 @@ app.use(
   helmet({
     contentSecurityPolicy: false,
     crossOriginEmbedderPolicy: false,
+    hidePoweredBy: false,
   })
 );
+app.disable("x-powered-by");
 
 app.use(
   cors({
@@ -43,12 +45,21 @@ app.use("/api/", apiLimiter);
 app.use(express.json({ limit: "15mb" }));
 app.use(express.urlencoded({ extended: true, limit: "15mb" }));
 
-// Routes
+// Routes - mounted both with /api and without /api for universal serverless/proxy compatibility
 app.use("/api/auth", authRoutes);
+app.use("/auth", authRoutes);
+
 app.use("/api/knowledge", knowledgeRoutes);
+app.use("/knowledge", knowledgeRoutes);
+
 app.use("/api/copilot", copilotRoutes);
+app.use("/copilot", copilotRoutes);
+
 app.use("/api/workflows", workflowRoutes);
+app.use("/workflows", workflowRoutes);
+
 app.use("/api/org", orgRoutes);
+app.use("/org", orgRoutes);
 
 // Health check endpoint
 app.get("/api/health", (_req, res) => {
